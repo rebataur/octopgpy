@@ -1,0 +1,17 @@
+{% extends "octopgpyapp/base.html" %}
+
+{% block content %}
+
+<div class="hero">
+    <h1>{{document.name}}</h1>
+    {% for field in fields %}
+    <h1>{{field.name}}</h1>
+    {% endfor %}
+
+    <form action="{% url 'octopgpyapp:fields' id=app.id did=document.id %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "octopgpyapp/base.html" %}
+
+{% block content %}
+
+<div class="hero">
+  <form action="{% url 'octopgpyapp:newapp' %}" method="post">
+    {% csrf_token %}
+   {{form}}
+    <input type="submit" value="Submit">
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "octopgpyapp/base.html" %}
+
+{% block content %}
+
+<div class="hero">
+    <h1>{{app.name}}<a class="btn btn-outline-success" href="{% url 'octopgpyapp:newdocument' id=app.id %}">New Document</a></h1>
+    {% for doc in documents %}
+    <h1>{{doc.name}}<a class="btn btn-outline-success" href="{% url 'octopgpyapp:fields' id=app.id did=doc.id %}">fields</a></h1>
+    {% endfor %}
+</div>
+{% endblock %}

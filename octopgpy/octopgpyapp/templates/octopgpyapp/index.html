@@ -1,0 +1,27 @@
+{% extends "octopgpyapp/base.html" %}
+
+{% block content %}
+
+<div class="hero">
+  <h1>Apps<a href="{% url 'octopgpyapp:newapp' %}" class="btn btn-outline-success">New</a></h1>
+  <div class="row">
+    {% for app in apps %}
+    <div class="col col-3">
+      <div class="card" style="width: 18rem;margin:1em">
+        <div class="card-body">
+          <h5 class="card-title">{{app.name}}</h5>
+          <!-- <h6 class="card-subtitle mb-2 text-muted">Library Management App</h6>
+            <p class="card-text">Manage books, see due date</p> -->
+          <!-- <a href="#" class="card-link">Card link</a> -->
+          <a href="{% url 'octopgpyapp:showapp' id=app.id %}" class="card-link">Go There</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+
+</div>
+{% endblock %}
