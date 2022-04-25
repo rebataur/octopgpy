@@ -3,12 +3,12 @@
 {% block content %}
 
 <div class="hero">
-    <h1>{{document.name}}</h1>
+    <h1><a href="{% url 'octopgpyapp:documents' id=app.id %}"><-</a>{{document.name}}</h1>
     {% for field in fields %}
-    <h1>{{field.name}}</h1>
+    <h1>{{field.name}}<a href="{% url 'octopgpyapp:fields' id=app.id did=document.id fid=field.id %}">Edit</a></h1>
     {% endfor %}
 
-    <form action="{% url 'octopgpyapp:fields' id=app.id did=document.id %}" method="post">
+    <form action="{% url 'octopgpyapp:fields' id=app.id did=document.id fid=fid %}" method="post">
         {% csrf_token %}
         {{form}}
         <input type="submit" value="Submit">

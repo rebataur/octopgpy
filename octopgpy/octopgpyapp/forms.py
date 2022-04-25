@@ -14,4 +14,4 @@ class DocumentForm(forms.ModelForm):
 class FieldForm(forms.ModelForm):
     class Meta:
         model = Field
-        fields = ('name',)
+        fields = ('name', 'type','is_calculated','calculation_func','calculation_func_args',)

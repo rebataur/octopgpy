@@ -4,5 +4,15 @@
 
 <div class="hero">
 <h1>{{app.name}}<a href="{% url 'octopgpyapp:documents' id=1 %}" class="btn btn-outline-success">Documents</a></h1>
+
+<div class="row">
+    <div class="col col-3">
+        <h3>Menu</h3>
+        {% for doc in documents %}
+            <a class="btn" href="{% url 'octopgpyapp:appdocument' id=app.id did=doc.id%}">{{doc.name}}</a>
+        {% endfor %}
+    </div>
+</div>
+
 </div>
 {% endblock %}

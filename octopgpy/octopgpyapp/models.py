@@ -18,7 +18,8 @@ class Field(models.Model):
     document = models.ForeignKey(Document, on_delete=models.DO_NOTHING)
     is_calculated = models.CharField(max_length=30,null=True)
     calculation_func = models.CharField(max_length=30,null=True)
-    calculation_func_args = models.JSONField(null=True)            
+    calculation_func_args = models.CharField(max_length=30,null=True)
+    # models.JSONField(null=True)            
 
 
 class Func(models.Model):

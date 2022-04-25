@@ -1,0 +1,29 @@
+{% extends "octopgpyapp/base.html" %}
+
+{% block content %}
+<h1>New Entry</h1>
+<div class="hero">
+    <h1>{{app.name}}<a href="{% url 'octopgpyapp:documents' id=1 %}" class="btn btn-outline-success">Documents</a></h1>
+
+    <h4>Document <em>{{document.name}}</em></h4>
+    <h3>Menu</h3>
+    <a href="{% url 'octopgpyapp:newentry' id=1 did=document.id %}">New Entry</a>
+
+    {{app.name}}_{{document.name}}
+
+    <form action="{% url 'octopgpyapp:newentry' id=1 did=document.id %}" method="POST">
+        {% csrf_token %}
+        {% for f in fields %}
+        {% if f.is_calculated == 'False' %}
+        <label>{{f.name}}</label>
+        {% if f.type == 'numeric' %}
+        <input type="number" name="{{f.name}}" />
+        {% else %}
+        <input type="text" name="{{f.name}}" />
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        <input type="submit" />
+    </form>
+</div>
+{% endblock %}

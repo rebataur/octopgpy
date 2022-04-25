@@ -10,4 +10,9 @@ urlpatterns = [
     path('app/<int:id>/newdocument/', views.newdocument, name='newdocument'),
 
     path('app/<int:id>/document/<int:did>/fields', views.fields, name='fields'),
+    path('app/<int:id>/document/<int:did>/field/<int:fid>', views.fields, name='fields'),
+
+
+    path('app/<int:id>/appdocument/<int:did>', views.appdocument, name='appdocument'),
+    path('app/<int:id>/appdocument/<int:did>/newentry', views.newentry, name='newentry'),
 ]
