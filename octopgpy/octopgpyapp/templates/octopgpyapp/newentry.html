@@ -11,18 +11,33 @@
 
     {{app.name}}_{{document.name}}
 
-    <form action="{% url 'octopgpyapp:newentry' id=1 did=document.id %}" method="POST">
+    <form action="{% url 'octopgpyapp:newentry' id=1 did=document.id %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% for f in fields %}
-        {% if f.is_calculated == 'False' %}
-        <label>{{f.name}}</label>
-        {% if f.type == 'numeric' %}
-        <input type="number" name="{{f.name}}" />
-        {% else %}
-        <input type="text" name="{{f.name}}" />
-        {% endif %}
+        {% if not f.is_calculated %}
+            <label style="width:6em">{{f.name}}</label>
+            {% if f.type == 'numeric' %}
+                <input type="number" name="{{f.name}}" />
+                <br/>
+            {% elif f.type == 'date' %}
+                <input type="date" name="{{f.name}}" />
+                <br/>
+            {% else%}
+                <input type="text" name="{{f.name}}" />
+                <br/>
+            {% endif %}
         {% endif %}
         {% endfor %}
+
+        <p>
+            <label for="id_newentry_file">New Entry file:</label>
+            <input type="file" name="newentry_file" id="id_newentry_file">
+            
+            
+              
+            
+          </p>
+
         <input type="submit" />
     </form>
 </div>

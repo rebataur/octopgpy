@@ -1,0 +1,109 @@
+2022-07-14 16:58:27.479 IST [9388] LOG:  starting PostgreSQL 14.2, compiled by Visual C++ build 1914, 64-bit
+2022-07-14 16:58:27.490 IST [9388] LOG:  listening on IPv6 address "::1", port 5432
+2022-07-14 16:58:27.496 IST [9388] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-07-14 16:58:27.553 IST [24048] LOG:  database system was interrupted; last known up at 2022-07-14 16:45:36 IST
+2022-07-14 16:58:28.014 IST [24048] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-07-14 16:58:28.020 IST [24048] LOG:  redo starts at 0/2AC21710
+2022-07-14 16:58:28.021 IST [24048] LOG:  invalid record length at 0/2AC217F8: wanted 24, got 0
+2022-07-14 16:58:28.021 IST [24048] LOG:  redo done at 0/2AC217C0 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-07-14 16:58:28.213 IST [9388] LOG:  database system is ready to accept connections
+2022-07-14 16:58:32.627 IST [27072] ERROR:  could not load library "C:/Users/pranjan24/Downloads/postgresql-14.2-2-windows-x64-binaries/pgsql/lib/plpython3.dll": The specified module could not be found.
+	
+2022-07-14 16:58:32.627 IST [27072] STATEMENT:  
+	select * from double_close(20)
+2022-07-14 16:58:35.908 IST [27072] ERROR:  could not load library "C:/Users/pranjan24/Downloads/postgresql-14.2-2-windows-x64-binaries/pgsql/lib/plpython3.dll": The specified module could not be found.
+	
+2022-07-14 16:58:35.908 IST [27072] STATEMENT:  
+	select * from double_close(20)
+2022-07-14 16:58:42.214 IST [9388] LOG:  received fast shutdown request
+2022-07-14 16:58:42.219 IST [9388] LOG:  aborting any active transactions
+2022-07-14 16:58:42.220 IST [27072] FATAL:  terminating connection due to administrator command
+2022-07-14 16:58:42.238 IST [9388] LOG:  background worker "logical replication launcher" (PID 16168) exited with exit code 1
+2022-07-14 16:58:42.241 IST [20248] LOG:  shutting down
+2022-07-14 16:58:42.335 IST [9388] LOG:  database system is shut down
+2022-07-14 16:58:42.851 IST [15908] LOG:  starting PostgreSQL 14.2, compiled by Visual C++ build 1914, 64-bit
+2022-07-14 16:58:42.862 IST [15908] LOG:  listening on IPv6 address "::1", port 5432
+2022-07-14 16:58:42.868 IST [15908] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-07-14 16:58:42.925 IST [18172] LOG:  database system was shut down at 2022-07-14 16:58:42 IST
+2022-07-14 16:58:42.998 IST [15908] LOG:  database system is ready to accept connections
+2022-07-14 16:58:47.878 IST [172] ERROR:  could not load library "C:/Users/pranjan24/Downloads/postgresql-14.2-2-windows-x64-binaries/pgsql/lib/plpython3.dll": The specified module could not be found.
+	
+2022-07-14 16:58:47.878 IST [172] STATEMENT:  select * from double_close(20)
+2022-07-14 16:58:52.809 IST [172] ERROR:  function "double_close" already exists with same argument types
+2022-07-14 16:58:52.809 IST [172] STATEMENT:  
+	CREATE FUNCTION double_close (close numeric)
+	  RETURNS numeric
+	AS $$
+	return 2 * close
+	$$ LANGUAGE plpython3u
+	
+2022-07-14 16:58:58.189 IST [172] ERROR:  could not load library "C:/Users/pranjan24/Downloads/postgresql-14.2-2-windows-x64-binaries/pgsql/lib/plpython3.dll": The specified module could not be found.
+	
+2022-07-14 16:58:58.189 IST [172] STATEMENT:  
+	select * from double_close(20)
+2022-07-14 17:00:50.098 IST [26452] LOG:  starting PostgreSQL 14.2, compiled by Visual C++ build 1914, 64-bit
+2022-07-14 17:00:50.110 IST [26452] LOG:  listening on IPv6 address "::1", port 5432
+2022-07-14 17:00:50.115 IST [26452] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-07-14 17:00:50.173 IST [23820] LOG:  database system was interrupted; last known up at 2022-07-14 16:58:42 IST
+2022-07-14 17:00:50.541 IST [23820] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-07-14 17:00:50.546 IST [23820] LOG:  redo starts at 0/2AC218E8
+2022-07-14 17:00:50.546 IST [23820] LOG:  invalid record length at 0/2AC21920: wanted 24, got 0
+2022-07-14 17:00:50.546 IST [23820] LOG:  redo done at 0/2AC218E8 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-07-14 17:00:50.573 IST [2208] FATAL:  the database system is starting up
+2022-07-14 17:00:50.681 IST [26452] LOG:  database system is ready to accept connections
+2022-07-14 17:01:01.283 IST [23336] ERROR:  extension "plpython3u" already exists
+2022-07-14 17:01:01.283 IST [23336] STATEMENT:  
+	create extension plpython3u
+2022-07-14 17:01:06.394 IST [23336] ERROR:  function "double_close" already exists with same argument types
+2022-07-14 17:01:06.394 IST [23336] STATEMENT:  CREATE FUNCTION double_close (close numeric)
+	  RETURNS numeric
+	AS $$
+	return 2 * close
+	$$ LANGUAGE plpython3u
+2022-07-14 17:08:23.723 IST [23336] ERROR:  AttributeError: 'Figure' object has no attribute 'buffer'
+2022-07-14 17:08:23.723 IST [23336] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_test", line 13, in <module>
+	    return fig.buffer()
+	PL/Python function "matplotlib_test"
+2022-07-14 17:08:23.723 IST [23336] STATEMENT:  
+	select matplotlib_test(1)
+2022-07-14 17:08:29.650 IST [23336] ERROR:  AttributeError: 'Figure' object has no attribute 'buffer'
+2022-07-14 17:08:29.650 IST [23336] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_test", line 13, in <module>
+	    return fig.buffer()
+	PL/Python function "matplotlib_test"
+2022-07-14 17:08:29.650 IST [23336] STATEMENT:  select * from matplotlib_test(1)
+	
+2022-07-14 17:08:46.941 IST [23336] ERROR:  AttributeError: 'Figure' object has no attribute 'getbuffer'
+2022-07-14 17:08:46.941 IST [23336] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_test", line 13, in <module>
+	    return fig.getbuffer()
+	PL/Python function "matplotlib_test"
+2022-07-14 17:08:46.941 IST [23336] STATEMENT:  
+	
+	select * from matplotlib_test(1)
+	
+2022-07-14 17:09:07.926 IST [23336] ERROR:  syntax error at or near "," at character 34
+2022-07-14 17:09:07.926 IST [23336] STATEMENT:  
+	drop FUNCTION matplotlib_test (, numeric)
+2022-07-14 17:09:18.497 IST [23336] ERROR:  AttributeError: 'Figure' object has no attribute 'getbuffer'
+2022-07-14 17:09:18.497 IST [23336] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_test", line 13, in <module>
+	    return fig.getbuffer()
+	PL/Python function "matplotlib_test"
+2022-07-14 17:09:18.497 IST [23336] STATEMENT:  
+	
+	select * from matplotlib_test(1)
+	
+2022-07-14 17:09:36.646 IST [23336] ERROR:  function matplotlib_test(numeric) does not exist
+2022-07-14 17:09:36.646 IST [23336] STATEMENT:  
+	drop FUNCTION matplotlib_test ( numeric)
+2022-07-14 17:09:43.159 IST [23336] ERROR:  function matplotlib_test(numeric) does not exist
+2022-07-14 17:09:43.159 IST [23336] STATEMENT:  drop FUNCTION matplotlib_test ( numeric)
+2022-07-14 17:11:16.159 IST [17644] ERROR:  canceling statement due to user request
+2022-07-14 17:11:16.160 IST [26452] LOG:  received fast shutdown request
+2022-07-14 17:11:16.163 IST [26452] LOG:  aborting any active transactions
+2022-07-14 17:11:16.164 IST [23336] FATAL:  terminating connection due to administrator command
+2022-07-14 17:11:16.178 IST [26452] LOG:  background worker "logical replication launcher" (PID 17644) exited with exit code 1
+2022-07-14 17:11:16.197 IST [15108] LOG:  shutting down
+2022-07-14 17:11:16.263 IST [26452] LOG:  database system is shut down

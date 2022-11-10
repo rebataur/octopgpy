@@ -1,0 +1,122 @@
+{
+    "query": {
+        "ctes": [
+            {
+                "name": "sma",
+                "from": "bse",
+                "order_by":"trade_date",
+                "order_type":"desc",
+                "limit":{"number":1,"offset":0},
+                "cols": [
+                    {
+                        "fname": "trade_date",
+                        "type": "normal"
+                    },
+                    {
+                        "fname": "close",
+                        "type": "normal"
+                    },
+                    {
+                        "fname": "sma20",
+                        "type": "window_function",
+                        "attributes": [
+                            {
+                                "window_func": "avg",
+                                "col": "close",
+                                "round": true,
+                                "over": {
+                                    "partition_by": "",
+                                    "order_by": "trade_date",
+                                    "frame_spec": {
+                                        "meta": {
+                                            "types": [
+                                                "rows",
+                                                "groups",
+                                                "range"
+                                            ]
+                                        },
+                                        "type": "rows"
+                                    },
+                                    "frame_boundaries": {
+                                        "meta": {
+                                            "types": [
+                                                "unbounded_preceding",
+                                                "expr_preceding",
+                                                "current_row",
+                                                "expr_following",
+                                                "unbounded_following"
+                                            ]
+                                        },
+                                        "type": "expr_preceding",
+                                        "preceding": 19,
+                                        "following": "current_row"
+                                    }
+                                }
+                            }
+                        ],
+                    }
+                ],
+                "where": {
+                    "criterion": {
+                        "and": [
+                            {
+                                "expr": {
+                                    "lval": "code",
+                                    "operator": "=",
+                                    "rval": 539448
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "delta",
+                "from": "sma",
+                "cols": {
+                    "fname": "next_sma200",
+                    "type": "window_function",
+                    "attributes": [
+                        {
+                            "window_func": "lead",
+                            "col": "sma200",
+                            "offset": 1,
+                            "default": 1,
+                            "round": true
+                        }
+                    ]
+                }
+            },
+            {
+                "from": "sma",
+                "cols": {
+                    "fname": "is_sma200_rising",
+                    "type": "case",
+                    "attributes": [
+                        {
+                            "criterion": {
+                                "when": [
+                                    {
+                                        "expr": {
+                                            "lval": {
+                                                "expr": {
+                                                    "lval": "next_sma200",
+                                                    "operator": "-",
+                                                    "rval": "sma200"
+                                                },
+                                                "operator": ">",
+                                                "rval": 0
+                                            }
+                                        }
+                                    }
+                                ],
+                                "then": "TRUE",
+                                "else": "FALSE"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

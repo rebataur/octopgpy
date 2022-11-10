@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/static/main.css'>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src='/static/main.js'></script>
+
+    <style>
+        div{
+            border:2px solid black;
+            width:80%;
+        }
+        em{
+            padding:1em;
+        }
+    </style>
+</head>
+<body>
+    <form id="sqlform">
+        <div>
+        Name<input type="text" id="name" name="name"/>
+    </div>
+        <div id="from">
+            <h4>From </h4>
+            <select name="from">
+                <option></option>
+                <option value="equities">Equities</option>
+                <option value="BSE">BSE</option>
+                <option value="NSE">NSE</option>
+            </select>
+            <button id="from-add">Add</button>
+            <span id="from-list"></span>
+
+        </div>
+        <div id="columns">
+            <h4>Columns </h4>
+            <select name="column">
+                <option></option>
+                <option value="normal">Normal</option>
+                <option value="window">Window</option>
+                <option value="case">Case</option>
+            </select>
+            <button id="col-add">Add</button>
+            <div id="col-list"></div>
+
+        </div>
+        <div id="where">
+            <h4>Where </h4>
+      
+            <div id="where-list"></div>
+
+        </div>
+        <div id="order">
+            <h4>Order By </h4>
+            <div id="order-list"></div>
+
+        </div>
+        <input type="submit"/>
+    </form>
+    <pre id="generated-sql">
+
+    </pre>
+    <pre id="res">
+
+    </pre>
+</body>
+</html>

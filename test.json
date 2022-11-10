@@ -1,0 +1,67 @@
+{
+    "name": "sma",
+    "from": [
+        "BSE"
+    ],
+    "cols": [
+        {
+            "name": "trade_date",
+            "type": "normal"
+        },
+        {
+            "name": "code",
+            "type": "normal"
+        },
+        {
+            "name": "close",
+            "type": "normal"
+        },
+        {
+            "name": "name",
+            "type": "normal"
+        },
+        {
+            "name": "sma200",
+            "type": "window_function",
+            "attributes": {
+                "window_func": "AVG",
+                "col": "close",
+                "over": {
+                    "partition_by": "",
+                    "order_by": "trade_date",
+                    "order_type": "desc",
+                    "frame_spec": {
+                        "type": "rows"
+                    },
+                    "frame_boundaries": {
+                        "preceding": "199 preceding",
+                        "following": "current Row"
+                    }
+                }
+            }
+        },
+        {
+            "name": "close_lt_1000",
+            "type": "case",
+            "attributes": {
+                "when": [
+                    "close",
+                    "lt",
+                    "1000",
+                    ""
+                ],
+                "then": "value"
+            }
+        }
+    ],
+    "where": [
+        "code",
+        "lt",
+        "56000",
+        ""
+    ],
+    "order": [
+        "trade_date",
+        "desc"
+    ]
+}
