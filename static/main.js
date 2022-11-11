@@ -124,7 +124,7 @@ $(document).ready(function () {
             // console.log(i,e);
             console.log($(e).attr("name"));
                 if ($(e).attr("name") === "select-case-then-col"){
-                    then =  $(e).find(":selected").val();
+                    then =  $(e).find(":selected").text();
                     // console.log("then",then)
                 }else{
                     let val = $(e).find(":selected").val();
@@ -162,16 +162,21 @@ $(document).ready(function () {
         var where = [];
         $(this).find("div#where-list > select").each((i,e)=>{
             let text = $(e).find(":selected").text();
-            console.log(text);
-            where.push(text)
+            if(text !== ""){
+                console.log(text);
+                where.push(text);
+            }
+          
         });
         
         // where
         var order = [];
         $(this).find("div#order-list > select").each((i,e)=>{
             let text = $(e).find(":selected").text();
-            console.log(text);
-            order.push(text)
+            if(text !== ""){
+                console.log(text);
+                order.push(text);
+            }
         });
             
 
@@ -379,7 +384,12 @@ function onChangeCaseAndOr(e){
        $(e).parent().parent().append(addCaseColumn());
     }
 }
-
+function onChangeWhereAndOr(e){
+    let ao = $(e).find(":selected").val();
+    if (ao == 'and' || ao == 'or') {
+       $(e).parent().append(addWhereCondition());
+    }
+}
 
 // where condition
 function addWhereCondition() {
@@ -410,7 +420,7 @@ function addWhereCondition() {
 
 
 
-    var andor = `<select name="select-case-andor-col" onchange="onChangeCaseAndOr(this)">
+    var andor = `<select name="select-case-andor-col" onchange="onChangeWhereAndOr(this)">
                     <option></option>
                     <option value="and">and</option>
                     <option value="or">or</option>
@@ -447,5 +457,5 @@ function addOrderCondition() {
 }
 
 function onChangeOrderBy(e){
-    $(e).parent().parent().append(addOrderCondition());
+    $(e).parent().append(addOrderCondition());
 }

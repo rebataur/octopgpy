@@ -1,1 +1,1 @@
-flask --app hello --debug run
+pgstart && flask --app hello --debug run

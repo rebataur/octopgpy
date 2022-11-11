@@ -107,3 +107,276 @@
 2022-07-14 17:11:16.178 IST [26452] LOG:  background worker "logical replication launcher" (PID 17644) exited with exit code 1
 2022-07-14 17:11:16.197 IST [15108] LOG:  shutting down
 2022-07-14 17:11:16.263 IST [26452] LOG:  database system is shut down
+2022-11-10 22:32:09.455 IST [24332] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-10 22:32:09.466 IST [24332] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-10 22:32:09.472 IST [24332] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-10 22:32:09.581 IST [25556] LOG:  database system was shut down at 2022-11-10 12:01:09 IST
+2022-11-10 22:32:09.649 IST [24332] LOG:  database system is ready to accept connections
+2022-11-10 22:32:40.652 IST [19544] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 22:32:52.417 IST [14408] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 22:33:08.718 IST [19076] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 22:33:11.246 IST [3736] ERROR:  relation "bse" does not exist at character 153
+2022-11-10 22:33:11.246 IST [3736] STATEMENT:  with test as( select  trade_date,code,close,name, AVG(close) over( order by trade_date desc rows between 199 preceding  and current Row) as sma200 from BSE) select * from test limit 100
+2022-11-10 22:33:24.796 IST [3736] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 22:37:09.569 IST [18732] LOG:  checkpoint starting: time
+2022-11-10 22:37:09.588 IST [18732] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.004 s, total=0.020 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB
+2022-11-10 22:40:46.082 IST [6072] ERROR:  relation "bse" does not exist at character 153
+2022-11-10 22:40:46.082 IST [6072] STATEMENT:  with test as( select  trade_date,code,close,name, AVG(close) over( order by trade_date desc rows between 199 preceding  and current Row) as sma200 from BSE) select * from test limit 100
+2022-11-10 22:42:50.785 IST [6072] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-10 22:42:50.785 IST [6072] STATEMENT:  with test as( select  trade_date,code,close,name, AVG(close) over( order by trade_date desc rows between 199 preceding  and current Row) as sma200 from BSE) select * from test limit 100
+2022-11-10 22:42:57.876 IST [6072] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 22:43:24.376 IST [9612] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 22:43:24.376 IST [9612] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 22:47:09.604 IST [18732] LOG:  checkpoint starting: time
+2022-11-10 22:48:36.886 IST [18732] LOG:  checkpoint complete: wrote 802 buffers (4.9%); 1 WAL file(s) added, 0 removed, 0 recycled; write=87.139 s, sync=0.062 s, total=87.282 s; sync files=27, longest=0.010 s, average=0.003 s; distance=7494 kB, estimate=7494 kB
+2022-11-10 22:53:23.952 IST [19148] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 22:53:23.952 IST [19148] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 22:54:48.037 IST [1936] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 22:54:48.037 IST [1936] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 22:56:39.572 IST [5304] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 22:56:39.572 IST [5304] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 22:56:53.485 IST [19132] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 22:58:26.754 IST [26472] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 22:58:26.754 IST [26472] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 22:59:19.947 IST [12156] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 22:59:19.947 IST [12156] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 22:59:25.673 IST [21304] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 22:59:28.359 IST [20220] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:00:27.627 IST [11784] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:00:27.627 IST [11784] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 23:00:36.607 IST [15604] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:00:36.607 IST [15604] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 23:01:57.549 IST [16892] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:02:07.425 IST [23688] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:02:07.425 IST [23688] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 23:04:24.644 IST [25492] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:09:25.064 IST [23676] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:09:25.064 IST [23676] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 23:09:40.073 IST [3368] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:09:48.859 IST [6860] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:10:08.110 IST [24780] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:10:08.110 IST [24780] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 23:10:31.454 IST [18060] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:10:31.454 IST [18060] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 23:11:21.317 IST [20000] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:11:21.317 IST [20000] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 23:11:24.152 IST [25508] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:12:40.745 IST [24848] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:12:40.745 IST [24848] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 23:12:54.727 IST [14952] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:12:54.727 IST [14952] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 23:21:47.860 IST [14112] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:21:47.860 IST [14112] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 23:23:39.657 IST [17868] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:23:39.657 IST [17868] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-10 23:23:56.574 IST [23716] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-10 23:23:56.574 IST [23716] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-11 11:10:51.943 IST [2324] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-11 11:10:51.955 IST [2324] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-11 11:10:51.961 IST [2324] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-11 11:10:52.159 IST [15008] LOG:  database system was interrupted; last known up at 2022-11-10 22:48:36 IST
+2022-11-11 11:10:52.740 IST [15008] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-11 11:10:52.750 IST [15008] LOG:  redo starts at 0/1DD7920
+2022-11-11 11:10:52.751 IST [15008] LOG:  invalid record length at 0/1DD7A08: wanted 24, got 0
+2022-11-11 11:10:52.751 IST [15008] LOG:  redo done at 0/1DD79D0 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-11 11:10:52.759 IST [1908] LOG:  checkpoint starting: end-of-recovery immediate wait
+2022-11-11 11:10:52.780 IST [1908] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.004 s, total=0.024 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB
+2022-11-11 11:10:52.827 IST [2324] LOG:  database system is ready to accept connections
+2022-11-11 11:11:06.439 IST [2324] LOG:  received fast shutdown request
+2022-11-11 11:11:06.439 IST [15912] ERROR:  canceling statement due to user request
+2022-11-11 11:11:06.440 IST [15836] ERROR:  canceling statement due to user request
+2022-11-11 11:11:06.443 IST [2324] LOG:  aborting any active transactions
+2022-11-11 11:11:06.444 IST [9208] FATAL:  terminating connection due to administrator command
+2022-11-11 11:11:06.444 IST [23704] FATAL:  terminating connection due to administrator command
+2022-11-11 11:11:06.464 IST [2324] LOG:  background worker "logical replication launcher" (PID 15912) exited with exit code 1
+2022-11-11 11:11:06.478 IST [1908] LOG:  shutting down
+2022-11-11 11:11:06.480 IST [1908] LOG:  checkpoint starting: shutdown immediate
+2022-11-11 11:11:06.496 IST [1908] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.019 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB
+2022-11-11 11:11:06.526 IST [2324] LOG:  database system is shut down
+2022-11-11 11:11:09.281 IST [12344] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-11 11:11:09.293 IST [12344] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-11 11:11:09.299 IST [12344] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-11 11:11:09.385 IST [26500] LOG:  database system was shut down at 2022-11-11 11:11:06 IST
+2022-11-11 11:11:09.425 IST [12344] LOG:  database system is ready to accept connections
+2022-11-11 11:11:47.453 IST [23136] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:11:53.272 IST [22148] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:13:03.778 IST [20532] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:13:03.779 IST [20532] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-11 11:13:25.134 IST [25592] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:13:25.134 IST [25592] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-11 11:14:37.733 IST [20392] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:15:31.417 IST [25576] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:16:09.385 IST [22152] LOG:  checkpoint starting: time
+2022-11-11 11:16:09.423 IST [22152] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.005 s, total=0.038 s; sync files=2, longest=0.003 s, average=0.002 s; distance=0 kB, estimate=0 kB
+2022-11-11 11:16:10.146 IST [4280] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:16:43.794 IST [9812] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:16:54.703 IST [10060] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:18:03.285 IST [18996] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:18:03.286 IST [18996] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-11 11:44:52.766 IST [21880] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:47:14.909 IST [17976] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:48:51.944 IST [19900] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:49:04.996 IST [19916] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:49:18.495 IST [4820] ERROR:  trailing junk after numeric literal at or near "1000a" at character 39
+2022-11-11 11:49:18.495 IST [4820] STATEMENT:  with test as( select  case when close<1000andclose>500 then  from BSE) select * from test limit 10
+2022-11-11 11:49:28.716 IST [4820] ERROR:  trailing junk after numeric literal at or near "1000a" at character 39
+2022-11-11 11:49:28.716 IST [4820] STATEMENT:  with test as( select  case when close<1000andclose>500 then value from BSE) select * from test limit 10
+2022-11-11 11:50:55.734 IST [4820] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:51:01.460 IST [15560] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:51:43.162 IST [9532] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:51:54.258 IST [20312] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:53:11.155 IST [19688] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:53:13.258 IST [13096] ERROR:  syntax error at or near "from" at character 74
+2022-11-11 11:53:13.258 IST [13096] STATEMENT:  with test as( select  case when  close < 1000 or close > 2000  then true from BSE) select * from test limit 10
+2022-11-11 11:54:10.636 IST [13096] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:54:26.198 IST [18716] ERROR:  syntax error at or near "endclose_lt_1000" at character 74
+2022-11-11 11:54:26.198 IST [18716] STATEMENT:  with test as( select  case when  close < 1000 or close > 2000  then true endclose_lt_1000 from BSE) select * from test limit 10
+2022-11-11 11:54:42.078 IST [18716] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:56:35.847 IST [32] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:56:35.847 IST [32] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-11 11:56:38.126 IST [20284] ERROR:  syntax error at or near "rowspartition" at character 93
+2022-11-11 11:56:38.126 IST [20284] STATEMENT:  with test as( select  trade_date,code,close,name, AVG(close) over( order by trade_date desc rowspartition by between 199 preceding  and current Row) as sma200,case when  close < 1000 or close > 2000  then true end close_lt_1000 from BSE) select * from test limit 10
+2022-11-11 11:57:07.433 IST [20284] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:57:46.052 IST [25548] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 11:58:03.063 IST [2476] ERROR:  syntax error at or near "by" at character 108
+2022-11-11 11:58:03.063 IST [2476] STATEMENT:  with test as( select  trade_date,code,close,name, AVG(close) over( order by trade_date desc rows partition by code between 199 preceding  and current Row) as sma200,case when  close < 1000 or close > 2000  then true end close_lt_1000 from BSE) select * from test limit 10
+2022-11-11 12:00:32.941 IST [2476] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:01:07.449 IST [18588] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:01:11.260 IST [14768] ERROR:  syntax error at or near "partition" at character 93
+2022-11-11 12:01:11.260 IST [14768] STATEMENT:  with test as( select  trade_date,code,close,name, AVG(close) over( order by trade_date desc partition by coderows  between 199 preceding  and current Row) as sma200,case when  close < 1000 or close > 2000  then true end close_lt_1000 from BSE) select * from test limit 10
+2022-11-11 12:01:59.586 IST [14768] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:02:09.530 IST [4380] ERROR:  syntax error at or near "partition" at character 93
+2022-11-11 12:02:09.530 IST [4380] STATEMENT:  with test as( select  trade_date,code,close,name, AVG(close) over( order by trade_date desc partition by coderows  between 199 preceding  and current Row) as sma200,case when  close < 1000 or close > 2000  then true end close_lt_1000 from BSE) select * from test limit 10
+2022-11-11 12:02:18.824 IST [4380] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:02:20.566 IST [18216] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:02:22.406 IST [15440] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:03:00.121 IST [25100] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:03:24.355 IST [9132] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:03:26.024 IST [25188] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:05:45.718 IST [15316] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:05:45.718 IST [15316] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-11 12:05:48.694 IST [14700] ERROR:  syntax error at or near "=" at character 248
+2022-11-11 12:05:48.694 IST [14700] STATEMENT:  with test as( select  trade_date,code,close,name, AVG(close) over(partition by code order by trade_date desc rows  between 199 preceding  and current Row) as sma200,case when  close < 1000 or close > 2000  then true end close_lt_1000 from BSEcode = 500002  order by trade_date desc ) select * from test limit 10
+2022-11-11 12:06:24.458 IST [14700] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:06:26.328 IST [15996] ERROR:  syntax error at or near "=" at character 254
+2022-11-11 12:06:26.328 IST [15996] STATEMENT:  with test as( select  trade_date,code,close,name, AVG(close) over(partition by code order by trade_date desc rows  between 199 preceding  and current Row) as sma200,case when  close < 1000 or close > 2000  then true end close_lt_1000 from BSEcode where = where 500002 where   order by trade_date desc ) select * from test limit 10
+2022-11-11 12:07:02.257 IST [15996] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:07:05.217 IST [7824] ERROR:  syntax error at or near "=" at character 254
+2022-11-11 12:07:05.217 IST [7824] STATEMENT:  with test as( select  trade_date,code,close,name, AVG(close) over(partition by code order by trade_date desc rows  between 199 preceding  and current Row) as sma200,case when  close < 1000 or close > 2000  then true end close_lt_1000 from BSEcode where = where 500002 where   order by trade_date desc ) select * from test limit 10
+2022-11-11 12:07:16.208 IST [7824] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:07:54.021 IST [9828] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:08:06.053 IST [12800] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:08:31.401 IST [17972] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:21:04.983 IST [23084] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:21:10.603 IST [15728] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:21:14.314 IST [4732] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:26:44.777 IST [11116] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:28:11.883 IST [6632] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:28:48.790 IST [20676] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:29:15.324 IST [17980] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:30:19.698 IST [12496] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:32:36.221 IST [26432] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:32:37.901 IST [12092] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:34:12.034 IST [20312] ERROR:  syntax error at or near "lt" at character 48
+2022-11-11 12:34:12.034 IST [20312] STATEMENT:  WITH test AS( SELECT  code FROM BSE WHERE code lt 55000 and code gt 60000 ORDER BY trade_date desc ,name desc ,code desc ) select * from test limit 10
+2022-11-11 12:35:22.953 IST [20312] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:35:38.624 IST [11832] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:35:47.402 IST [19340] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:36:18.020 IST [18064] ERROR:  syntax error at or near "ORDER" at character 44
+2022-11-11 12:36:18.020 IST [18064] STATEMENT:  WITH test AS( SELECT  code FROM BSE WHERE  ORDER BY) select * from test limit 10
+2022-11-11 12:36:43.597 IST [18064] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 12:40:40.661 IST [17404] ERROR:  canceling statement due to user request
+2022-11-11 12:40:40.662 IST [12344] LOG:  received fast shutdown request
+2022-11-11 12:40:40.674 IST [12344] LOG:  aborting any active transactions
+2022-11-11 12:40:40.674 IST [19324] FATAL:  terminating connection due to administrator command
+2022-11-11 12:40:40.675 IST [5504] FATAL:  terminating connection due to administrator command
+2022-11-11 12:40:40.675 IST [12344] LOG:  background worker "logical replication launcher" (PID 17404) exited with exit code 1
+2022-11-11 12:40:40.706 IST [22152] LOG:  shutting down
+2022-11-11 12:40:40.709 IST [22152] LOG:  checkpoint starting: shutdown immediate
+2022-11-11 12:40:40.722 IST [22152] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.016 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB
+2022-11-11 12:40:40.753 IST [12344] LOG:  database system is shut down
