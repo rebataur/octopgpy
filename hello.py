@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,jsonify
+from flask import Flask,render_template,request,jsonify,Response
 import json
 
 
@@ -37,6 +37,71 @@ def jsontosql():
     # res = []
     jsonres = json.dumps(res,  indent=4, sort_keys=True, default=str)
     return json.dumps({'success':True,'sql':sql,'res':jsonres}), 200, {'ContentType':'application/json'} 
+
+
+@app.route('/viz',methods=['GET'])
+def visualization():
+    sql = '''
+            WITH test AS(
+            SELECT
+                trade_date,
+                code,
+                CLOSE,
+                name,
+                AVG(round(CLOSE)) OVER(PARTITION BY code
+            ORDER BY
+                trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+            FROM
+                BSE
+            ORDER BY
+                trade_date DESC 
+            
+                
+        ), lmt as(
+                
+        select close,sma200,trade_date,name
+        FROM
+            test
+        WHERE
+            code = 532540
+            limit 200
+        )select array_agg(name) as namearr,array_agg(close) as closearr,array_agg(sma200) as smaarr,array_agg(trade_date) as trade_datearr from lmt 
+
+    '''
+
+    cur.execute(sql)
+    res = cur.fetchall()
+
+    name = res[0]['namearr'][0]
+    closearr = res[0]['closearr']
+    smaarr = res[0]['smaarr']
+    tradearr = res[0]['trade_datearr']
+
+    
+    from io import BytesIO
+    import matplotlib as mpl
+    mpl.use('Agg')
+    import matplotlib.pyplot as plt
+    # import numpy as np
+
+    plt.rcParams["figure.figsize"] = [7.50, 3.50]
+    plt.rcParams["figure.autolayout"] = True
+
+    # x = np.linspace(0, 2, 100)  # Sample data.
+    plt.figure(figsize=(10, 5), layout='constrained')
+    plt.plot(tradearr, closearr, label='close')  # Plot some data on the (implicit) axes.
+    plt.plot(tradearr,smaarr, label='sma200')  # etc.
+    plt.xlabel('close, sma200')
+    plt.ylabel('trade date')
+    plt.title(name)
+    plt.legend()
+
+    buffer = BytesIO()
+    plt.savefig(buffer, format="png")
+    return Response(buffer.getvalue(), mimetype='image/png')
+
+
+
 
 def jsontosql(jsonsql):  
     operators_dict= {'+':'+','-':'-','=':'=','lt':'<','gt':'>','lte':'<=', 'gte':'>='}
@@ -85,7 +150,7 @@ def jsontosql(jsonsql):
                
                 frame_spec = over['frame_spec']
                 if over['partition_by'] != '':
-                    c += f"PARTITION BY{over['partition_by']}"
+                    c += f"PARTITION BY {over['partition_by']}"
 
                 order_by = over['order_by']
                 order_type = over['order_type']
@@ -118,7 +183,7 @@ def jsontosql(jsonsql):
                         c += " " + operators_dict[a] 
                     else:
                         c += " " + a
-                c += ' THEN ' + attribs['then'] + " END " + col_name
+                c += ' THEN ' + attribs['then'] + " ELSE " + attribs['else'] + "END as " + col_name
                 columns.append(c)
 
         sql += f"{','.join(columns)}"
@@ -150,14 +215,8 @@ def jsontosql(jsonsql):
         #     order_by) > 0 else ''
     
 
-        if 'limit' in cte.keys():          
-            limit = cte['limit']
-            if limit['number'] > 0:
-                sql += f"limit {limit['number']}"
-                if limit['offset'] > 0:
-                    sql += f" limit['offset']"
 
         # END OF CTE
-        sql += f") select * from {cte['name']} limit 10"
+        sql += f") select * from {cte['name']} limit {cte['limit']} offset {cte['offset']}"
     print(sql)
     return sql

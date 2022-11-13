@@ -3,7 +3,7 @@ var fromList = [];
 var cols = [];
 
 var dbCols = ['','trade_date','code','close','name'];
-var wfCols = ['','AVG','HIGH','LOW'];
+var wfCols = ['','AVG','MAX','MIN'];
 let operators= ['','+','-','=','lt','gt','lte', 'gte'];
 
 $(document).ready(function () {
@@ -36,7 +36,8 @@ $(document).ready(function () {
         } else if (option === 'case') {
             var column = addCaseColumn();
             var thenColumn = addThenColumn();
-            $("div#col-list").append("<div class='case-column'><label>Alias Name</label><input type='text' name='case-alias'/>" + column + "<div> then"+thenColumn+"</div></div>");
+            var elseColumn =addElseColumn();
+            $("div#col-list").append("<div class='case-column'><label>Alias Name</label><input type='text' name='case-alias'/>" + column + "<div> then"+thenColumn +  "else " + elseColumn + "</div></div>");
         }
 
 
@@ -120,12 +121,16 @@ $(document).ready(function () {
             console.log(alias);
             let when = [];
             let then = '';
+            let elsecond = '';
             $(e).find("select").each(function(i,e){
             // console.log(i,e);
             console.log($(e).attr("name"));
                 if ($(e).attr("name") === "select-case-then-col"){
                     then =  $(e).find(":selected").text();
                     // console.log("then",then)
+                }else if ($(e).attr("name") === "select-case-else-col"){
+                    elsecond =  $(e).find(":selected").text();
+                
                 }else{
                     let val = $(e).find(":selected").val();
                     let text = $(e).find(":selected").text();
@@ -149,7 +154,8 @@ $(document).ready(function () {
                 "type":"case",
                 "attributes":{
                     "when":when,
-                    "then":then
+                    "then":then,
+                    "else":elsecond
                 }
             });
             console.log(caseColumns);
@@ -184,9 +190,16 @@ $(document).ready(function () {
         // cols.push(normalCols);
         // cols.push(winCols);
         // cols.push(caseCols);
+
+        var limit = $("input[name=limit]").val();
+        var offset = $("input[name=offset]").val();
+
+        
         cte['cols'] = cols;
         cte['where'] = where;
         cte['order'] = order;
+        cte['limit'] = limit;
+        cte['offset'] = offset;
 
         console.log(cte);
 
@@ -197,9 +210,30 @@ $(document).ready(function () {
             data : JSON.stringify(cte),
             contentType: "application/json",
         }).done(function(data){
+            console.log(data);
             console.log(data['sql']);
             $("pre#generated-sql").html(data['sql']);
             $("pre#res").html(data['res']);
+            console.log(data['res'][0]);
+            var res = JSON.parse(data['res']);
+            var keys = Object.keys(res[0]);
+
+            // Create table
+            var table = `<table class="table"><thead><tr>`;
+            for(var k in keys){
+                table += `<th>${keys[k]}</th>`;
+            }
+            table += `</tr>`;
+            table += `</thead><tbody>`;
+            for(var r in res){
+                table += `<tr>`;
+                for(var k in keys){
+                    table += `<td>${res[r][keys[k]]}</td>`;
+                }
+                table += `</tr>`;
+            }
+            table += `</tbody></table>`;
+            $("pre#res").html(table);
         });
     });// End of submit
 
@@ -322,6 +356,18 @@ function addCaseColumn() {
 function addThenColumn(){
     var cols = dbCols;
     var rcolumns = `<select name="select-case-then-col" onchange="onChangeCaseColumns(this)">`;
+    for (var col in cols) {
+        rcolumns += `<option value = ${cols[col]}>${cols[col]}</option>`;
+                   
+    }
+    rcolumns +=  `<option value="value">value</option>`;
+    rcolumns += `</select>`;
+    return rcolumns;
+}
+
+function addElseColumn(){
+    var cols = dbCols;
+    var rcolumns = `<select name="select-case-else-col" onchange="onChangeCaseColumns(this)">`;
     for (var col in cols) {
         rcolumns += `<option value = ${cols[col]}>${cols[col]}</option>`;
                    

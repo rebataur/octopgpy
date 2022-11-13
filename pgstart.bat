@@ -10,8 +10,9 @@
 @REM C:\Users\pranjan24\Downloads\postgresql-14.2-2-windows-x64-binaries\pgsql\bin\pg_ctl -D C:\Users\pranjan24\Downloads\postgresql-14.2-2-windows-x64-binaries\pgsql\data -l logfile stop
 @REM C:\Users\pranjan24\Downloads\postgresql-14.2-2-windows-x64-binaries\pgsql\bin\pg_ctl -D C:\Users\pranjan24\Downloads\postgresql-14.2-2-windows-x64-binaries\pgsql\data -l logfile start
 
-C:\Users\pranjan24\Downloads\postgresql-15.0-2-windows-x64-binaries\pgsql\bin\pg_ctl -D C:\Users\pranjan24\Downloads\postgresql-15.0-2-windows-x64-binaries\pgsql\data -l logfile stop
-C:\Users\pranjan24\Downloads\postgresql-15.0-2-windows-x64-binaries\pgsql\bin\pg_ctl -D C:\Users\pranjan24\Downloads\postgresql-15.0-2-windows-x64-binaries\pgsql\data -l logfile start
+C:\Users\pranjan24\Downloads\postgresql-14.6-1-windows-x64-binaries\pgsql\bin\pg_ctl -D C:\Users\pranjan24\Downloads\postgresql-14.6-1-windows-x64-binaries\pgsql\data -l logfile stop
+
+C:\Users\pranjan24\Downloads\postgresql-14.6-1-windows-x64-binaries\pgsql\bin\pg_ctl -D C:\Users\pranjan24\Downloads\postgresql-14.6-1-windows-x64-binaries\pgsql\data -l logfile start
 
 @REM C:\Users\pranjan24\AppData\Local\Programs\Python\Python310\Scripts\pip3.10
 @REM npx postgraphile -c postgres://postgres:postgres@localhost:5432/postgres?ssl=false --watch

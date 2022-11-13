@@ -380,3 +380,2152 @@
 2022-11-11 12:40:40.709 IST [22152] LOG:  checkpoint starting: shutdown immediate
 2022-11-11 12:40:40.722 IST [22152] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.016 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB
 2022-11-11 12:40:40.753 IST [12344] LOG:  database system is shut down
+2022-11-11 20:57:29.980 IST [17476] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-11 20:57:29.993 IST [17476] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-11 20:57:29.999 IST [17476] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-11 20:57:30.110 IST [26216] LOG:  database system was shut down at 2022-11-11 12:40:40 IST
+2022-11-11 20:57:30.210 IST [17476] LOG:  database system is ready to accept connections
+2022-11-11 20:59:55.371 IST [9200] ERROR:  syntax error at or near "BYcode" at character 77
+2022-11-11 20:59:55.371 IST [9200] STATEMENT:  WITH test AS( SELECT  trade_date,code,close,name, AVG(close) OVER(PARTITION BYcode ORDER BY trade_date desc ROWS  BETWEEN 199 preceding  AND current Row) as sma200 FROM BSE ORDER BY trade_date desc ) select * from test limit 10
+2022-11-11 21:00:29.627 IST [9200] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-11 21:02:30.104 IST [24460] LOG:  checkpoint starting: time
+2022-11-11 21:02:30.469 IST [24460] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.328 s, sync=0.006 s, total=0.367 s; sync files=3, longest=0.003 s, average=0.002 s; distance=0 kB, estimate=0 kB
+2022-11-11 21:22:30.045 IST [24460] LOG:  checkpoint starting: time
+2022-11-11 21:27:00.221 IST [24460] LOG:  checkpoint complete: wrote 14279 buffers (87.2%); 0 WAL file(s) added, 0 removed, 9 recycled; write=270.040 s, sync=0.039 s, total=270.176 s; sync files=11, longest=0.010 s, average=0.004 s; distance=137141 kB, estimate=137141 kB
+2022-11-11 22:43:36.983 IST [2812] ERROR:  OVER specified, but round is not a window function nor an aggregate function at character 72
+2022-11-11 22:43:36.983 IST [2812] STATEMENT:        
+	with test as(
+	select
+		trade_date,
+		code,
+		close,
+		name,
+		round(avg(close)) over(partition by code
+	order by
+		trade_date rows between 199 preceding and current Row) as sma200 FROM BSE ORDER BY trade_date desc ) 
+	select * from test where code = 532540
+2022-11-12 00:40:54.227 IST [6520] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 00:40:54.227 IST [6520] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 00:41:57.693 IST [17708] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 00:42:05.499 IST [15460] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 00:42:07.604 IST [15560] ERROR:  LIMIT #,# syntax is not supported at character 110
+2022-11-12 00:42:07.604 IST [15560] HINT:  Use separate LIMIT and OFFSET clauses.
+2022-11-12 00:42:07.604 IST [15560] STATEMENT:  WITH test AS( SELECT  trade_date FROM BSE WHERE  code > 500000 ORDER BY trade_date desc ) select * from test limit 200,0
+2022-11-12 00:43:25.012 IST [15560] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 00:44:07.825 IST [488] ERROR:  LIMIT #,# syntax is not supported at character 104
+2022-11-12 00:44:07.825 IST [488] HINT:  Use separate LIMIT and OFFSET clauses.
+2022-11-12 00:44:07.825 IST [488] STATEMENT:  WITH test AS( SELECT  code FROM BSE WHERE  code > 500000 ORDER BY trade_date desc ) select * from test limit 200,0
+2022-11-12 00:45:05.179 IST [488] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 01:58:36.586 IST [2812] ERROR:  column "test.trade_date" must appear in the GROUP BY clause or be used in an aggregate function at character 227
+2022-11-12 01:58:36.586 IST [2812] STATEMENT:  with test as(
+	select
+		trade_date,
+		code,
+		close,
+		name,
+		avg(round(close)) over(partition by code
+	order by
+		trade_date rows between 199 preceding and current Row) as sma200 FROM BSE ORDER BY trade_date desc ) 
+	select *,array_agg(sma200) from test where code = 532540
+	
+	
+2022-11-12 02:01:46.095 IST [2812] ERROR:  schema "matplotlib" does not exist
+2022-11-12 02:01:46.095 IST [2812] STATEMENT:  CREATE FUNCTION matplotlib.simplelinechart (x numeric[], y numberic)
+	  RETURNS numeric[]
+	AS $$
+	return x
+	$$ LANGUAGE plpythonu
+2022-11-12 02:02:02.235 IST [2812] ERROR:  language "plpythonu" does not exist
+2022-11-12 02:02:02.235 IST [2812] STATEMENT:  
+	CREATE FUNCTION matplotlib_simplelinechart (x numeric[], y numberic)
+	  RETURNS numeric[]
+	AS $$
+	return x
+	$$ LANGUAGE plpythonu
+2022-11-12 02:02:09.044 IST [2812] ERROR:  type numberic does not exist
+2022-11-12 02:02:09.044 IST [2812] STATEMENT:  
+	CREATE FUNCTION matplotlib_simplelinechart (x numeric[], y numberic)
+	  RETURNS numeric[]
+	AS $$
+	return x
+	$$ LANGUAGE plpython3u
+2022-11-12 02:03:19.227 IST [2812] ERROR:  function "matplotlib_simplelinechart" already exists with same argument types
+2022-11-12 02:03:19.227 IST [2812] STATEMENT:  CREATE FUNCTION matplotlib_simplelinechart (x numeric[], y numeric[])
+	  RETURNS numeric[]
+	AS $$
+	return x[1]
+	$$ LANGUAGE plpython3u
+2022-11-12 02:03:36.830 IST [2812] ERROR:  return value of function with array return type is not a Python sequence
+2022-11-12 02:03:36.830 IST [2812] CONTEXT:  while creating return value
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 02:03:36.830 IST [2812] STATEMENT:  with test as(
+	select
+		trade_date,
+		code,
+		close,
+		name,
+		avg(round(close)) over(partition by code
+	order by
+		trade_date rows between 199 preceding and current Row) as sma200 FROM BSE ORDER BY trade_date desc ) 
+	select matplotlib_simplelinechart(array_agg(sma200),array_agg(sma200)) from test where code = 532540
+	
+2022-11-12 02:04:04.185 IST [24460] LOG:  checkpoint starting: time
+2022-11-12 02:04:04.890 IST [24460] LOG:  checkpoint complete: wrote 7 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.657 s, sync=0.019 s, total=0.706 s; sync files=7, longest=0.010 s, average=0.003 s; distance=40 kB, estimate=123431 kB
+2022-11-12 02:09:04.893 IST [24460] LOG:  checkpoint starting: time
+2022-11-12 02:09:05.586 IST [24460] LOG:  checkpoint complete: wrote 7 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.650 s, sync=0.020 s, total=0.693 s; sync files=7, longest=0.010 s, average=0.003 s; distance=43 kB, estimate=111092 kB
+2022-11-12 02:09:54.824 IST [2812] ERROR:  function matplotlib_simplelinechart(numeric[], date[]) does not exist at character 227
+2022-11-12 02:09:54.824 IST [2812] HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2022-11-12 02:09:54.824 IST [2812] STATEMENT:  with test as(
+	select
+		trade_date,
+		code,
+		close,
+		name,
+		avg(round(close)) over(partition by code
+	order by
+		trade_date rows between 199 preceding and current Row) as sma200 FROM BSE ORDER BY trade_date desc ) 
+	select matplotlib_simplelinechart(array_agg(sma200),array_agg(trade_date)) from test where code = 532540
+2022-11-12 02:10:13.637 IST [2812] ERROR:  syntax error at or near "CREATE" at character 342
+2022-11-12 02:10:13.637 IST [2812] STATEMENT:            
+	with test as(
+	select
+		trade_date,
+		code,
+		close,
+		name,
+		avg(round(close)) over(partition by code
+	order by
+		trade_date rows between 199 preceding and current Row) as sma200 FROM BSE ORDER BY trade_date desc ) 
+	select matplotlib_simplelinechart(array_agg(sma200),array_agg(trade_date)) from test where code = 532540
+	
+	
+	CREATE or replace FUNCTION matplotlib_simplelinechart (xdat numeric[], ydat date[])
+	  RETURNS bytea
+	AS $$
+	import base64
+	from io import BytesIO
+	from matplotlib.figure import Figure
+	
+	buf = BytesIO()
+	import matplotlib.pyplot as plt
+	import numpy as np
+	
+	f1, ax = plt.subplots(figsize = (10,5))
+	ax.plot(ydat, xdat, label='sma200' )
+	plt.xlabel('DATE')
+	plt.ylabel('STOCK')
+	plt.title('Name of stock')
+	plt.legend()
+	buffer = BytesIO()
+	plt.savefig(buffer, format="png")
+	return buffer.getvalue()
+	$$ LANGUAGE plpython3u
+2022-11-12 02:13:09.800 IST [2812] ERROR:  ValueError: x, y, and format string must not be None
+2022-11-12 02:13:09.800 IST [2812] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 11, in <module>
+	    ax.plot(ydat, xdat, label='sma200' )
+	  PL/Python function "matplotlib_simplelinechart", line 1661, in plot
+	  PL/Python function "matplotlib_simplelinechart", line 310, in __call__
+	  PL/Python function "matplotlib_simplelinechart", line 464, in _plot_args
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 02:13:09.800 IST [2812] STATEMENT:              
+	with test as(
+	select
+		trade_date,
+		code,
+		close,
+		name,
+		avg(round(close)) over(partition by code
+	order by
+		trade_date rows between 199 preceding and current Row) as sma200 FROM BSE ORDER BY trade_date desc limit 100) 
+	select matplotlib_simplelinechart(array_agg(sma200),array_agg(trade_date)) from test where code = 532540
+	limit 10
+	
+2022-11-12 02:14:04.602 IST [24460] LOG:  checkpoint starting: time
+2022-11-12 02:14:05.304 IST [24460] LOG:  checkpoint complete: wrote 7 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.658 s, sync=0.024 s, total=0.702 s; sync files=7, longest=0.010 s, average=0.004 s; distance=44 kB, estimate=99987 kB
+2022-11-12 02:15:27.182 IST [17476] LOG:  background worker "logical replication launcher" (PID 24044) was terminated by exception 0x40010004
+2022-11-12 02:15:27.182 IST [17476] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-11-12 02:15:27.182 IST [17476] LOG:  terminating any other active server processes
+2022-11-12 02:15:27.275 IST [17476] LOG:  all server processes terminated; reinitializing
+^C2022-11-12 12:17:20.222 IST [25820] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 12:17:20.242 IST [25820] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 12:17:20.253 IST [25820] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 12:17:20.420 IST [15272] LOG:  database system was interrupted; last known up at 2022-11-12 02:14:05 IST
+2022-11-12 12:17:22.355 IST [15272] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-12 12:17:22.365 IST [15272] LOG:  redo starts at 0/A3E5858
+2022-11-12 12:17:22.373 IST [15272] LOG:  invalid record length at 0/A3F0138: wanted 24, got 0
+2022-11-12 12:17:22.373 IST [15272] LOG:  redo done at 0/A3F0100 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-12 12:17:22.380 IST [25492] LOG:  checkpoint starting: end-of-recovery immediate wait
+2022-11-12 12:17:22.416 IST [25492] LOG:  checkpoint complete: wrote 10 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.008 s, sync=0.014 s, total=0.039 s; sync files=9, longest=0.003 s, average=0.002 s; distance=42 kB, estimate=42 kB
+2022-11-12 12:17:22.517 IST [25820] LOG:  database system is ready to accept connections
+2022-11-12 12:17:33.711 IST [16996] ERROR:  syntax error at or near "WITH" at character 86
+2022-11-12 12:17:33.711 IST [16996] STATEMENT:  WITH test AS (
+	SELECT
+		*
+	FROM
+		bse
+	WHERE
+		code = 532540
+	ORDER BY
+		trade_date WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC )
+			
+	SELECT
+		*
+	FROM
+		test
+	WHERE
+		code = 500209
+	LIMIT 10 
+			
+	SELECT
+		matplotlib_simplelinechart(array_agg(sma200),array_agg(trade_date))
+	FROM
+		test
+	WHERE
+		code = 500209
+	LIMIT 10 
+	
+2022-11-12 12:19:02.334 IST [16996] ERROR:  syntax error at or near "matplotlib_simplelinechart" at character 14
+2022-11-12 12:19:02.334 IST [16996] STATEMENT:  SELECT
+		*
+		matplotlib_simplelinechart(array_agg(sma200),array_agg(trade_date))
+	FROM
+		test
+	WHERE
+		code = 500209
+	LIMIT 10 
+2022-11-12 12:19:05.339 IST [16996] ERROR:  syntax error at or near "matplotlib_simplelinechart" at character 254
+2022-11-12 12:19:05.339 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC )
+			
+	SELECT
+		*
+		matplotlib_simplelinechart(array_agg(sma200),array_agg(trade_date))
+	FROM
+		test
+	WHERE
+		code = 500209
+	LIMIT 10 
+2022-11-12 12:19:11.854 IST [16996] ERROR:  column "test.trade_date" must appear in the GROUP BY clause or be used in an aggregate function at character 250
+2022-11-12 12:19:11.854 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC )
+			
+	SELECT
+		*,
+		matplotlib_simplelinechart(array_agg(sma200),array_agg(trade_date))
+	FROM
+		test
+	WHERE
+		code = 500209
+	LIMIT 10 
+2022-11-12 12:20:28.793 IST [16996] ERROR:  syntax error at or near "SELECT" at character 370
+2022-11-12 12:20:28.793 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC )
+			
+	SELECT
+		matplotlib_simplelinechart(array_agg(sma200),array_agg(trade_date))
+	FROM
+		test
+	WHERE
+		code = 500209
+	LIMIT 10 
+			
+	SELECT
+		matplotlib_simplelinechart(array_agg(sma200),array_agg(trade_date))
+	FROM
+		test
+	WHERE
+		code = 500209
+	LIMIT 10 
+2022-11-12 12:22:22.423 IST [25492] LOG:  checkpoint starting: time
+2022-11-12 12:22:22.910 IST [25492] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.431 s, sync=0.020 s, total=0.487 s; sync files=5, longest=0.011 s, average=0.004 s; distance=27 kB, estimate=40 kB
+2022-11-12 12:29:26.887 IST [16996] ERROR:  syntax error at end of input at character 330
+2022-11-12 12:29:26.887 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select sma200,trade_date
+	FROM
+		test
+	WHERE
+		code = 500209
+		limit 10
+2022-11-12 12:29:52.850 IST [16996] ERROR:  syntax error at end of input at character 329
+2022-11-12 12:29:52.850 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select sma200,trade_date
+	FROM
+		test
+	WHERE
+		code = 500209
+		limit 1
+2022-11-12 12:30:48.272 IST [16996] ERROR:  syntax error at or near "selectmatplotlib_simplelinechart" at character 332
+2022-11-12 12:30:48.272 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select sma200,trade_date
+	FROM
+		test
+	WHERE
+		code = 500209
+		limit 1
+	)selectmatplotlib_simplelinechart(array_agg(sma200),array_agg(trade_date)) from lmt  
+2022-11-12 12:32:22.933 IST [25492] LOG:  checkpoint starting: time
+2022-11-12 12:32:23.416 IST [25492] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.450 s, sync=0.010 s, total=0.484 s; sync files=5, longest=0.003 s, average=0.002 s; distance=28 kB, estimate=39 kB
+2022-11-12 12:38:55.108 IST [16996] ERROR:  syntax error at or near "SELECT" at character 431
+2022-11-12 12:38:55.108 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select sma200,trade_date
+	FROM
+		test
+	WHERE
+		code = 532540
+	
+		limit 125
+	)select matplotlib_simplelinechart(array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+			
+	SELECT
+		matplotlib_simplelinechart(array_agg(sma200),array_agg(trade_date))
+	FROM
+		test
+	WHERE
+		code = 500209
+	LIMIT 10 
+<string>:7: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+2022-11-12 12:42:22.432 IST [25492] LOG:  checkpoint starting: time
+2022-11-12 12:42:22.915 IST [25492] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.440 s, sync=0.019 s, total=0.483 s; sync files=5, longest=0.011 s, average=0.004 s; distance=29 kB, estimate=38 kB
+2022-11-12 13:28:35.230 IST [25492] LOG:  checkpoint starting: time
+2022-11-12 13:28:35.703 IST [25492] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.439 s, sync=0.018 s, total=0.474 s; sync files=5, longest=0.010 s, average=0.004 s; distance=29 kB, estimate=37 kB
+2022-11-12 13:33:35.705 IST [25492] LOG:  checkpoint starting: time
+2022-11-12 13:33:36.386 IST [25492] LOG:  checkpoint complete: wrote 7 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.650 s, sync=0.010 s, total=0.682 s; sync files=7, longest=0.002 s, average=0.002 s; distance=43 kB, estimate=43 kB
+<string>:6: MatplotlibDeprecationWarning: The 'b' parameter of grid() has been renamed 'visible' since Matplotlib 3.5; support for the old name will be dropped two minor releases later.
+<string>:6: MatplotlibDeprecationWarning: The 'b' parameter of grid() has been renamed 'visible' since Matplotlib 3.5; support for the old name will be dropped two minor releases later.
+2022-11-12 14:14:56.766 IST [16996] ERROR:  NameError: name 'false' is not defined
+2022-11-12 14:14:56.766 IST [16996] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 5, in <module>
+	    plt.rcParams['axes.grid'] = false
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 14:14:56.766 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date
+	FROM
+		test
+	WHERE
+		code = 532540
+	
+		limit 365
+	)select matplotlib_simplelinechart(array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+2022-11-12 14:17:52.162 IST [25492] LOG:  checkpoint starting: time
+2022-11-12 14:17:53.491 IST [25492] LOG:  checkpoint complete: wrote 13 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.292 s, sync=0.018 s, total=1.330 s; sync files=9, longest=0.004 s, average=0.002 s; distance=76 kB, estimate=76 kB
+2022-11-12 14:19:46.062 IST [16996] ERROR:  syntax error at or near "trade_date" at character 451
+2022-11-12 14:19:46.062 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date
+	FROM
+		test
+	WHERE
+		code = 532540
+	
+		limit 10
+	)select matplotlib_simplelinechart(array_agg(close),array_agg(sma200),array_agg(date_trunc('month', trade_date)trade_date)) from lmt  
+	
+	
+			
+2022-11-12 14:20:03.967 IST [16996] ERROR:  function matplotlib_simplelinechart(numeric[], numeric[], timestamp with time zone[]) does not exist at character 348
+2022-11-12 14:20:03.967 IST [16996] HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2022-11-12 14:20:03.967 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date
+	FROM
+		test
+	WHERE
+		code = 532540
+	
+		limit 10
+	)select matplotlib_simplelinechart(array_agg(close),array_agg(sma200),array_agg(date_trunc('month', trade_date))) from lmt  
+	
+	
+			
+2022-11-12 14:21:14.024 IST [16996] ERROR:  syntax error at or near "scrip_name" at character 125
+2022-11-12 14:21:14.024 IST [16996] STATEMENT:  CREATE OR REPLACE FUNCTION public.matplotlib_simplelinechart(close_arr numeric[], sma200_arr numeric[], ydat date[],varchar scrip_name)
+	 RETURNS bytea
+	 LANGUAGE plpython3u
+	AS $function$
+	from io import BytesIO
+	import matplotlib.pyplot as plt
+	
+	plt.rcParams['axes.grid'] = False
+	plt.xticks(rotation=45)
+	fig, ax = plt.subplots(figsize=(10,5), layout='constrained')
+	ax.plot(ydat, sma200_arr, label='sma200')  
+	ax.plot(ydat, close_arr, label='close')  
+	ax.set_xlabel('Trade Date')
+	ax.set_ylabel('SMA 200')
+	ax.set_title("SMA 200")
+	ax.legend();  # Add a legend.
+	
+	buffer = BytesIO()
+	plt.savefig(buffer, format="png")
+	return buffer.getvalue()
+	$function$
+	
+2022-11-12 14:21:30.688 IST [16996] ERROR:  syntax error at or near "scrip_name" at character 125
+2022-11-12 14:21:30.688 IST [16996] STATEMENT:  CREATE OR REPLACE FUNCTION public.matplotlib_simplelinechart(close_arr numeric[], sma200_arr numeric[], ydat date[],varchar scrip_name)
+	 RETURNS bytea
+	 LANGUAGE plpython3u
+	AS $function$
+	from io import BytesIO
+	import matplotlib.pyplot as plt
+	
+	plt.rcParams['axes.grid'] = False
+	plt.xticks(rotation=45)
+	fig, ax = plt.subplots(figsize=(10,5), layout='constrained')
+	ax.plot(ydat, sma200_arr, label='sma200')  
+	ax.plot(ydat, close_arr, label='close')  
+	ax.set_xlabel('Trade Date')
+	ax.set_ylabel('SMA 200')
+	ax.set_title(scrip_name)
+	ax.legend();  # Add a legend.
+	
+	buffer = BytesIO()
+	plt.savefig(buffer, format="png")
+	return buffer.getvalue()
+	$function$
+	
+2022-11-12 14:21:37.313 IST [16996] ERROR:  type scrip_name does not exist
+2022-11-12 14:21:37.313 IST [16996] STATEMENT:  CREATE OR REPLACE FUNCTION public.matplotlib_simplelinechart(close_arr numeric[], sma200_arr numeric[], ydat date[],text scrip_name)
+	 RETURNS bytea
+	 LANGUAGE plpython3u
+	AS $function$
+	from io import BytesIO
+	import matplotlib.pyplot as plt
+	
+	plt.rcParams['axes.grid'] = False
+	plt.xticks(rotation=45)
+	fig, ax = plt.subplots(figsize=(10,5), layout='constrained')
+	ax.plot(ydat, sma200_arr, label='sma200')  
+	ax.plot(ydat, close_arr, label='close')  
+	ax.set_xlabel('Trade Date')
+	ax.set_ylabel('SMA 200')
+	ax.set_title(scrip_name)
+	ax.legend();  # Add a legend.
+	
+	buffer = BytesIO()
+	plt.savefig(buffer, format="png")
+	return buffer.getvalue()
+	$function$
+	
+2022-11-12 14:22:52.494 IST [25492] LOG:  checkpoint starting: time
+2022-11-12 14:22:52.854 IST [25492] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.320 s, sync=0.018 s, total=0.361 s; sync files=4, longest=0.011 s, average=0.005 s; distance=14 kB, estimate=70 kB
+2022-11-12 14:27:08.147 IST [16996] ERROR:  syntax error at or near "array_agg" at character 8
+2022-11-12 14:27:08.147 IST [16996] STATEMENT:  
+	
+	
+	(array_agg(sma200),array_agg(trade_date))
+2022-11-12 14:27:48.318 IST [16996] ERROR:  column "name" does not exist at character 375
+2022-11-12 14:27:48.318 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date
+	FROM
+		test
+	WHERE
+		code = 532540
+	
+		limit 10
+	)select matplotlib_simplelinechart(name,array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+2022-11-12 14:27:52.847 IST [25492] LOG:  checkpoint starting: time
+2022-11-12 14:27:53.636 IST [25492] LOG:  checkpoint complete: wrote 8 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.751 s, sync=0.018 s, total=0.790 s; sync files=7, longest=0.010 s, average=0.003 s; distance=43 kB, estimate=67 kB
+2022-11-12 14:28:06.980 IST [16996] ERROR:  column "lmt.name" must appear in the GROUP BY clause or be used in an aggregate function at character 380
+2022-11-12 14:28:06.980 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+	
+		limit 10
+	)select matplotlib_simplelinechart(name,array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+			
+2022-11-12 14:29:04.348 IST [16996] ERROR:  NameError: name 'BytesIO' is not defined
+2022-11-12 14:29:04.348 IST [16996] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 6, in <module>
+	    buf = BytesIO()
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 14:29:04.348 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+	
+		limit 10
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+2022-11-12 14:30:04.737 IST [16996] ERROR:  NameError: name 'BytesIO' is not defined
+2022-11-12 14:30:04.737 IST [16996] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 13, in <module>
+	    buffer = BytesIO()
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 14:30:04.737 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+	
+		limit 10
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+2022-11-12 14:30:39.661 IST [16996] ERROR:  NameError: name 'BytesIO' is not defined
+2022-11-12 14:30:39.661 IST [16996] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 13, in <module>
+	    buffer = BytesIO()
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 14:30:39.661 IST [16996] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+	
+		limit 10
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+2022-11-12 14:32:52.626 IST [25492] LOG:  checkpoint starting: time
+2022-11-12 14:32:53.325 IST [25492] LOG:  checkpoint complete: wrote 7 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.654 s, sync=0.022 s, total=0.700 s; sync files=7, longest=0.010 s, average=0.004 s; distance=49 kB, estimate=65 kB
+2022-11-12 14:37:52.338 IST [25492] LOG:  checkpoint starting: time
+2022-11-12 14:37:52.815 IST [25492] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.440 s, sync=0.012 s, total=0.478 s; sync files=5, longest=0.004 s, average=0.003 s; distance=24 kB, estimate=61 kB
+2022-11-12 14:39:10.985 IST [16996] ERROR:  could not compile PL/Python function "matplotlib_simplelinechart"
+2022-11-12 14:39:10.985 IST [16996] DETAIL:  SyntaxError: closing parenthesis ')' does not match opening parenthesis '[' (<string>, line 14)
+2022-11-12 14:39:10.985 IST [16996] STATEMENT:  CREATE OR REPLACE FUNCTION public.matplotlib_simplelinechart(name text[], close numeric[], sma200 numeric[], trade_date date[])
+	 RETURNS bytea
+	 LANGUAGE plpython3u
+	AS $function$
+	import matplotlib as mpl
+	import matplotlib.pyplot as plt
+	from io import BytesIO
+	plt.style.use('_mpl-gallery')
+	
+	fig = plt.figure()  # an empty figure with no Axes
+	fig, ax = plt.subplots(figsize = (10,5),layout='constrained')
+	ax.plot(trade_date, close,label='close' )
+	ax.plot(trade_date, sma200, label='sma200' )
+	ax.set_xlabel('date')  # Add an x-label to the axes.
+	ax.set_ylabel('close,sma200')  # Add a y-label to the axes.
+	ax.set_title(name[0)  # Add a title to the axes.
+	ax.legend();  # Add a legend.
+	buffer = BytesIO()
+	plt.savefig(buffer, format="png")
+	return buffer.getvalue()
+	$function$
+	
+2022-11-12 14:42:52.817 IST [25492] LOG:  checkpoint starting: time
+2022-11-12 14:42:53.285 IST [25492] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.445 s, sync=0.008 s, total=0.468 s; sync files=5, longest=0.003 s, average=0.002 s; distance=34 kB, estimate=59 kB
+2022-11-12 17:35:18.510 IST [10128] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:41:00.212 IST [5696] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:41:45.430 IST [15160] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:42:01.282 IST [24376] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:43:13.666 IST [1916] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:43:37.219 IST [12724] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:50:36.545 IST [12316] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:51:13.395 IST [2300] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:51:26.279 IST [8876] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:51:34.106 IST [12904] ERROR:  syntax error at or near "from" at character 684
+2022-11-12 17:51:34.106 IST [12904] STATEMENT:  
+	            WITH test AS(
+	            SELECT
+	                trade_date,
+	                code,
+	                CLOSE,
+	                name,
+	                AVG(round(CLOSE)) OVER(PARTITION BY code
+	            ORDER BY
+	                trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+	            FROM
+	                BSE
+	            ORDER BY
+	                trade_date DESC 
+	            
+	                
+	        ), lmt as(
+	                
+	        select close,sma200,trade_date,name
+	        FROM
+	            test
+	        WHERE
+	            code = 532540
+	            limit 200
+	        )select (array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date) from lmt 
+	
+	    
+2022-11-12 17:52:02.267 IST [12904] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:52:43.425 IST [10720] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:52:43.425 IST [10720] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 17:53:09.550 IST [1016] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:53:09.550 IST [1016] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 17:53:28.926 IST [16300] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:53:28.926 IST [16300] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 17:53:49.380 IST [11928] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:53:49.380 IST [11928] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 17:54:15.218 IST [6260] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:54:15.218 IST [6260] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 17:55:44.061 IST [2708] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:55:44.061 IST [2708] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 17:55:57.085 IST [14792] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:55:57.085 IST [14792] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 17:56:12.049 IST [17064] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:56:12.049 IST [17064] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 17:57:25.792 IST [19656] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:57:25.793 IST [19656] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 17:57:54.608 IST [18588] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:57:54.608 IST [18588] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 17:57:59.191 IST [22472] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:57:59.192 IST [22472] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 17:58:18.327 IST [6208] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:58:18.327 IST [6208] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 17:58:31.230 IST [21540] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 17:58:31.230 IST [21540] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 18:00:38.764 IST [17380] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 18:00:38.764 IST [17380] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 18:01:05.292 IST [9372] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 18:01:26.648 IST [18636] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 18:01:26.648 IST [18636] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 18:01:55.336 IST [10860] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 18:01:55.336 IST [10860] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 18:02:29.265 IST [16252] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 18:02:29.265 IST [16252] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 18:03:19.809 IST [23396] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 18:03:19.809 IST [23396] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 18:03:30.733 IST [14184] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 18:03:46.085 IST [20136] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 18:03:46.085 IST [20136] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 18:19:33.374 IST [16996] ERROR:  could not compile PL/Python function "matplotlib_simplelinechart"
+2022-11-12 18:19:33.374 IST [16996] DETAIL:  IndentationError: unindent does not match any outer indentation level (<string>, line 4)
+2022-11-12 18:19:33.374 IST [16996] STATEMENT:  CREATE OR REPLACE FUNCTION public.matplotlib_simplelinechart(name text[], close numeric[], sma200 numeric[], trade_date date[])
+	 RETURNS bytea
+	 LANGUAGE plpython3u
+	AS $function$
+		from io import BytesIO
+	    import matplotlib as mpl
+	    mpl.use('Agg')
+	    import matplotlib.pyplot as plt
+	    # import numpy as np
+	
+	    plt.rcParams["figure.figsize"] = [7.50, 3.50]
+	    plt.rcParams["figure.autolayout"] = True
+	
+	    # x = np.linspace(0, 2, 100)  # Sample data.
+	    plt.figure(figsize=(10, 5), layout='constrained')
+	    plt.plot(trade_date, close, label='close')  # Plot some data on the (implicit) axes.
+	    plt.plot(trade_date,sma200, label='sma200')  # etc.
+	    plt.xlabel('close, sma200')
+	    plt.ylabel('trade date')
+	    plt.title(name[0])
+	    plt.legend()
+	
+	    buffer = BytesIO()
+	    plt.savefig(buffer, format="png")
+	return buffer.getvalue()
+	$function$
+	
+2022-11-12 18:19:46.793 IST [16996] ERROR:  could not compile PL/Python function "matplotlib_simplelinechart"
+2022-11-12 18:19:46.793 IST [16996] DETAIL:  IndentationError: unindent does not match any outer indentation level (<string>, line 4)
+2022-11-12 18:19:46.793 IST [16996] STATEMENT:  CREATE OR REPLACE FUNCTION public.matplotlib_simplelinechart(name text[], close numeric[], sma200 numeric[], trade_date date[])
+	 RETURNS bytea
+	 LANGUAGE plpython3u
+	AS $function$
+		from io import BytesIO
+	    import matplotlib as mpl
+	    mpl.use('Agg')
+	    import matplotlib.pyplot as plt
+	    # import numpy as np
+	
+	    plt.rcParams["figure.figsize"] = [7.50, 3.50]
+	    plt.rcParams["figure.autolayout"] = True
+	
+	    # x = np.linspace(0, 2, 100)  # Sample data.
+	    plt.figure(figsize=(10, 5), layout='constrained')
+	    plt.plot(trade_date, close, label='close')  # Plot some data on the (implicit) axes.
+	    plt.plot(trade_date,sma200, label='sma200')  # etc.
+	    plt.xlabel('close, sma200')
+	    plt.ylabel('trade date')
+	    plt.title(name[0])
+	    plt.legend()
+	
+	    buffer = BytesIO()
+	    plt.savefig(buffer, format="png")
+		return buffer.getvalue()
+	$function$
+	
+2022-11-12 18:20:11.564 IST [12284] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 18:20:11.564 IST [12284] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 18:22:50.577 IST [5320] ERROR:  ModuleNotFoundError: No module named 'matplotlib.artist'
+2022-11-12 18:22:50.577 IST [5320] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 5, in <module>
+	    import matplotlib.pyplot as plt
+	  PL/Python function "matplotlib_simplelinechart", line 51, in <module>
+	  PL/Python function "matplotlib_simplelinechart", line 18, in <module>
+	  PL/Python function "matplotlib_simplelinechart", line 19, in <module>
+	  PL/Python function "matplotlib_simplelinechart", line 13, in <module>
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 18:22:50.577 IST [5320] STATEMENT:  WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+		limit 200
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+	
+2022-11-12 18:24:11.469 IST [17648] ERROR:  canceling statement due to user request
+2022-11-12 18:24:11.470 IST [25820] LOG:  received fast shutdown request
+2022-11-12 18:24:11.480 IST [25820] LOG:  aborting any active transactions
+2022-11-12 18:24:11.481 IST [1996] FATAL:  terminating connection due to administrator command
+2022-11-12 18:24:11.482 IST [21712] FATAL:  terminating connection due to administrator command
+2022-11-12 18:24:11.482 IST [14548] FATAL:  terminating connection due to administrator command
+2022-11-12 18:24:11.503 IST [25820] LOG:  background worker "logical replication launcher" (PID 17648) exited with exit code 1
+2022-11-12 18:24:11.516 IST [25492] LOG:  shutting down
+2022-11-12 18:24:11.519 IST [25492] LOG:  checkpoint starting: shutdown immediate
+2022-11-12 18:24:11.546 IST [25492] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.010 s, total=0.031 s; sync files=5, longest=0.004 s, average=0.002 s; distance=31 kB, estimate=56 kB
+2022-11-12 18:24:11.598 IST [25820] LOG:  database system is shut down
+2022-11-12 18:24:14.267 IST [23032] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 18:24:14.279 IST [23032] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 18:24:14.286 IST [23032] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 18:24:14.379 IST [11952] LOG:  database system was shut down at 2022-11-12 18:24:11 IST
+2022-11-12 18:24:14.435 IST [23032] LOG:  database system is ready to accept connections
+2022-11-12 18:28:50.033 IST [12976] ERROR:  canceling statement due to user request
+2022-11-12 18:28:50.034 IST [23032] LOG:  received fast shutdown request
+2022-11-12 18:28:50.045 IST [23032] LOG:  aborting any active transactions
+2022-11-12 18:28:50.046 IST [14552] FATAL:  terminating connection due to administrator command
+2022-11-12 18:28:50.047 IST [2576] FATAL:  terminating connection due to administrator command
+2022-11-12 18:28:50.065 IST [23032] LOG:  background worker "logical replication launcher" (PID 12976) exited with exit code 1
+2022-11-12 18:28:50.071 IST [11344] LOG:  shutting down
+2022-11-12 18:28:50.074 IST [11344] LOG:  checkpoint starting: shutdown immediate
+2022-11-12 18:28:50.094 IST [11344] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.004 s, total=0.023 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB
+2022-11-12 18:28:50.130 IST [23032] LOG:  database system is shut down
+2022-11-12 18:31:09.504 IST [5068] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 18:31:09.516 IST [5068] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 18:31:09.523 IST [5068] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 18:31:09.617 IST [4124] LOG:  database system was shut down at 2022-11-12 18:28:50 IST
+2022-11-12 18:31:09.677 IST [5068] LOG:  database system is ready to accept connections
+2022-11-12 18:31:30.769 IST [13680] ERROR:  function blah() does not exist at character 10
+2022-11-12 18:31:30.769 IST [13680] HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2022-11-12 18:31:30.769 IST [13680] STATEMENT:  
+	select blah()
+2022-11-12 18:31:46.545 IST [13680] ERROR:  could not load library "C:/Users/pranjan24/Downloads/postgresql-15.0-2-windows-x64-binaries/pgsql/lib/plpython3.dll": The specified module could not be found.
+	
+2022-11-12 18:31:46.545 IST [13680] STATEMENT:  select blah('')
+2022-11-12 18:32:15.126 IST [22236] ERROR:  canceling statement due to user request
+2022-11-12 18:32:15.127 IST [5068] LOG:  received fast shutdown request
+2022-11-12 18:32:15.138 IST [5068] LOG:  aborting any active transactions
+2022-11-12 18:32:15.139 IST [13680] FATAL:  terminating connection due to administrator command
+2022-11-12 18:32:15.139 IST [11152] FATAL:  terminating connection due to administrator command
+2022-11-12 18:32:15.140 IST [18184] FATAL:  terminating connection due to administrator command
+2022-11-12 18:32:15.154 IST [5068] LOG:  background worker "logical replication launcher" (PID 22236) exited with exit code 1
+2022-11-12 18:32:15.184 IST [12572] LOG:  shutting down
+2022-11-12 18:32:15.186 IST [12572] LOG:  checkpoint starting: shutdown immediate
+2022-11-12 18:32:15.209 IST [12572] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.005 s, sync=0.006 s, total=0.025 s; sync files=3, longest=0.003 s, average=0.002 s; distance=0 kB, estimate=0 kB
+2022-11-12 18:32:15.234 IST [5068] LOG:  database system is shut down
+2022-11-12 18:42:06.938 IST [12584] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 18:42:06.950 IST [12584] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 18:42:06.957 IST [12584] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 18:42:07.045 IST [20416] LOG:  database system was shut down at 2022-11-12 18:32:15 IST
+2022-11-12 18:42:07.085 IST [12584] LOG:  database system is ready to accept connections
+2022-11-12 18:42:11.522 IST [18952] ERROR:  could not load library "C:/Users/pranjan24/Downloads/postgresql-15.0-2-windows-x64-binaries/pgsql/lib/plpython3.dll": The specified module could not be found.
+	
+2022-11-12 18:42:11.522 IST [18952] STATEMENT:  
+	
+	select blah('')
+	
+2022-11-12 18:42:17.885 IST [18952] ERROR:  could not load library "C:/Users/pranjan24/Downloads/postgresql-15.0-2-windows-x64-binaries/pgsql/lib/plpython3.dll": The specified module could not be found.
+	
+2022-11-12 18:42:17.885 IST [18952] STATEMENT:  
+	select blah('')
+	
+2022-11-12 18:46:41.431 IST [12584] LOG:  received fast shutdown request
+2022-11-12 18:46:41.441 IST [12584] LOG:  aborting any active transactions
+2022-11-12 18:46:41.441 IST [18952] FATAL:  terminating connection due to administrator command
+2022-11-12 18:46:41.451 IST [12584] LOG:  background worker "logical replication launcher" (PID 19804) exited with exit code 1
+2022-11-12 18:46:41.473 IST [23016] LOG:  shutting down
+2022-11-12 18:46:41.475 IST [23016] LOG:  checkpoint starting: shutdown immediate
+2022-11-12 18:46:41.498 IST [23016] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.003 s, total=0.026 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB
+2022-11-12 18:46:41.520 IST [12584] LOG:  database system is shut down
+2022-11-12 18:46:42.053 IST [1976] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 18:46:42.065 IST [1976] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 18:46:42.072 IST [1976] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 18:46:42.159 IST [21920] LOG:  database system was shut down at 2022-11-12 18:46:41 IST
+2022-11-12 18:46:42.215 IST [1976] LOG:  database system is ready to accept connections
+2022-11-12 18:46:46.502 IST [14548] ERROR:  could not load library "C:/Users/pranjan24/Downloads/postgresql-15.0-2-windows-x64-binaries/pgsql/lib/plpython3.dll": The specified module could not be found.
+	
+2022-11-12 18:46:46.502 IST [14548] STATEMENT:  select blah('')
+2022-11-12 18:51:42.139 IST [16576] LOG:  checkpoint starting: time
+2022-11-12 18:51:42.163 IST [16576] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.004 s, total=0.025 s; sync files=2, longest=0.003 s, average=0.002 s; distance=0 kB, estimate=0 kB
+2022-11-12 18:51:53.703 IST [1976] LOG:  received fast shutdown request
+2022-11-12 18:51:53.707 IST [1976] LOG:  aborting any active transactions
+2022-11-12 18:51:53.707 IST [14548] FATAL:  terminating connection due to administrator command
+2022-11-12 18:51:53.736 IST [1976] LOG:  background worker "logical replication launcher" (PID 21004) exited with exit code 1
+2022-11-12 18:51:53.739 IST [16576] LOG:  shutting down
+2022-11-12 18:51:53.741 IST [16576] LOG:  checkpoint starting: shutdown immediate
+2022-11-12 18:51:53.752 IST [16576] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.014 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB
+2022-11-12 18:51:53.784 IST [1976] LOG:  database system is shut down
+2022-11-12 18:51:54.239 IST [8588] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 18:51:54.251 IST [8588] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 18:51:54.259 IST [8588] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 18:51:54.346 IST [18100] LOG:  database system was shut down at 2022-11-12 18:51:53 IST
+2022-11-12 18:51:54.408 IST [8588] LOG:  database system is ready to accept connections
+2022-11-12 18:51:59.826 IST [10740] ERROR:  could not load library "C:/Users/pranjan24/Downloads/postgresql-15.0-2-windows-x64-binaries/pgsql/lib/plpython3.dll": The specified module could not be found.
+	
+2022-11-12 18:51:59.826 IST [10740] STATEMENT:  
+	select blah('')
+2022-11-12 18:54:07.398 IST [16060] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 18:54:07.581 IST [16060] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 18:54:07.602 IST [16060] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 18:54:07.959 IST [15868] LOG:  database system was interrupted; last known up at 2022-11-12 18:51:54 IST
+2022-11-12 18:54:11.073 IST [15868] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-12 18:54:11.192 IST [15868] LOG:  invalid record length at 0/A45C8E8: wanted 24, got 0
+2022-11-12 18:54:11.193 IST [15868] LOG:  redo is not required
+2022-11-12 18:54:11.203 IST [1900] LOG:  checkpoint starting: end-of-recovery immediate wait
+2022-11-12 18:54:11.262 IST [1900] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.007 s, total=0.063 s; sync files=2, longest=0.004 s, average=0.004 s; distance=0 kB, estimate=0 kB
+2022-11-12 18:54:11.474 IST [16060] LOG:  database system is ready to accept connections
+2022-11-12 18:54:34.433 IST [6596] ERROR:  cannot drop extension plpython3u because other objects depend on it
+2022-11-12 18:54:34.433 IST [6596] DETAIL:  function blah(character varying) depends on language plpython3u
+	function pymax(integer,integer) depends on language plpython3u
+	function matplotlib_simplelinechart(text[],numeric[],numeric[],date[]) depends on language plpython3u
+2022-11-12 18:54:34.433 IST [6596] HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2022-11-12 18:54:34.433 IST [6596] STATEMENT:  
+	drop extension plpython3u
+2022-11-12 18:55:36.182 IST [6596] ERROR:  could not load library "C:/Users/pranjan24/Downloads/postgresql-15.0-2-windows-x64-binaries/pgsql/lib/plpython3.dll": The specified module could not be found.
+	
+2022-11-12 18:55:36.182 IST [6596] STATEMENT:  create extension plpython3u
+	
+2022-11-12 18:56:20.825 IST [11868] ERROR:  canceling statement due to user request
+2022-11-12 18:56:20.826 IST [16060] LOG:  received fast shutdown request
+2022-11-12 18:56:20.832 IST [16060] LOG:  aborting any active transactions
+2022-11-12 18:56:20.832 IST [6596] FATAL:  terminating connection due to administrator command
+2022-11-12 18:56:20.833 IST [6508] FATAL:  terminating connection due to administrator command
+2022-11-12 18:56:20.834 IST [13588] FATAL:  terminating connection due to administrator command
+2022-11-12 18:56:20.834 IST [16300] FATAL:  terminating connection due to administrator command
+2022-11-12 18:56:20.851 IST [16060] LOG:  background worker "logical replication launcher" (PID 11868) exited with exit code 1
+2022-11-12 18:56:20.881 IST [1900] LOG:  shutting down
+2022-11-12 18:56:20.884 IST [1900] LOG:  checkpoint starting: shutdown immediate
+2022-11-12 18:56:20.941 IST [1900] LOG:  checkpoint complete: wrote 19 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.007 s, sync=0.039 s, total=0.061 s; sync files=15, longest=0.007 s, average=0.003 s; distance=85 kB, estimate=85 kB
+2022-11-12 18:56:20.984 IST [16060] LOG:  database system is shut down
+2022-11-12 18:58:34.668 IST [5196] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 18:58:34.680 IST [5196] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 18:58:34.686 IST [5196] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 18:58:34.780 IST [6764] LOG:  database system was shut down at 2022-11-12 18:56:20 IST
+2022-11-12 18:58:34.846 IST [5196] LOG:  database system is ready to accept connections
+2022-11-12 18:58:42.468 IST [18100] ERROR:  could not load library "C:/Users/pranjan24/Downloads/postgresql-15.0-2-windows-x64-binaries/pgsql/lib/plpython3.dll": The specified module could not be found.
+	
+2022-11-12 18:58:42.468 IST [18100] STATEMENT:  
+	create extension plpython3u
+2022-11-12 19:00:53.964 IST [7088] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 19:01:12.413 IST [5196] LOG:  server process (PID 18688) exited with exit code 1
+2022-11-12 19:01:12.413 IST [5196] LOG:  terminating any other active server processes
+2022-11-12 19:05:17.741 IST [13328] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 19:05:17.753 IST [13328] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 19:05:17.759 IST [13328] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 19:05:17.854 IST [5768] LOG:  database system was interrupted; last known up at 2022-11-12 18:58:34 IST
+2022-11-12 19:05:18.237 IST [5768] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-12 19:05:18.243 IST [5768] LOG:  redo starts at 0/A471DD8
+2022-11-12 19:05:18.248 IST [5768] LOG:  invalid record length at 0/A482730: wanted 24, got 0
+2022-11-12 19:05:18.248 IST [5768] LOG:  redo done at 0/A4826F8 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-12 19:05:18.253 IST [10436] LOG:  checkpoint starting: end-of-recovery immediate wait
+2022-11-12 19:05:18.284 IST [10436] LOG:  checkpoint complete: wrote 17 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.016 s, total=0.033 s; sync files=14, longest=0.002 s, average=0.002 s; distance=66 kB, estimate=66 kB
+2022-11-12 19:05:18.326 IST [13328] LOG:  database system is ready to accept connections
+2022-11-12 19:05:32.941 IST [13328] LOG:  received fast shutdown request
+2022-11-12 19:05:32.944 IST [13328] LOG:  aborting any active transactions
+2022-11-12 19:05:32.945 IST [10664] FATAL:  terminating connection due to administrator command
+2022-11-12 19:05:32.955 IST [13328] LOG:  background worker "logical replication launcher" (PID 15292) exited with exit code 1
+2022-11-12 19:05:32.967 IST [10436] LOG:  shutting down
+2022-11-12 19:05:32.970 IST [10436] LOG:  checkpoint starting: shutdown immediate
+2022-11-12 19:05:32.987 IST [10436] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.003 s, total=0.020 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=59 kB
+2022-11-12 19:05:33.016 IST [13328] LOG:  database system is shut down
+2022-11-12 19:05:33.511 IST [17268] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 19:05:33.525 IST [17268] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 19:05:33.531 IST [17268] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 19:05:33.640 IST [19216] LOG:  database system was shut down at 2022-11-12 19:05:32 IST
+2022-11-12 19:05:33.709 IST [17268] LOG:  database system is ready to accept connections
+2022-11-12 19:05:52.717 IST [15788] ERROR:  could not load library "C:/Users/pranjan24/Downloads/postgresql-15.0-2-windows-x64-binaries/pgsql/lib/plpython3.dll": The specified module could not be found.
+	
+2022-11-12 19:05:52.717 IST [15788] STATEMENT:  
+	create extension plpython3u
+2022-11-12 19:08:56.003 IST [15788] ERROR:  could not load library "C:/Users/pranjan24/Downloads/postgresql-15.0-2-windows-x64-binaries/pgsql/lib/plpython3.dll": The specified module could not be found.
+	
+2022-11-12 19:08:56.003 IST [15788] STATEMENT:  
+	create extension plpython3u
+2022-11-12 19:09:00.501 IST [17204] ERROR:  canceling statement due to user request
+2022-11-12 19:09:00.503 IST [17268] LOG:  received fast shutdown request
+2022-11-12 19:09:00.507 IST [17268] LOG:  aborting any active transactions
+2022-11-12 19:09:00.508 IST [15788] FATAL:  terminating connection due to administrator command
+2022-11-12 19:09:00.509 IST [2188] FATAL:  terminating connection due to administrator command
+2022-11-12 19:09:00.509 IST [5756] FATAL:  terminating connection due to administrator command
+2022-11-12 19:09:00.525 IST [17268] LOG:  background worker "logical replication launcher" (PID 17204) exited with exit code 1
+2022-11-12 19:09:00.545 IST [14620] LOG:  shutting down
+2022-11-12 19:09:00.548 IST [14620] LOG:  checkpoint starting: shutdown immediate
+2022-11-12 19:09:00.586 IST [14620] LOG:  checkpoint complete: wrote 16 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.018 s, total=0.041 s; sync files=13, longest=0.002 s, average=0.002 s; distance=53 kB, estimate=53 kB
+2022-11-12 19:09:00.638 IST [17268] LOG:  database system is shut down
+2022-11-12 19:09:02.227 IST [17592] LOG:  starting PostgreSQL 15.0, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 19:09:02.238 IST [17592] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 19:09:02.245 IST [17592] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 19:09:02.333 IST [18520] LOG:  database system was shut down at 2022-11-12 19:09:00 IST
+2022-11-12 19:09:02.374 IST [17592] LOG:  database system is ready to accept connections
+2022-11-12 19:09:06.586 IST [14412] ERROR:  could not load library "C:/Users/pranjan24/Downloads/postgresql-15.0-2-windows-x64-binaries/pgsql/lib/plpython3.dll": The specified module could not be found.
+	
+2022-11-12 19:09:06.586 IST [14412] STATEMENT:  create extension plpython3u
+2022-11-12 19:12:32.007 IST [14704] ERROR:  canceling statement due to user request
+2022-11-12 19:12:32.008 IST [17592] LOG:  received fast shutdown request
+2022-11-12 19:12:32.016 IST [17592] LOG:  aborting any active transactions
+2022-11-12 19:12:32.016 IST [14412] FATAL:  terminating connection due to administrator command
+2022-11-12 19:12:32.017 IST [17372] FATAL:  terminating connection due to administrator command
+2022-11-12 19:12:32.017 IST [11576] FATAL:  terminating connection due to administrator command
+2022-11-12 19:12:32.036 IST [17592] LOG:  background worker "logical replication launcher" (PID 14704) exited with exit code 1
+2022-11-12 19:12:32.051 IST [18972] LOG:  shutting down
+2022-11-12 19:12:32.053 IST [18972] LOG:  checkpoint starting: shutdown immediate
+2022-11-12 19:12:32.089 IST [18972] LOG:  checkpoint complete: wrote 14 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.017 s, total=0.039 s; sync files=13, longest=0.002 s, average=0.002 s; distance=53 kB, estimate=53 kB
+2022-11-12 19:12:32.112 IST [17592] LOG:  database system is shut down
+2022-11-12 19:29:52.492 IST [10196] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 19:29:52.504 IST [10196] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 19:29:52.510 IST [10196] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 19:29:52.585 IST [9884] LOG:  database system was shut down at 2022-11-12 19:24:11 IST
+2022-11-12 19:29:52.717 IST [10196] LOG:  database system is ready to accept connections
+2022-11-12 19:30:00.136 IST [19388] ERROR:  relation "bse" does not exist at character 334
+2022-11-12 19:30:00.136 IST [19388] STATEMENT:  
+	            WITH test AS(
+	            SELECT
+	                trade_date,
+	                code,
+	                CLOSE,
+	                name,
+	                AVG(round(CLOSE)) OVER(PARTITION BY code
+	            ORDER BY
+	                trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+	            FROM
+	                BSE
+	            ORDER BY
+	                trade_date DESC 
+	            
+	                
+	        ), lmt as(
+	                
+	        select close,sma200,trade_date,name
+	        FROM
+	            test
+	        WHERE
+	            code = 532540
+	            limit 365
+	        )select array_agg(name) as namearr,array_agg(close) as closearr,array_agg(sma200) as smaarr,array_agg(trade_date) as trade_datearr from lmt 
+	
+	    
+2022-11-12 19:32:03.770 IST [19388] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-12 19:32:03.770 IST [19388] STATEMENT:  
+	            WITH test AS(
+	            SELECT
+	                trade_date,
+	                code,
+	                CLOSE,
+	                name,
+	                AVG(round(CLOSE)) OVER(PARTITION BY code
+	            ORDER BY
+	                trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+	            FROM
+	                BSE
+	            ORDER BY
+	                trade_date DESC 
+	            
+	                
+	        ), lmt as(
+	                
+	        select close,sma200,trade_date,name
+	        FROM
+	            test
+	        WHERE
+	            code = 532540
+	            limit 365
+	        )select array_agg(name) as namearr,array_agg(close) as closearr,array_agg(sma200) as smaarr,array_agg(trade_date) as trade_datearr from lmt 
+	
+	    
+2022-11-12 19:32:11.178 IST [3632] ERROR:  canceling statement due to user request
+2022-11-12 19:32:11.178 IST [3632] STATEMENT:  insert into bse values('EQ020322.CSV','2022-03-02',530065,'LORDSHOTL   ','XT','Q',7.54,7.90,7.54,7.54,7.54,7.54,6,38,'287.00')
+2022-11-12 19:32:11.181 IST [16568] ERROR:  canceling statement due to user request
+2022-11-12 19:32:11.183 IST [10196] LOG:  received fast shutdown request
+2022-11-12 19:32:11.188 IST [10196] LOG:  aborting any active transactions
+2022-11-12 19:32:11.188 IST [3632] FATAL:  terminating connection due to administrator command
+2022-11-12 19:32:11.189 IST [19388] FATAL:  terminating connection due to administrator command
+2022-11-12 19:32:11.190 IST [4880] FATAL:  terminating connection due to administrator command
+2022-11-12 19:32:11.239 IST [10196] LOG:  background worker "logical replication launcher" (PID 16568) exited with exit code 1
+2022-11-12 19:32:11.253 IST [17520] LOG:  shutting down
+2022-11-12 19:32:11.868 IST [10196] LOG:  database system is shut down
+2022-11-12 19:32:14.002 IST [18556] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 19:32:14.026 IST [18556] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 19:32:14.034 IST [18556] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 19:32:14.151 IST [4104] LOG:  database system was shut down at 2022-11-12 19:32:11 IST
+2022-11-12 19:32:14.362 IST [18556] LOG:  database system is ready to accept connections
+2022-11-12 19:33:31.565 IST [20256] ERROR:  conflicting or redundant options at character 581
+2022-11-12 19:33:31.565 IST [20256] STATEMENT:  CREATE OR replace FUNCTION matplotlib_simplelinechart (name text[],close NUMERIC[],sma200 NUMERIC[],trade_date DATE[]) 
+	 
+	 RETURNS bytea
+	 LANGUAGE plpython3u
+	AS $$
+	import matplotlib.pyplot as plt
+	from io import BytesIO
+	plt.style.use('_mpl-gallery')
+	
+	f1, ax = plt.subplots(figsize = (10,5), layout='constrained')
+	ax.plot(trade_date, close,label='close' )
+	ax.plot(trade_date, sma200, label='sma200' )
+	plt.xlabel('DATE')
+	plt.ylabel('Close, SMA200')
+	plt.title(name[0])
+	plt.legend()
+	buffer = BytesIO()
+	plt.savefig(buffer, format="png")
+	return buffer.getvalue()
+	
+	$$ LANGUAGE plpython3u
+2022-11-12 19:34:15.275 IST [20256] ERROR:  OSError: '_mpl-gallery' not found in the style library and input is not a valid URL or path; see `style.available` for list of available styles
+2022-11-12 19:34:15.275 IST [20256] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 4, in <module>
+	    plt.style.use('_mpl-gallery')
+	  PL/Python function "matplotlib_simplelinechart", line 117, in use
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 19:34:15.275 IST [20256] STATEMENT:  
+	WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+		limit 365
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+	
+	
+2022-11-12 19:34:53.344 IST [20256] ERROR:  OSError: '_mpl-gallery' not found in the style library and input is not a valid URL or path; see `style.available` for list of available styles
+2022-11-12 19:34:53.344 IST [20256] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 4, in <module>
+	    plt.style.use('_mpl-gallery')
+	  PL/Python function "matplotlib_simplelinechart", line 117, in use
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 19:34:53.344 IST [20256] STATEMENT:  
+	WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+		limit 365
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+	
+2022-11-12 19:35:06.586 IST [20256] ERROR:  extension "plpython3u" already exists
+2022-11-12 19:35:06.586 IST [20256] STATEMENT:  
+	
+	create extension plpython3u
+2022-11-12 19:35:14.560 IST [20256] ERROR:  TypeError: __init__() got an unexpected keyword argument 'layout'
+2022-11-12 19:35:14.560 IST [20256] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 5, in <module>
+	    f1, ax = plt.subplots(figsize = (10,5), layout='constrained')
+	  PL/Python function "matplotlib_simplelinechart", line 470, in wrapper
+	  PL/Python function "matplotlib_simplelinechart", line 1438, in subplots
+	  PL/Python function "matplotlib_simplelinechart", line 796, in figure
+	  PL/Python function "matplotlib_simplelinechart", line 315, in new_figure_manager
+	  PL/Python function "matplotlib_simplelinechart", line 3543, in new_figure_manager
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 19:35:14.560 IST [20256] STATEMENT:  
+	WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+		limit 365
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+	
+2022-11-12 19:36:44.816 IST [20256] ERROR:  TypeError: __init__() got an unexpected keyword argument 'layout'
+2022-11-12 19:36:44.816 IST [20256] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 10, in <module>
+	    plt.figure(figsize=(10, 5), layout='constrained')
+	  PL/Python function "matplotlib_simplelinechart", line 796, in figure
+	  PL/Python function "matplotlib_simplelinechart", line 315, in new_figure_manager
+	  PL/Python function "matplotlib_simplelinechart", line 3543, in new_figure_manager
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 19:36:44.816 IST [20256] STATEMENT:  
+	WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+		limit 365
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+	
+2022-11-12 19:38:32.958 IST [20256] ERROR:  TypeError: __init__() got an unexpected keyword argument 'layout'
+2022-11-12 19:38:32.958 IST [20256] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 10, in <module>
+	    plt.figure(figsize=(10, 5), layout='constrained')
+	  PL/Python function "matplotlib_simplelinechart", line 796, in figure
+	  PL/Python function "matplotlib_simplelinechart", line 315, in new_figure_manager
+	  PL/Python function "matplotlib_simplelinechart", line 3543, in new_figure_manager
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 19:38:32.958 IST [20256] STATEMENT:  
+	WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+		limit 365
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+2022-11-12 19:39:29.243 IST [20256] ERROR:  TypeError: __init__() got an unexpected keyword argument 'layout'
+2022-11-12 19:39:29.243 IST [20256] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 9, in <module>
+	    plt.figure(figsize=(10, 5), layout="constrained")
+	  PL/Python function "matplotlib_simplelinechart", line 796, in figure
+	  PL/Python function "matplotlib_simplelinechart", line 315, in new_figure_manager
+	  PL/Python function "matplotlib_simplelinechart", line 3543, in new_figure_manager
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 19:39:29.243 IST [20256] STATEMENT:  
+	WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+		limit 365
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+	
+	
+2022-11-12 19:40:04.902 IST [7728] ERROR:  canceling statement due to user request
+2022-11-12 19:40:04.903 IST [18556] LOG:  received fast shutdown request
+2022-11-12 19:40:04.906 IST [18556] LOG:  aborting any active transactions
+2022-11-12 19:40:04.907 IST [20256] FATAL:  terminating connection due to administrator command
+2022-11-12 19:40:04.907 IST [14904] FATAL:  terminating connection due to administrator command
+2022-11-12 19:40:04.908 IST [4484] FATAL:  terminating connection due to administrator command
+2022-11-12 19:40:04.938 IST [18556] LOG:  background worker "logical replication launcher" (PID 7728) exited with exit code 1
+2022-11-12 19:40:04.965 IST [7560] LOG:  shutting down
+2022-11-12 19:40:05.043 IST [18556] LOG:  database system is shut down
+2022-11-12 19:40:06.397 IST [9804] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 19:40:06.409 IST [9804] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 19:40:06.415 IST [9804] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 19:40:06.624 IST [16716] LOG:  database system was shut down at 2022-11-12 19:40:04 IST
+2022-11-12 19:40:06.769 IST [9804] LOG:  database system is ready to accept connections
+2022-11-12 19:40:25.863 IST [19288] ERROR:  TypeError: __init__() got an unexpected keyword argument 'layout'
+2022-11-12 19:40:25.863 IST [19288] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 9, in <module>
+	    plt.figure(figsize=(10, 5), layout="constrained")
+	  PL/Python function "matplotlib_simplelinechart", line 796, in figure
+	  PL/Python function "matplotlib_simplelinechart", line 315, in new_figure_manager
+	  PL/Python function "matplotlib_simplelinechart", line 3543, in new_figure_manager
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 19:40:25.863 IST [19288] STATEMENT:  
+	WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+		limit 365
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+2022-11-12 19:43:00.227 IST [19064] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 19:43:09.400 IST [18664] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 19:43:17.186 IST [3336] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 19:43:50.891 IST [4880] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 19:43:50.891 IST [4880] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 19:44:08.942 IST [18720] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 19:44:08.943 IST [18720] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 19:44:37.280 IST [10440] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 19:45:06.665 IST [20116] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 19:45:06.665 IST [20116] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 19:45:09.397 IST [7288] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 19:51:27.774 IST [19288] ERROR:  NameError: name 'BytesIO' is not defined
+2022-11-12 19:51:27.774 IST [19288] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 7, in <module>
+	    buf = BytesIO()
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 19:51:27.774 IST [19288] STATEMENT:  
+	WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+		limit 365
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+2022-11-12 19:51:47.177 IST [19288] ERROR:  NameError: name 'base64' is not defined
+2022-11-12 19:51:47.177 IST [19288] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 11, in <module>
+	    data = base64.b64encode(buf.getbuffer()).decode("ascii")
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 19:51:47.177 IST [19288] STATEMENT:  
+	WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+		limit 365
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+	
+	
+2022-11-12 19:52:03.657 IST [19288] ERROR:  could not create bytes representation of Python object
+2022-11-12 19:52:03.657 IST [19288] DETAIL:  TypeError: cannot convert 'str' object to bytes
+2022-11-12 19:52:03.657 IST [19288] CONTEXT:  while creating return value
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 19:52:03.657 IST [19288] STATEMENT:  
+	WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+		limit 365
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+	
+2022-11-12 19:52:15.622 IST [19288] ERROR:  cannot change return type of existing function
+2022-11-12 19:52:15.622 IST [19288] HINT:  Use DROP FUNCTION matplotlib_simplelinechart(text[],numeric[],numeric[],date[]) first.
+2022-11-12 19:52:15.622 IST [19288] STATEMENT:  
+	CREATE OR replace FUNCTION matplotlib_simplelinechart (name text[],close NUMERIC[],sma200 NUMERIC[],trade_date DATE[]) 
+	RETURNS text
+	AS $$
+	import base64
+	from io import BytesIO
+	from matplotlib.figure import Figure
+	fig = Figure()
+	ax = fig.subplots()
+	ax.plot([1, 2])
+	# Save it to a temporary buffer.
+	buf = BytesIO()
+	fig.savefig(buf, format="png")
+	# Embed the result in the html output.
+	data = base64.b64encode(buf.getbuffer()).decode("ascii")
+	return data
+	$$ LANGUAGE plpython3u
+	
+2022-11-12 19:52:34.527 IST [19288] ERROR:  syntax error at or near "CREATE" at character 81
+2022-11-12 19:52:34.527 IST [19288] STATEMENT:  
+	DROP FUNCTION matplotlib_simplelinechart(text[],numeric[],numeric[],date[]) 
+	CREATE OR replace FUNCTION matplotlib_simplelinechart (name text[],close NUMERIC[],sma200 NUMERIC[],trade_date DATE[]) 
+	RETURNS text
+	AS $$
+	import base64
+	from io import BytesIO
+	from matplotlib.figure import Figure
+	fig = Figure()
+	ax = fig.subplots()
+	ax.plot([1, 2])
+	# Save it to a temporary buffer.
+	buf = BytesIO()
+	fig.savefig(buf, format="png")
+	# Embed the result in the html output.
+	data = base64.b64encode(buf.getbuffer()).decode("ascii")
+	return data
+	$$ LANGUAGE plpython3u
+	
+	
+2022-11-12 20:07:32.603 IST [13028] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 20:07:32.603 IST [13028] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 20:10:47.503 IST [17136] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 20:10:47.503 IST [17136] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 20:10:57.619 IST [12436] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-12 20:10:57.619 IST [12436] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-12 20:13:53.906 IST [20268] ERROR:  canceling statement due to user request
+2022-11-12 20:13:53.907 IST [9804] LOG:  received fast shutdown request
+2022-11-12 20:13:53.919 IST [9804] LOG:  aborting any active transactions
+2022-11-12 20:13:53.919 IST [12296] FATAL:  terminating connection due to administrator command
+2022-11-12 20:13:53.920 IST [19288] FATAL:  terminating connection due to administrator command
+2022-11-12 20:13:53.920 IST [14708] FATAL:  terminating connection due to administrator command
+2022-11-12 20:13:53.936 IST [9804] LOG:  background worker "logical replication launcher" (PID 20268) exited with exit code 1
+2022-11-12 20:13:53.968 IST [16996] LOG:  shutting down
+2022-11-12 20:13:54.378 IST [9804] LOG:  database system is shut down
+2022-11-12 20:14:35.699 IST [1276] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 20:14:35.718 IST [1276] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 20:14:35.726 IST [1276] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 20:14:35.810 IST [14356] LOG:  database system was shut down at 2022-11-12 20:13:54 IST
+2022-11-12 20:14:35.970 IST [1276] LOG:  database system is ready to accept connections
+2022-11-12 21:01:40.897 IST [604] ERROR:  type timestam[] does not exist
+2022-11-12 21:01:40.897 IST [604] STATEMENT:  CREATE OR replace FUNCTION matplotlib_simplelinechart (name text[],close NUMERIC[],sma200 NUMERIC[],trade_date TIMESTAM[]) 
+	RETURNS text
+	AS $$
+	import base64
+	from io import BytesIO
+	from matplotlib.figure import Figure
+	fig = Figure()
+	ax = fig.subplots()
+	ax.plot(trade_date, close, label='linear')
+	ax.plot(trade_date, sma200, label='linear')
+	# Save it to a temporary buffer.
+	buf = BytesIO()
+	fig.savefig(buf, format="png")
+	# Embed the result in the html output.
+	data = base64.b64encode(buf.getbuffer()).decode("ascii")
+	return data
+	$$ LANGUAGE plpython3u
+	
+2022-11-12 21:03:55.792 IST [604] ERROR:  function matplotlib_simplelinechart(text[], numeric[], numeric[], date[]) does not exist
+2022-11-12 21:03:55.792 IST [604] STATEMENT:  DROP FUNCTION matplotlib_simplelinechart(text[],numeric[],numeric[],date[])
+2022-11-12 21:04:39.602 IST [604] ERROR:  TypeError: __init__() got an unexpected keyword argument 'layout'
+2022-11-12 21:04:39.602 IST [604] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 10, in <module>
+	    plt.figure(figsize=(5, 2.7), layout='constrained')
+	  PL/Python function "matplotlib_simplelinechart", line 796, in figure
+	  PL/Python function "matplotlib_simplelinechart", line 315, in new_figure_manager
+	  PL/Python function "matplotlib_simplelinechart", line 3543, in new_figure_manager
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 21:04:39.602 IST [604] STATEMENT:  
+	WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+		limit 2
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+	
+2022-11-12 21:09:09.777 IST [1276] LOG:  received fast shutdown request
+2022-11-12 21:09:09.778 IST [14044] ERROR:  canceling statement due to user request
+2022-11-12 21:09:09.781 IST [1276] LOG:  aborting any active transactions
+2022-11-12 21:09:09.782 IST [604] FATAL:  terminating connection due to administrator command
+2022-11-12 21:09:09.782 IST [10456] FATAL:  terminating connection due to administrator command
+2022-11-12 21:09:09.783 IST [3816] FATAL:  terminating connection due to administrator command
+2022-11-12 21:09:09.793 IST [1276] LOG:  background worker "logical replication launcher" (PID 14044) exited with exit code 1
+2022-11-12 21:09:09.843 IST [11820] LOG:  shutting down
+2022-11-12 21:09:09.923 IST [1276] LOG:  database system is shut down
+2022-11-12 21:45:06.596 IST [3288] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-12 21:45:06.610 IST [3288] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-12 21:45:06.617 IST [3288] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-12 21:45:06.697 IST [13468] LOG:  database system was shut down at 2022-11-12 21:09:09 IST
+2022-11-12 21:45:06.860 IST [3288] LOG:  database system is ready to accept connections
+2022-11-12 21:47:49.981 IST [14044] ERROR:  TypeError: __init__() got an unexpected keyword argument 'layout'
+2022-11-12 21:47:49.981 IST [14044] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 46, in <module>
+	    plt.figure(figsize=(10, 5), layout='constrained')
+	  PL/Python function "matplotlib_simplelinechart", line 796, in figure
+	  PL/Python function "matplotlib_simplelinechart", line 315, in new_figure_manager
+	  PL/Python function "matplotlib_simplelinechart", line 3543, in new_figure_manager
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 21:47:49.981 IST [14044] STATEMENT:  
+	WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+		limit 365
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+2022-11-12 21:52:36.850 IST [14044] ERROR:  cannot change return type of existing function
+2022-11-12 21:52:36.850 IST [14044] HINT:  Use DROP FUNCTION matplotlib_simplelinechart() first.
+2022-11-12 21:52:36.850 IST [14044] STATEMENT:  
+	CREATE OR replace FUNCTION matplotlib_simplelinechart () 
+	RETURNS bytea
+	AS $$
+	
+	sql = '''
+	            WITH test AS(
+	            SELECT
+	                trade_date,
+	                code,
+	                CLOSE,
+	                name,
+	                AVG(round(CLOSE)) OVER(PARTITION BY code
+	            ORDER BY
+	                trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+	            FROM
+	                BSE
+	            ORDER BY
+	                trade_date DESC 
+	            
+	                
+	        ), lmt as(
+	                
+	        select close,sma200,trade_date,name
+	        FROM
+	            test
+	        WHERE
+	            code = 532540
+	            limit 200
+	        )select array_agg(name) as namearr,array_agg(close) as closearr,array_agg(sma200) as smaarr,array_agg(trade_date) as trade_datearr from lmt 
+	
+	    '''
+	
+	res = plpy.execute(sql)
+	
+	name = res[0]['namearr'][0]
+	closearr = res[0]['closearr']
+	smaarr = res[0]['smaarr']
+	tradearr = res[0]['trade_datearr']
+	
+	#return name
+	
+	from io import BytesIO
+	import matplotlib.pyplot as plt
+	# import numpy as np
+	plt.rcParams["figure.figsize"] = [7.50, 3.50]
+	plt.rcParams["figure.autolayout"] = True
+	# x = np.linspace(0, 2, 100)  # Sample data.
+	plt.figure(figsize=(10, 5))
+	plt.plot(tradearr, closearr, label='close')  # Plot some data on the (implicit) axes.
+	plt.plot(tradearr,smaarr, label='sma200')  # etc.
+	plt.xlabel('close, sma200')
+	plt.ylabel('trade date')
+	plt.title(name)
+	plt.legend()
+	buffer = BytesIO()
+	plt.savefig(buffer, format="png")
+	return buffer.getvalue()
+	
+	$$ LANGUAGE plpython3u
+2022-11-12 21:53:45.909 IST [14044] ERROR:  TypeError: an integer is required (got type str)
+2022-11-12 21:53:45.909 IST [14044] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 39, in <module>
+	    tradearr = [datetime(t) for t in tradearr]
+	  PL/Python function "matplotlib_simplelinechart", line 39, in <listcomp>
+	    tradearr = [datetime(t) for t in tradearr]
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 21:53:45.909 IST [14044] STATEMENT:  
+	
+	select matplotlib_simplelinechart()
+	
+	
+2022-11-12 21:59:03.792 IST [14044] ERROR:  function matplotlib_simplelinechart(text[], numeric[], numeric[], date[]) does not exist
+2022-11-12 21:59:03.792 IST [14044] STATEMENT:  DROP FUNCTION matplotlib_simplelinechart(text[],numeric[],numeric[],date[])
+2022-11-12 22:00:14.770 IST [14044] ERROR:  cannot change return type of existing function
+2022-11-12 22:00:14.770 IST [14044] HINT:  Use DROP FUNCTION matplotlib_simplelinechart(text[],numeric[],numeric[],date[]) first.
+2022-11-12 22:00:14.770 IST [14044] STATEMENT:  CREATE OR replace FUNCTION matplotlib_simplelinechart (name text[],closearr NUMERIC[],smaarr NUMERIC[],tradearr date[]) 
+	RETURNS text
+	AS $$
+	return type(tradearr[0]) + " " + type(closearr[0])
+	from io import BytesIO
+	
+	import matplotlib.pyplot as plt
+	# import numpy as np
+	plt.rcParams["figure.figsize"] = [7.50, 3.50]
+	plt.rcParams["figure.autolayout"] = True
+	# x = np.linspace(0, 2, 100)  # Sample data.
+	plt.figure(figsize=(10, 5))
+	plt.plot(tradearr, closearr, label='close')  # Plot some data on the (implicit) axes.
+	plt.plot(tradearr,smaarr, label='sma200')  # etc.
+	plt.xlabel('close, sma200')
+	plt.ylabel('trade date')
+	plt.title(name)
+	plt.legend()
+	buffer = BytesIO()
+	plt.savefig(buffer, format="png")
+	return buffer.getvalue()
+	$$ LANGUAGE plpython3u
+2022-11-12 22:00:28.194 IST [14044] ERROR:  TypeError: unsupported operand type(s) for +: 'type' and 'str'
+2022-11-12 22:00:28.194 IST [14044] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "matplotlib_simplelinechart", line 2, in <module>
+	    return type(tradearr[0]) + " " + type(closearr[0])
+	PL/Python function "matplotlib_simplelinechart"
+2022-11-12 22:00:28.194 IST [14044] STATEMENT:  
+	WITH test AS(
+		SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		
+			
+	), lmt as(
+			
+	select close,sma200,trade_date,name
+	FROM
+		test
+	WHERE
+		code = 532540
+		limit 365
+	)select matplotlib_simplelinechart(array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date)) from lmt  
+	
+	
+2022-11-13 02:02:26.136 IST [6320] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-13 02:02:26.148 IST [6320] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-13 02:02:26.155 IST [6320] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-13 02:02:26.258 IST [16744] LOG:  database system was interrupted; last known up at 2022-11-12 22:00:07 IST
+2022-11-13 02:02:28.047 IST [16744] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-13 02:02:28.057 IST [16744] LOG:  redo starts at 0/18551C08
+2022-11-13 02:02:28.063 IST [16744] LOG:  invalid record length at 0/1855BDF0: wanted 24, got 0
+2022-11-13 02:02:28.063 IST [16744] LOG:  redo done at 0/1855BDB8 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-13 02:02:28.322 IST [6320] LOG:  database system is ready to accept connections
+2022-11-13 02:03:45.812 IST [11792] ERROR:  argument of WHERE must be type boolean, not type date at character 181
+2022-11-13 02:03:45.812 IST [11792] STATEMENT:  WITH test AS( SELECT  trade_date,code,close,name, AVG(close) OVER(PARTITION BY code ORDER BY trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sma200 FROM BSE WHERE  trade_date ORDER BY trade_date desc ) select * from test limit 200 offset 0
+2022-11-13 02:04:10.053 IST [11792] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-13 02:04:10.053 IST [11792] STATEMENT:  WITH test AS( SELECT  trade_date,code,close,name, AVG(close) OVER(PARTITION BY code ORDER BY trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sma200 FROM BSE WHERE  code > 1 ORDER BY trade_date desc ) select * from test limit 200 offset 0
+2022-11-13 02:04:13.460 IST [4924] ERROR:  canceling statement due to user request
+2022-11-13 02:04:13.461 IST [6320] LOG:  received fast shutdown request
+2022-11-13 02:04:13.473 IST [6320] LOG:  aborting any active transactions
+2022-11-13 02:04:13.473 IST [11792] FATAL:  terminating connection due to administrator command
+2022-11-13 02:04:13.474 IST [9888] FATAL:  terminating connection due to administrator command
+2022-11-13 02:04:13.484 IST [6320] LOG:  background worker "logical replication launcher" (PID 4924) exited with exit code 1
+2022-11-13 02:04:13.500 IST [18048] LOG:  shutting down
+2022-11-13 02:04:13.579 IST [6320] LOG:  database system is shut down
+2022-11-13 02:04:15.484 IST [1120] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-13 02:04:15.496 IST [1120] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-13 02:04:15.502 IST [1120] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-13 02:04:15.577 IST [2964] LOG:  database system was shut down at 2022-11-13 02:04:13 IST
+2022-11-13 02:04:15.780 IST [1120] LOG:  database system is ready to accept connections
+2022-11-13 12:45:08.684 IST [12344] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-13 12:45:08.752 IST [12344] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-13 12:45:08.780 IST [12344] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-13 12:45:09.239 IST [12244] LOG:  database system was interrupted; last known up at 2022-11-13 02:28:53 IST
+2022-11-13 12:45:11.699 IST [12244] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-13 12:45:11.704 IST [12244] LOG:  redo starts at 0/1855BF50
+2022-11-13 12:45:11.704 IST [12244] LOG:  invalid record length at 0/1855C050: wanted 24, got 0
+2022-11-13 12:45:11.704 IST [12244] LOG:  redo done at 0/1855C018 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-13 12:45:11.961 IST [12344] LOG:  database system is ready to accept connections
+2022-11-13 13:00:46.967 IST [12352] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 13:00:46.967 IST [12352] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-13 13:01:21.738 IST [1616] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 13:01:21.739 IST [1616] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-13 13:01:30.572 IST [7700] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 13:01:54.863 IST [13804] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 13:01:54.863 IST [13804] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-13 13:02:02.703 IST [6656] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 13:02:47.566 IST [15028] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 13:02:47.567 IST [15028] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-13 13:03:26.340 IST [5196] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 13:03:26.341 IST [5196] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-13 13:04:19.369 IST [9320] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 13:04:19.370 IST [9320] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-13 13:04:37.530 IST [15352] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 13:04:37.530 IST [15352] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-13 13:26:01.753 IST [2176] ERROR:  syntax error at or near "THEN" at character 71
+2022-11-13 13:26:01.753 IST [2176] STATEMENT:  WITH test AS( SELECT  trade_date,code,close,name,CASE WHEN  close <   THEN 1000 END close_lt_1000 FROM BSE) select * from test limit 200 offset 0
+2022-11-13 13:26:04.187 IST [2176] ERROR:  syntax error at or near "THEN" at character 71
+2022-11-13 13:26:04.187 IST [2176] STATEMENT:  WITH test AS( SELECT  trade_date,code,close,name,CASE WHEN  close <   THEN 1000 END close_lt_1000 FROM BSE) select * from test limit 200 offset 0
+2022-11-13 13:28:00.722 IST [2176] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-13 13:28:00.722 IST [2176] STATEMENT:  WITH test AS( SELECT  trade_date,code,close,name,CASE WHEN  close < 1000  THEN close_lt_11000 END close_lt_1000 FROM BSE) select * from test limit 200 offset 0
+2022-11-13 13:28:12.183 IST [14240] ERROR:  canceling statement due to user request
+2022-11-13 13:28:12.183 IST [12344] LOG:  received fast shutdown request
+2022-11-13 13:28:12.189 IST [12344] LOG:  aborting any active transactions
+2022-11-13 13:28:12.189 IST [2176] FATAL:  terminating connection due to administrator command
+2022-11-13 13:28:12.190 IST [18580] FATAL:  terminating connection due to administrator command
+2022-11-13 13:28:12.190 IST [16492] FATAL:  terminating connection due to administrator command
+2022-11-13 13:28:12.214 IST [12344] LOG:  background worker "logical replication launcher" (PID 14240) exited with exit code 1
+2022-11-13 13:28:12.220 IST [16744] LOG:  shutting down
+2022-11-13 13:28:12.322 IST [12344] LOG:  database system is shut down
+2022-11-13 13:28:15.245 IST [18904] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-13 13:28:15.261 IST [18904] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-13 13:28:15.268 IST [18904] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-13 13:28:15.356 IST [4192] LOG:  database system was shut down at 2022-11-13 13:28:12 IST
+2022-11-13 13:28:15.550 IST [18904] LOG:  database system is ready to accept connections
+2022-11-13 13:28:16.973 IST [9928] ERROR:  column "close_lt_11000" does not exist at character 80
+2022-11-13 13:28:16.973 IST [9928] STATEMENT:  WITH test AS( SELECT  trade_date,code,close,name,CASE WHEN  close < 1000  THEN close_lt_11000 END close_lt_1000 FROM BSE) select * from test limit 200 offset 0
+2022-11-13 13:29:08.433 IST [4260] ERROR:  column "close_lt_11000" does not exist at character 95
+2022-11-13 13:29:08.433 IST [4260] STATEMENT:  with test as(
+	select
+		trade_date,
+		code,
+		close,
+		name,
+		case
+			when close < 1000 then close_lt_11000
+		end close_lt_1000
+	from
+		BSE)
+	select
+		*
+	from
+		test
+	limit 200 offset 0
+2022-11-13 13:29:23.062 IST [4260] ERROR:  column "close_lt_11000" does not exist at character 97
+2022-11-13 13:29:23.062 IST [4260] STATEMENT:  
+	with test as(
+	select
+		trade_date,
+		code,
+		close,
+		name,
+		case
+			when close < 1000 then close_lt_11000
+		end 
+	from
+		BSE)
+	select
+		*
+	from
+		test
+	limit 200 offset 0
+	
+2022-11-13 13:30:18.581 IST [9928] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 13:30:30.637 IST [20004] ERROR:  column "close_lt_11000" does not exist at character 80
+2022-11-13 13:30:30.637 IST [20004] STATEMENT:  WITH test AS( SELECT  trade_date,code,close,name,CASE WHEN  close < 1000  THEN close_lt_11000 END  FROM BSE) select * from test limit 200 offset 0
+2022-11-13 13:30:57.193 IST [20004] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-13 13:30:57.193 IST [20004] STATEMENT:  WITH test AS( SELECT  trade_date,code,close,name,CASE WHEN  close < 1000  THEN true END  FROM BSE) select * from test limit 200 offset 0
+2022-11-13 13:31:00.514 IST [20276] ERROR:  canceling statement due to user request
+2022-11-13 13:31:00.516 IST [18904] LOG:  received fast shutdown request
+2022-11-13 13:31:00.520 IST [18904] LOG:  aborting any active transactions
+2022-11-13 13:31:00.521 IST [20004] FATAL:  terminating connection due to administrator command
+2022-11-13 13:31:00.521 IST [4260] FATAL:  terminating connection due to administrator command
+2022-11-13 13:31:00.522 IST [4724] FATAL:  terminating connection due to administrator command
+2022-11-13 13:31:00.542 IST [18904] LOG:  background worker "logical replication launcher" (PID 20276) exited with exit code 1
+2022-11-13 13:31:00.570 IST [6784] LOG:  shutting down
+2022-11-13 13:31:00.651 IST [18904] LOG:  database system is shut down
+2022-11-13 13:31:01.978 IST [14168] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-13 13:31:01.990 IST [14168] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-13 13:31:01.996 IST [14168] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-13 13:31:02.068 IST [17204] LOG:  database system was shut down at 2022-11-13 13:31:00 IST
+2022-11-13 13:31:02.359 IST [14168] LOG:  database system is ready to accept connections
+2022-11-13 13:32:19.419 IST [2756] ERROR:  function matplotlib_simplelinechart() does not exist at character 8
+2022-11-13 13:32:19.419 IST [2756] HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2022-11-13 13:32:19.419 IST [2756] STATEMENT:  select matplotlib_simplelinechart()
+2022-11-13 13:32:51.896 IST [15500] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 13:32:51.897 IST [15500] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-13 13:33:10.148 IST [17772] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 13:33:10.148 IST [17772] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-13 13:57:43.627 IST [2428] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 13:57:43.627 IST [2428] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-13 14:01:55.955 IST [6064] ERROR:  function high(numeric) does not exist at character 51
+2022-11-13 14:01:55.955 IST [6064] HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2022-11-13 14:01:55.955 IST [6064] STATEMENT:  WITH test AS( SELECT  trade_date,code,close,name, HIGH(close) OVER(PARTITION BY code ORDER BY trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as highs, LOW(close) OVER(PARTITION BY code ORDER BY trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as lows,CASE WHEN  code < 600000 and close < 1000  THEN 1 ELSE 0END as ss FROM BSE) select * from test limit 2000 offset 0
+2022-11-13 14:03:10.727 IST [6064] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-13 14:03:10.727 IST [6064] STATEMENT:  WITH test AS( SELECT   MAX(close) OVER(PARTITION BY code ORDER BY trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sss FROM BSE) select * from test limit 200 offset 0
+2022-11-13 14:03:15.231 IST [16760] ERROR:  canceling statement due to user request
+2022-11-13 14:03:15.232 IST [14168] LOG:  received fast shutdown request
+2022-11-13 14:03:15.243 IST [14168] LOG:  aborting any active transactions
+2022-11-13 14:03:15.244 IST [6064] FATAL:  terminating connection due to administrator command
+2022-11-13 14:03:15.244 IST [2756] FATAL:  terminating connection due to administrator command
+2022-11-13 14:03:15.245 IST [12740] FATAL:  terminating connection due to administrator command
+2022-11-13 14:03:15.258 IST [14168] LOG:  background worker "logical replication launcher" (PID 16760) exited with exit code 1
+2022-11-13 14:03:15.277 IST [13660] LOG:  shutting down
+2022-11-13 14:03:15.340 IST [14168] LOG:  database system is shut down
+2022-11-13 14:03:17.165 IST [2012] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-13 14:03:17.180 IST [2012] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-13 14:03:17.187 IST [2012] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-13 14:03:17.265 IST [15496] LOG:  database system was shut down at 2022-11-13 14:03:15 IST
+2022-11-13 14:03:17.375 IST [2012] LOG:  database system is ready to accept connections

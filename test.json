@@ -9,29 +9,93 @@
             "type": "normal"
         },
         {
+            "name": "close",
+            "type": "normal"
+        },
+        {
             "name": "name",
             "type": "normal"
         },
         {
-            "name": "trade_date",
-            "type": "normal"
+            "name": "sma200",
+            "type": "window_function",
+            "attributes": {
+                "window_func": "AVG",
+                "col": "close",
+                "over": {
+                    "partition_by": "code",
+                    "order_by": "trade_date",
+                    "order_type": "asc",
+                    "frame_spec": {
+                        "type": "rows"
+                    },
+                    "frame_boundaries": {
+                        "preceding": "199 preceding",
+                        "following": "current Row"
+                    }
+                }
+            }
+        },
+        {
+            "name": "sma300",
+            "type": "window_function",
+            "attributes": {
+                "window_func": "AVG",
+                "col": "close",
+                "over": {
+                    "partition_by": "code",
+                    "order_by": "trade_date",
+                    "order_type": "asc",
+                    "frame_spec": {
+                        "type": "rows"
+                    },
+                    "frame_boundaries": {
+                        "preceding": "299 preceding",
+                        "following": "current Row"
+                    }
+                }
+            }
+        },
+        {
+            "name": "sma500",
+            "type": "window_function",
+            "attributes": {
+                "window_func": "AVG",
+                "col": "close",
+                "over": {
+                    "partition_by": "code",
+                    "order_by": "trade_date",
+                    "order_type": "asc",
+                    "frame_spec": {
+                        "type": "rows"
+                    },
+                    "frame_boundaries": {
+                        "preceding": "499 preceding",
+                        "following": "current Row"
+                    }
+                }
+            }
+        },
+        {
+            "name": "close_lt_1000",
+            "type": "case",
+            "attributes": {
+                "when": [
+                    "close",
+                    "gt",
+                    "2000",
+                    ""
+                ],
+                "then": "1",
+                "else": "0"
+            }
         }
     ],
-    "where": [
-        "code",
-        "gt",
-        "550000",
-        "and",
-        "code",
-        "lt",
-        "600000"
-    ],
+    "where": [],
     "order": [
-        "name",
-        "asc",
-        "code",
-        "asc",
         "trade_date",
-        "asc"
-    ]
+        "desc"
+    ],
+    "limit": "200",
+    "offset": "0"
 }
