@@ -1,101 +1,60 @@
-{
-    "name": "test",
-    "from": [
-        "BSE"
-    ],
-    "cols": [
-        {
-            "name": "code",
-            "type": "normal"
-        },
-        {
-            "name": "close",
-            "type": "normal"
-        },
-        {
-            "name": "name",
-            "type": "normal"
-        },
-        {
-            "name": "sma200",
-            "type": "window_function",
-            "attributes": {
-                "window_func": "AVG",
-                "col": "close",
-                "over": {
-                    "partition_by": "code",
-                    "order_by": "trade_date",
-                    "order_type": "asc",
-                    "frame_spec": {
-                        "type": "rows"
-                    },
-                    "frame_boundaries": {
-                        "preceding": "199 preceding",
-                        "following": "current Row"
-                    }
+[
+    {
+        "name": "test1",
+        "parent": "test",
+        "from": [
+            "test"
+        ],
+        "cols": [
+            {
+                "name": "test.code",
+                "type": "normal"
+            },
+            {
+                "name": "test.name",
+                "type": "normal"
+            },
+            {
+                "name": "test.trade_date",
+                "type": "normal"
+            },
+            {
+                "name": "test.close",
+                "type": "normal"
+            },
+            {
+                "name": "test.sma200",
+                "type": "normal"
+            },
+            {
+                "name": "close_lt_sma200",
+                "type": "case",
+                "attributes": {
+                    "when": [
+                        "test.close",
+                        "lt",
+                        "test.sma200",
+                        ""
+                    ],
+                    "then": "1",
+                    "else": "0"
                 }
             }
-        },
-        {
-            "name": "sma300",
-            "type": "window_function",
-            "attributes": {
-                "window_func": "AVG",
-                "col": "close",
-                "over": {
-                    "partition_by": "code",
-                    "order_by": "trade_date",
-                    "order_type": "asc",
-                    "frame_spec": {
-                        "type": "rows"
-                    },
-                    "frame_boundaries": {
-                        "preceding": "299 preceding",
-                        "following": "current Row"
-                    }
-                }
-            }
-        },
-        {
-            "name": "sma500",
-            "type": "window_function",
-            "attributes": {
-                "window_func": "AVG",
-                "col": "close",
-                "over": {
-                    "partition_by": "code",
-                    "order_by": "trade_date",
-                    "order_type": "asc",
-                    "frame_spec": {
-                        "type": "rows"
-                    },
-                    "frame_boundaries": {
-                        "preceding": "499 preceding",
-                        "following": "current Row"
-                    }
-                }
-            }
-        },
-        {
-            "name": "close_lt_1000",
-            "type": "case",
-            "attributes": {
-                "when": [
-                    "close",
-                    "gt",
-                    "2000",
-                    ""
-                ],
-                "then": "1",
-                "else": "0"
-            }
-        }
-    ],
-    "where": [],
-    "order": [
-        "trade_date",
-        "desc"
-    ],
-    "limit": "200",
-    "offset": "0"
-}
+        ],
+        "where": [
+            "test.close",
+            "gt",
+            "1000",
+            "and",
+            "test.code",
+            "=",
+            "532540"
+        ],
+        "order": [
+            "test.trade_date",
+            "desc"
+        ],
+        "limit": "1",
+        "offset": "0"
+    }
+]

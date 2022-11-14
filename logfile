@@ -2529,3 +2529,855 @@
 2022-11-13 14:03:17.187 IST [2012] LOG:  listening on IPv4 address "127.0.0.1", port 5432
 2022-11-13 14:03:17.265 IST [15496] LOG:  database system was shut down at 2022-11-13 14:03:15 IST
 2022-11-13 14:03:17.375 IST [2012] LOG:  database system is ready to accept connections
+2022-11-13 15:37:29.263 IST [7060] ERROR:  syntax error at or near "where" at character 222
+2022-11-13 15:37:29.263 IST [7060] STATEMENT:  	SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+		ORDER BY
+			trade_date DESC 
+		where code = 532540
+	
+		
+2022-11-13 15:38:46.277 IST [7060] ERROR:  syntax error at or near "having" at character 225
+2022-11-13 15:38:46.277 IST [7060] STATEMENT:  	SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+			
+		ORDER BY
+			trade_date desc
+		having close > 1000
+2022-11-13 15:39:13.389 IST [7060] ERROR:  column "bse.trade_date" must appear in the GROUP BY clause or be used in an aggregate function at character 12
+2022-11-13 15:39:13.389 IST [7060] STATEMENT:  	SELECT
+			trade_date,
+			code,
+			CLOSE,
+			name,
+			AVG(round(CLOSE)) OVER(PARTITION BY code
+		ORDER BY
+			trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+		FROM
+			BSE
+			having close > 1000
+		ORDER BY
+			trade_date desc
+2022-11-13 17:01:04.632 IST [18648] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 17:01:04.633 IST [18648] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-13 17:01:22.783 IST [20208] ERROR:  canceling statement due to user request
+2022-11-13 17:01:22.784 IST [2012] LOG:  received fast shutdown request
+2022-11-13 17:01:22.795 IST [2012] LOG:  aborting any active transactions
+2022-11-13 17:01:22.796 IST [7060] FATAL:  terminating connection due to administrator command
+2022-11-13 17:01:22.796 IST [2236] FATAL:  terminating connection due to administrator command
+2022-11-13 17:01:22.797 IST [10112] FATAL:  terminating connection due to administrator command
+2022-11-13 17:01:22.801 IST [2012] LOG:  background worker "logical replication launcher" (PID 20208) exited with exit code 1
+2022-11-13 17:01:22.821 IST [18752] LOG:  shutting down
+2022-11-13 17:01:22.901 IST [2012] LOG:  database system is shut down
+2022-11-13 17:01:24.800 IST [19144] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-13 17:01:24.812 IST [19144] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-13 17:01:24.818 IST [19144] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-13 17:01:24.889 IST [17184] LOG:  database system was shut down at 2022-11-13 17:01:22 IST
+2022-11-13 17:01:24.995 IST [19144] LOG:  database system is ready to accept connections
+2022-11-13 17:03:34.995 IST [2000] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 17:04:09.729 IST [6316] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 17:04:16.613 IST [4468] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 17:04:37.844 IST [11380] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 17:05:35.359 IST [2128] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 17:06:02.827 IST [6384] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 17:11:00.266 IST [6820] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 17:11:27.824 IST [17864] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 17:12:20.127 IST [17228] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 17:12:20.128 IST [17228] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-13 17:16:05.224 IST [13392] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 17:16:05.224 IST [13392] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-13 17:25:10.276 IST [14556] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 17:25:43.854 IST [20092] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 17:26:03.118 IST [6020] ERROR:  canceling statement due to user request
+2022-11-13 17:26:03.119 IST [19144] LOG:  received fast shutdown request
+2022-11-13 17:26:03.131 IST [19144] LOG:  aborting any active transactions
+2022-11-13 17:26:03.133 IST [19336] FATAL:  terminating connection due to administrator command
+2022-11-13 17:26:03.133 IST [15684] FATAL:  terminating connection due to administrator command
+2022-11-13 17:26:03.138 IST [19144] LOG:  background worker "logical replication launcher" (PID 6020) exited with exit code 1
+2022-11-13 17:26:03.155 IST [15188] LOG:  shutting down
+2022-11-13 17:26:03.191 IST [19144] LOG:  database system is shut down
+2022-11-13 17:26:50.446 IST [11336] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-13 17:26:50.457 IST [11336] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-13 17:26:50.463 IST [11336] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-13 17:26:50.533 IST [15140] LOG:  database system was shut down at 2022-11-13 17:26:03 IST
+2022-11-13 17:26:50.637 IST [11336] LOG:  database system is ready to accept connections
+2022-11-13 17:27:10.395 IST [980] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 17:28:15.917 IST [2196] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 18:59:47.043 IST [16752] ERROR:  column "select * from test" does not exist at character 64
+2022-11-13 18:59:47.043 IST [16752] STATEMENT:  insert into CTE(name,ctejson,ctesql) values('test','{"a":"b"}',"select * from test")
+2022-11-13 19:00:40.135 IST [16752] ERROR:  syntax error at or near "insert" at character 81
+2022-11-13 19:00:40.135 IST [16752] STATEMENT:  
+	
+	create table CTE(name text unique,ctejson json, ctesql text,parent text)
+	
+	insert into CTE(name,ctejson,ctesql) values('test','{"a":"b"}','select * from test')
+2022-11-13 19:01:37.924 IST [16752] ERROR:  relation "cte" already exists
+2022-11-13 19:01:37.924 IST [16752] STATEMENT:  
+	create table CTE(name text unique,ctejson json, ctesql text,parent text)
+2022-11-13 19:02:01.827 IST [16752] ERROR:  duplicate key value violates unique constraint "cte_name_key"
+2022-11-13 19:02:01.827 IST [16752] DETAIL:  Key (name)=(test) already exists.
+2022-11-13 19:02:01.827 IST [16752] STATEMENT:  
+	insert into CTE(name,ctejson,ctesql) values('test','{"a":"b"}','select * from test')
+2022-11-13 19:17:20.506 IST [13872] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:31:35.895 IST [16772] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:32:04.568 IST [19968] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:32:27.391 IST [13032] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:32:32.132 IST [2996] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:32:45.104 IST [18200] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:34:04.585 IST [16292] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:34:25.832 IST [15372] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:34:52.150 IST [18244] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:35:16.535 IST [16440] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:35:41.840 IST [2176] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:36:06.234 IST [2616] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:36:09.908 IST [18292] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:54:45.479 IST [17688] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:55:00.442 IST [172] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:55:03.149 IST [7976] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:56:51.963 IST [2556] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:57:48.794 IST [16752] ERROR:  operator does not exist: json = unknown at character 52
+2022-11-13 23:57:48.794 IST [16752] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2022-11-13 23:57:48.794 IST [16752] STATEMENT:  DELETE FROM public.cte
+		WHERE "name"=$1 AND ctejson=$2 AND ctesql=$3
+2022-11-13 23:58:21.226 IST [18052] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:59:19.550 IST [16128] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:59:28.437 IST [15176] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:59:41.508 IST [3536] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-13 23:59:50.223 IST [2756] ERROR:  canceling statement due to user request
+2022-11-13 23:59:50.224 IST [11336] LOG:  received fast shutdown request
+2022-11-13 23:59:50.236 IST [11336] LOG:  aborting any active transactions
+2022-11-13 23:59:50.237 IST [16920] FATAL:  terminating connection due to administrator command
+2022-11-13 23:59:50.237 IST [16752] FATAL:  terminating connection due to administrator command
+2022-11-13 23:59:50.238 IST [20344] FATAL:  terminating connection due to administrator command
+2022-11-13 23:59:50.238 IST [11336] LOG:  background worker "logical replication launcher" (PID 2756) exited with exit code 1
+2022-11-13 23:59:50.275 IST [9312] LOG:  shutting down
+2022-11-13 23:59:50.366 IST [11336] LOG:  database system is shut down
+2022-11-13 23:59:52.561 IST [15464] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-13 23:59:52.574 IST [15464] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-13 23:59:52.580 IST [15464] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-13 23:59:52.663 IST [6932] LOG:  database system was shut down at 2022-11-13 23:59:50 IST
+2022-11-13 23:59:52.800 IST [15464] LOG:  database system is ready to accept connections
+2022-11-14 00:00:42.594 IST [196] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:02:24.237 IST [2556] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:02:37.226 IST [2764] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:02:57.364 IST [17636] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:03:05.227 IST [12216] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:04:05.390 IST [20156] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:08:34.984 IST [13348] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:08:56.307 IST [932] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:13:33.949 IST [12880] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:13:33.949 IST [12880] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 00:14:11.551 IST [10108] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:14:13.618 IST [7208] ERROR:  syntax error at or near "name" at character 89
+2022-11-14 00:14:13.618 IST [7208] STATEMENT:  
+	        insert into 
+	        CTE(name,ctejson,ctesql,parent) 
+	        values('test','{'name': 'test', 'from': ['BSE'], 'parent': '', 'cols': [{'name': '', 'type': 'normal'}], 'where': [], 'order': [], 'limit': '200', 'offset': '0'}','
+	        create table if not exists CTE(name text,ctejson json, ctesql text,parent text)
+	    ','')
+	    
+2022-11-14 00:14:41.176 IST [7208] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:17:29.412 IST [9888] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:17:29.412 IST [9888] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 00:18:12.401 IST [15340] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:19:51.046 IST [8456] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:19:51.046 IST [8456] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 00:19:58.872 IST [18068] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:20:02.549 IST [7104] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:20:26.865 IST [16060] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:20:30.632 IST [6928] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:25:54.595 IST [16972] ERROR:  operator does not exist: json = unknown at character 52
+2022-11-14 00:25:54.595 IST [16972] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2022-11-14 00:25:54.595 IST [16972] STATEMENT:  DELETE FROM public.cte
+		WHERE "name"=$1 AND ctejson=$2 AND ctesql=$3
+2022-11-14 00:26:09.330 IST [16972] ERROR:  operator does not exist: json = unknown at character 52
+2022-11-14 00:26:09.330 IST [16972] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2022-11-14 00:26:09.330 IST [16972] STATEMENT:  DELETE FROM public.cte
+		WHERE "name"=$1 AND ctejson=$2 AND ctesql=$3
+2022-11-14 00:57:35.107 IST [2732] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:58:07.507 IST [5832] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 00:58:15.035 IST [20400] ERROR:  there is no unique or exclusion constraint matching the ON CONFLICT specification
+2022-11-14 00:58:15.035 IST [20400] STATEMENT:  
+	        insert into 
+	        CTE(name,ctejson,ctesql,parent) 
+	        values('test','{"name": "test", "from": ["BSE"], "parent": "", "cols": [{"name": "trade_date", "type": "normal"}, {"name": "code", "type": "normal"}, {"name": "close", "type": "normal"}], "where": [], "order": [], "limit": "200", "offset": "0"}','WITH test AS( SELECT  trade_date,code,close FROM BSE) select * from test limit 200 offset 0','')
+	
+	        on conflict(name)
+	        DO 
+	        update set ctejson = '{"name": "test", "from": ["BSE"], "parent": "", "cols": [{"name": "trade_date", "type": "normal"}, {"name": "code", "type": "normal"}, {"name": "close", "type": "normal"}], "where": [], "order": [], "limit": "200", "offset": "0"}', ctesql = 'WITH test AS( SELECT  trade_date,code,close FROM BSE) select * from test limit 200 offset 0', parent =  ''
+	    
+2022-11-14 00:58:15.164 IST [20400] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-14 00:58:15.164 IST [20400] STATEMENT:  WITH test AS( SELECT  trade_date,code,close FROM BSE) select * from test limit 200 offset 0
+2022-11-14 00:58:15.238 IST [20400] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-14 00:58:15.238 IST [20400] STATEMENT:  WITH test AS( SELECT  trade_date,code,close FROM BSE) select * from test limit 200 offset 0
+2022-11-14 00:58:15.350 IST [20400] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-14 00:58:15.350 IST [20400] STATEMENT:  WITH test AS( SELECT  trade_date,code,close FROM BSE) select * from test limit 200 offset 0
+2022-11-14 00:58:15.517 IST [20400] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-14 00:58:15.517 IST [20400] STATEMENT:  WITH test AS( SELECT  trade_date,code,close FROM BSE) select * from test limit 200 offset 0
+2022-11-14 00:58:27.214 IST [17756] ERROR:  canceling statement due to user request
+2022-11-14 00:58:27.216 IST [15464] LOG:  received fast shutdown request
+2022-11-14 00:58:27.227 IST [15464] LOG:  aborting any active transactions
+2022-11-14 00:58:27.228 IST [20400] FATAL:  terminating connection due to administrator command
+2022-11-14 00:58:27.228 IST [16972] FATAL:  terminating connection due to administrator command
+2022-11-14 00:58:27.229 IST [20000] FATAL:  terminating connection due to administrator command
+2022-11-14 00:58:27.247 IST [15464] LOG:  background worker "logical replication launcher" (PID 17756) exited with exit code 1
+2022-11-14 00:58:27.266 IST [9136] LOG:  shutting down
+2022-11-14 00:58:27.400 IST [15464] LOG:  database system is shut down
+2022-11-14 00:58:28.633 IST [15024] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-14 00:58:28.644 IST [15024] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-14 00:58:28.651 IST [15024] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-14 00:58:28.720 IST [19596] LOG:  database system was shut down at 2022-11-14 00:58:27 IST
+2022-11-14 00:58:28.890 IST [15024] LOG:  database system is ready to accept connections
+2022-11-14 00:58:32.224 IST [15260] ERROR:  there is no unique or exclusion constraint matching the ON CONFLICT specification
+2022-11-14 00:58:32.224 IST [15260] STATEMENT:  
+	        insert into 
+	        CTE(name,ctejson,ctesql,parent) 
+	        values('test','{"name": "test", "from": ["BSE"], "parent": "", "cols": [{"name": "trade_date", "type": "normal"}, {"name": "code", "type": "normal"}, {"name": "close", "type": "normal"}], "where": [], "order": [], "limit": "200", "offset": "0"}','WITH test AS( SELECT  trade_date,code,close FROM BSE) select * from test limit 200 offset 0','')
+	
+	        on conflict(name)
+	        DO 
+	        update set ctejson = '{"name": "test", "from": ["BSE"], "parent": "", "cols": [{"name": "trade_date", "type": "normal"}, {"name": "code", "type": "normal"}, {"name": "close", "type": "normal"}], "where": [], "order": [], "limit": "200", "offset": "0"}', ctesql = 'WITH test AS( SELECT  trade_date,code,close FROM BSE) select * from test limit 200 offset 0', parent =  ''
+	    
+2022-11-14 00:58:49.645 IST [15260] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 03:01:22.292 IST [10172] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 03:02:38.815 IST [18088] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 03:07:25.761 IST [11904] ERROR:  NameError: name 'njit' is not defined
+2022-11-14 03:07:25.761 IST [11904] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "testspeed", line 6, in <module>
+	    @njit
+	PL/Python function "testspeed"
+2022-11-14 03:07:25.761 IST [11904] STATEMENT:  
+	
+	select * from testspeed()
+2022-11-14 03:08:13.081 IST [11904] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-14 03:08:13.081 IST [11904] STATEMENT:  
+	CREATE OR replace FUNCTION testspeed () 
+	RETURNS numeric
+	AS $$
+	import numpy as np
+	import numba
+	from numba import jit,njit
+	
+	@njit
+	def monte_carlo_pi(nsamples):
+	    acc = 0
+	    for i in range(nsamples):
+	        x = random.random()
+	        y = random.random()
+	        if (x ** 2 + y ** 2) < 1.0:
+	            acc += 1
+	    return 4.0 * acc / nsamples
+	
+	return monte_carlo(100)
+	$$ LANGUAGE plpython3u
+2022-11-14 03:08:13.131 IST [11904] ERROR:  NameError: name 'monte_carlo' is not defined
+2022-11-14 03:08:13.131 IST [11904] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "testspeed", line 16, in <module>
+	    return monte_carlo(100)
+	PL/Python function "testspeed"
+2022-11-14 03:08:13.131 IST [11904] STATEMENT:  
+	
+	select * from testspeed()
+2022-11-14 03:08:18.406 IST [11904] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-14 03:08:18.406 IST [11904] STATEMENT:  SELECT x.oid,x.relname,x.relnamespace,x.relkind FROM pg_catalog.pg_class x WHERE x.relkind in('r','v','m') AND x.relname ILIKE $1  ORDER BY x.relname LIMIT 1
+2022-11-14 03:08:18.521 IST [11904] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-14 03:08:18.521 IST [11904] STATEMENT:  SELECT x.oid,x.relname,x.relnamespace,x.relkind FROM pg_catalog.pg_class x WHERE x.relkind in('r','v','m') AND x.relname ILIKE $1  ORDER BY x.relname LIMIT 1
+2022-11-14 03:08:18.774 IST [11904] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-14 03:08:18.774 IST [11904] STATEMENT:  SELECT x.oid,x.relname,x.relnamespace,x.relkind FROM pg_catalog.pg_class x WHERE x.relkind in('r','v','m') AND x.relname ILIKE $1  AND x.relnamespace IN ($2,$3) ORDER BY x.relname LIMIT 10
+2022-11-14 03:08:19.877 IST [11904] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-14 03:08:19.877 IST [11904] STATEMENT:  SELECT x.oid,x.relname,x.relnamespace,x.relkind FROM pg_catalog.pg_class x WHERE x.relkind in('r','v','m') AND x.relname ILIKE $1  AND x.relnamespace IN ($2,$3) ORDER BY x.relname LIMIT 10
+2022-11-14 03:08:21.333 IST [11904] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-14 03:08:21.333 IST [11904] STATEMENT:  
+	
+	
+	CREATE OR replace FUNCTION testspeed () 
+	RETURNS numeric
+	AS $$
+	import numpy as np
+	import numba
+	from numba import jit,njit
+	
+	@njit
+	def monte_carlo_pi(nsamples):
+	    acc = 0
+	    for i in range(nsamples):
+	        x = random.random()
+	        y = random.random()
+	        if (x ** 2 + y ** 2) < 1.0:
+	            acc += 1
+	    return 4.0 * acc / nsamples
+	
+	return monte_carlo_pi(100)
+	$$ LANGUAGE plpython3u
+2022-11-14 03:08:22.845 IST [11904] ERROR:  numba.core.errors.TypingError: Failed in nopython mode pipeline (step: nopython frontend)
+	[1mNameError: name 'random' is not defined[0m
+2022-11-14 03:08:22.845 IST [11904] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "testspeed", line 16, in <module>
+	    return monte_carlo_pi(100)
+	  PL/Python function "testspeed", line 467, in _compile_for_args
+	  PL/Python function "testspeed", line 408, in error_rewrite
+	PL/Python function "testspeed"
+2022-11-14 03:08:22.845 IST [11904] STATEMENT:  
+	
+	select * from testspeed()
+2022-11-14 03:08:51.972 IST [11904] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-14 03:08:51.972 IST [11904] STATEMENT:  
+	CREATE OR replace FUNCTION testspeed () 
+	RETURNS numeric
+	AS $$
+	import numpy as np
+	import numba
+	from numba import jit,njit
+	import random
+	@njit
+	def monte_carlo_pi(nsamples):
+	    acc = 0
+	    for i in range(nsamples):
+	        x = random.random()
+	        y = random.random()
+	        if (x ** 2 + y ** 2) < 1.0:
+	            acc += 1
+	    return 4.0 * acc / nsamples
+	
+	return monte_carlo_pi(100)
+	$$ LANGUAGE plpython3u
+2022-11-14 03:10:38.985 IST [11904] ERROR:  KeyboardInterrupt: 
+2022-11-14 03:10:38.985 IST [11904] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "testspeed", line 18, in <module>
+	    return monte_carlo_pi(10000000000000000)
+	  PL/Python function "testspeed", line 14, in monte_carlo_pi
+	    if (x ** 2 + y ** 2) < 1.0:
+	PL/Python function "testspeed"
+2022-11-14 03:10:38.985 IST [11904] STATEMENT:  
+	
+	select * from testspeed()
+2022-11-14 03:10:38.987 IST [11904] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-14 03:10:38.987 IST [11904] STATEMENT:  SELECT x.oid,x.relname,x.relnamespace,x.relkind FROM pg_catalog.pg_class x WHERE x.relkind in('r','v','m') AND x.relname ILIKE $1  AND x.relnamespace IN ($2,$3) ORDER BY x.relname LIMIT 10
+2022-11-14 03:10:38.987 IST [19296] ERROR:  canceling statement due to user request
+2022-11-14 03:10:38.989 IST [15024] LOG:  received fast shutdown request
+2022-11-14 03:10:38.996 IST [15024] LOG:  aborting any active transactions
+2022-11-14 03:10:38.997 IST [11904] FATAL:  terminating connection due to administrator command
+2022-11-14 03:10:38.997 IST [7840] FATAL:  terminating connection due to administrator command
+2022-11-14 03:10:38.999 IST [12608] FATAL:  terminating connection due to administrator command
+2022-11-14 03:10:39.014 IST [15024] LOG:  background worker "logical replication launcher" (PID 19296) exited with exit code 1
+2022-11-14 03:10:39.047 IST [12728] LOG:  shutting down
+2022-11-14 03:10:39.140 IST [15024] LOG:  database system is shut down
+2022-11-14 03:10:42.329 IST [15680] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-14 03:10:42.341 IST [15680] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-14 03:10:42.347 IST [15680] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-14 03:10:42.530 IST [15340] LOG:  database system was shut down at 2022-11-14 03:10:39 IST
+2022-11-14 03:10:42.681 IST [15680] LOG:  database system is ready to accept connections
+2022-11-14 03:11:12.873 IST [10048] ERROR:  canceling statement due to user request
+2022-11-14 03:11:12.874 IST [15680] LOG:  received fast shutdown request
+2022-11-14 03:11:12.886 IST [15680] LOG:  aborting any active transactions
+2022-11-14 03:11:12.887 IST [4848] FATAL:  terminating connection due to administrator command
+2022-11-14 03:11:12.887 IST [6904] FATAL:  terminating connection due to administrator command
+2022-11-14 03:11:12.903 IST [15680] LOG:  background worker "logical replication launcher" (PID 10048) exited with exit code 1
+2022-11-14 03:11:22.599 IST [13068] FATAL:  the database system is shutting down
+2022-11-14 03:11:40.746 IST [18936] FATAL:  the database system is shutting down
+2022-11-14 03:11:40.802 IST [12292] FATAL:  the database system is shutting down
+2022-11-14 03:11:40.858 IST [3940] FATAL:  the database system is shutting down
+2022-11-14 03:11:40.977 IST [7648] FATAL:  the database system is shutting down
+2022-11-14 03:11:41.042 IST [17884] FATAL:  the database system is shutting down
+2022-11-14 03:12:22.953 IST [15680] LOG:  server process (PID 12628) exited with exit code 1
+2022-11-14 03:12:22.953 IST [15680] DETAIL:  Failed process was running: 
+	
+	select * from testspeed()
+2022-11-14 03:12:22.953 IST [15680] LOG:  terminating any other active server processes
+2022-11-14 03:12:23.025 IST [14540] FATAL:  the database system is shutting down
+2022-11-14 03:12:23.053 IST [15680] LOG:  abnormal database system shutdown
+2022-11-14 03:12:23.056 IST [15680] LOG:  database system is shut down
+2022-11-14 03:12:23.713 IST [2400] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-14 03:12:23.724 IST [2400] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-14 03:12:23.730 IST [2400] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-14 03:12:23.801 IST [1412] LOG:  database system was interrupted; last known up at 2022-11-14 03:10:42 IST
+2022-11-14 03:12:24.133 IST [13920] FATAL:  the database system is starting up
+2022-11-14 03:12:24.254 IST [2248] FATAL:  the database system is starting up
+2022-11-14 03:12:24.315 IST [1344] FATAL:  the database system is starting up
+2022-11-14 03:12:25.044 IST [1412] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-14 03:12:25.049 IST [1412] LOG:  redo starts at 0/186894C0
+2022-11-14 03:12:25.053 IST [1412] LOG:  invalid record length at 0/18693858: wanted 24, got 0
+2022-11-14 03:12:25.053 IST [1412] LOG:  redo done at 0/18693820 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-14 03:12:25.241 IST [2400] LOG:  database system is ready to accept connections
+2022-11-14 03:13:17.298 IST [2400] LOG:  server process (PID 10036) exited with exit code 1
+2022-11-14 03:13:17.298 IST [2400] DETAIL:  Failed process was running: 
+	
+	select * from testspeed()
+2022-11-14 03:13:17.298 IST [2400] LOG:  terminating any other active server processes
+2022-11-14 03:13:17.329 IST [2400] LOG:  all server processes terminated; reinitializing
+2022-11-14 03:13:17.396 IST [8132] LOG:  database system was interrupted; last known up at 2022-11-14 03:12:25 IST
+2022-11-14 03:13:17.419 IST [9880] FATAL:  the database system is in recovery mode
+2022-11-14 03:13:17.549 IST [6396] FATAL:  the database system is in recovery mode
+2022-11-14 03:13:17.610 IST [440] FATAL:  the database system is in recovery mode
+2022-11-14 03:13:17.670 IST [17596] FATAL:  the database system is in recovery mode
+2022-11-14 03:13:17.790 IST [8132] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-14 03:13:17.791 IST [11836] FATAL:  the database system is in recovery mode
+2022-11-14 03:13:17.796 IST [8132] LOG:  redo starts at 0/186938D0
+2022-11-14 03:13:17.801 IST [8132] LOG:  invalid record length at 0/1869D5D0: wanted 24, got 0
+2022-11-14 03:13:17.801 IST [8132] LOG:  redo done at 0/1869D598 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-14 03:13:17.878 IST [1696] FATAL:  the database system is in recovery mode
+2022-11-14 03:13:17.960 IST [2400] LOG:  database system is ready to accept connections
+2022-11-14 03:13:21.902 IST [18316] ERROR:  canceling statement due to user request
+2022-11-14 03:13:21.903 IST [20048] ERROR:  canceling statement due to user request
+2022-11-14 03:13:21.907 IST [2400] LOG:  received fast shutdown request
+2022-11-14 03:13:21.919 IST [2400] LOG:  aborting any active transactions
+2022-11-14 03:13:21.920 IST [2400] LOG:  background worker "logical replication launcher" (PID 18316) exited with exit code 1
+2022-11-14 03:13:21.957 IST [10456] LOG:  shutting down
+2022-11-14 03:13:22.037 IST [2400] LOG:  database system is shut down
+2022-11-14 03:13:23.265 IST [19504] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-14 03:13:23.277 IST [19504] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-14 03:13:23.283 IST [19504] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-14 03:13:23.352 IST [18056] LOG:  database system was shut down at 2022-11-14 03:13:21 IST
+2022-11-14 03:13:23.519 IST [19504] LOG:  database system is ready to accept connections
+2022-11-14 03:24:59.214 IST [8336] FATAL:  terminating connection due to unexpected postmaster exit
+2022-11-14 09:52:08.956 IST [13632] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-14 09:52:08.987 IST [13632] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-14 09:52:09.052 IST [13632] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-14 09:52:09.211 IST [13376] LOG:  database system was interrupted; last known up at 2022-11-14 03:18:24 IST
+2022-11-14 09:52:10.622 IST [13376] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-14 09:52:10.632 IST [13376] LOG:  redo starts at 0/186A49D0
+2022-11-14 09:52:10.632 IST [13376] LOG:  invalid record length at 0/186A4AB8: wanted 24, got 0
+2022-11-14 09:52:10.632 IST [13376] LOG:  redo done at 0/186A4A80 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-14 09:52:10.858 IST [13632] LOG:  database system is ready to accept connections
+2022-11-14 09:52:25.841 IST [13632] LOG:  received fast shutdown request
+2022-11-14 09:52:25.845 IST [13632] LOG:  aborting any active transactions
+2022-11-14 09:52:25.870 IST [13632] LOG:  background worker "logical replication launcher" (PID 15628) exited with exit code 1
+2022-11-14 09:52:25.871 IST [19680] LOG:  shutting down
+2022-11-14 09:52:25.966 IST [13632] LOG:  database system is shut down
+2022-11-14 09:52:26.901 IST [14380] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-14 09:52:26.941 IST [14380] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-14 09:52:26.965 IST [14380] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-14 09:52:27.182 IST [9272] LOG:  database system was shut down at 2022-11-14 09:52:25 IST
+2022-11-14 09:52:27.394 IST [14380] LOG:  database system is ready to accept connections
+2022-11-14 11:08:16.471 IST [15692] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 11:09:23.155 IST [9816] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 11:10:11.647 IST [11492] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 11:10:28.212 IST [6984] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 11:10:35.759 IST [8412] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 11:30:58.718 IST [12560] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 11:31:41.327 IST [11560] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 11:37:36.346 IST [1772] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 11:37:45.244 IST [12768] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 11:38:19.777 IST [14652] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 12:05:32.208 IST [17672] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 12:41:47.109 IST [4488] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 12:45:57.089 IST [2196] ERROR:  NameError: name 'monte_carlo' is not defined
+2022-11-14 12:45:57.089 IST [2196] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "testspeed", line 16, in <module>
+	    return monte_carlo(100)
+	PL/Python function "testspeed"
+2022-11-14 12:45:57.089 IST [2196] STATEMENT:  
+	
+	select * from testspeed()
+2022-11-14 12:46:19.886 IST [2196] ERROR:  numba.core.errors.TypingError: Failed in nopython mode pipeline (step: nopython frontend)
+	[1mNameError: name 'random' is not defined[0m
+2022-11-14 12:46:19.886 IST [2196] CONTEXT:  Traceback (most recent call last):
+	  PL/Python function "testspeed", line 16, in <module>
+	    return monte_carlo_pi(100)
+	  PL/Python function "testspeed", line 467, in _compile_for_args
+	  PL/Python function "testspeed", line 408, in error_rewrite
+	PL/Python function "testspeed"
+2022-11-14 12:46:19.886 IST [2196] STATEMENT:  
+	
+	select * from testspeed()
+2022-11-14 13:10:45.722 IST [10180] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:11:05.293 IST [5212] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:11:35.158 IST [19076] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:12:36.906 IST [12396] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:14:06.214 IST [3700] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:14:17.201 IST [17564] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:15:48.039 IST [8020] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:16:14.742 IST [17772] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:16:16.077 IST [3172] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:16:24.650 IST [15596] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:18:19.784 IST [20172] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:18:46.635 IST [21064] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:18:46.636 IST [21064] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 13:30:24.689 IST [20496] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:30:24.689 IST [20496] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 13:31:42.932 IST [20924] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:31:42.932 IST [20924] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 13:33:19.341 IST [17688] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:33:19.342 IST [17688] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 13:33:55.937 IST [13340] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:33:55.937 IST [13340] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 13:34:04.782 IST [4028] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:34:52.490 IST [15084] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:34:52.490 IST [15084] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 13:35:21.299 IST [21408] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:35:21.300 IST [21408] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 13:35:35.582 IST [19360] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:35:35.583 IST [19360] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 13:37:14.454 IST [5068] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:37:14.454 IST [5068] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 13:37:20.516 IST [4740] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:37:42.131 IST [4916] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:37:42.131 IST [4916] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 13:38:19.497 IST [2632] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:38:19.497 IST [2632] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 13:38:29.855 IST [12468] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:38:29.856 IST [12468] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 13:38:41.068 IST [8708] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:39:54.540 IST [20676] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:39:54.540 IST [20676] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 13:40:04.983 IST [9656] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 13:40:04.984 IST [9656] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 15:51:15.865 IST [18376] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 15:51:15.865 IST [18376] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 18:23:09.290 IST [13192] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:23:09.290 IST [13192] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 18:24:13.290 IST [20976] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:28:29.956 IST [20060] ERROR:  INSERT has more expressions than target columns at character 335
+2022-11-14 18:28:29.956 IST [20060] STATEMENT:  
+	            insert into 
+	            CTE(name,ctejson,ctesql) 
+	            values('testcte','{"name": "testcte", "parent": "", "from": ["bse"], "cols": [{"name": "close", "type": "normal"}], "where": [], "order": [], "limit": "200", "offset": "0"}','WITH testcte AS( SELECT  close FROM bse) select * from testcte limit 200 offset 0','')
+	        
+2022-11-14 18:30:36.181 IST [20060] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:30:55.442 IST [21708] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:36:47.839 IST [844] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:38:01.482 IST [20620] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:41:43.989 IST [19888] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:41:59.087 IST [8928] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:42:12.019 IST [19068] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:42:23.959 IST [13660] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:42:33.742 IST [22372] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:43:36.070 IST [21916] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:46:31.324 IST [5264] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:46:33.697 IST [20764] ERROR:  column "bse" does not exist at character 45
+2022-11-14 18:46:33.697 IST [20764] STATEMENT:  
+	            SELECT * FROM CTE WHERE name = bse
+	        
+2022-11-14 18:47:57.118 IST [20764] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:49:49.349 IST [22648] ERROR:  column "bse" does not exist at character 45
+2022-11-14 18:49:49.349 IST [22648] STATEMENT:  
+	            SELECT * FROM CTE WHERE name = bse
+	        
+2022-11-14 18:50:16.099 IST [22648] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-14 18:50:16.099 IST [22648] STATEMENT:  
+	        SELECT * FROM information_schema.tables WHERE table_schema = 'public'
+	    
+2022-11-14 18:50:20.888 IST [15736] ERROR:  canceling statement due to user request
+2022-11-14 18:50:20.889 IST [14380] LOG:  received fast shutdown request
+2022-11-14 18:50:20.893 IST [14380] LOG:  aborting any active transactions
+2022-11-14 18:50:20.894 IST [22648] FATAL:  terminating connection due to administrator command
+2022-11-14 18:50:20.894 IST [2196] FATAL:  terminating connection due to administrator command
+2022-11-14 18:50:20.897 IST [14380] LOG:  background worker "logical replication launcher" (PID 15736) exited with exit code 1
+2022-11-14 18:50:20.898 IST [9136] FATAL:  terminating connection due to administrator command
+2022-11-14 18:50:20.955 IST [18980] LOG:  shutting down
+2022-11-14 18:50:21.099 IST [14380] LOG:  database system is shut down
+2022-11-14 18:50:22.627 IST [3308] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-14 18:50:22.641 IST [3308] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-14 18:50:22.647 IST [3308] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-14 18:50:22.734 IST [21804] LOG:  database system was shut down at 2022-11-14 18:50:20 IST
+2022-11-14 18:50:22.855 IST [3308] LOG:  database system is ready to accept connections
+2022-11-14 18:50:45.176 IST [20836] ERROR:  column "bse" does not exist at character 45
+2022-11-14 18:50:45.176 IST [20836] STATEMENT:  
+	            SELECT * FROM CTE WHERE name = bse
+	        
+2022-11-14 18:54:02.166 IST [20836] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-14 18:54:02.166 IST [20836] STATEMENT:  
+	        SELECT * FROM information_schema.tables WHERE table_schema = 'public'
+	    
+2022-11-14 18:54:05.729 IST [2912] ERROR:  canceling statement due to user request
+2022-11-14 18:54:05.730 IST [3308] LOG:  received fast shutdown request
+2022-11-14 18:54:05.733 IST [3308] LOG:  aborting any active transactions
+2022-11-14 18:54:05.734 IST [20836] FATAL:  terminating connection due to administrator command
+2022-11-14 18:54:05.734 IST [21940] FATAL:  terminating connection due to administrator command
+2022-11-14 18:54:05.746 IST [3308] LOG:  background worker "logical replication launcher" (PID 2912) exited with exit code 1
+2022-11-14 18:54:05.764 IST [21660] LOG:  shutting down
+2022-11-14 18:54:05.929 IST [3308] LOG:  database system is shut down
+2022-11-14 18:54:07.425 IST [21164] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-14 18:54:07.437 IST [21164] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-14 18:54:07.444 IST [21164] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-14 18:54:07.531 IST [16244] LOG:  database system was shut down at 2022-11-14 18:54:05 IST
+2022-11-14 18:54:07.668 IST [21164] LOG:  database system is ready to accept connections
+2022-11-14 18:55:20.852 IST [19984] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 18:56:59.592 IST [10768] ERROR:  column "test" does not exist at character 45
+2022-11-14 18:56:59.592 IST [10768] STATEMENT:  
+	            SELECT * FROM CTE WHERE name = test
+	        
+2022-11-14 23:22:55.606 IST [10768] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 23:27:47.538 IST [1432] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 23:27:47.538 IST [1432] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-14 23:27:51.792 IST [23532] ERROR:  column "test" does not exist at character 637
+2022-11-14 23:27:51.792 IST [23532] STATEMENT:  
+	            update cte set ctejson = '[{"name": "test", "parent": "", "from": ["bse"], "cols": [{"name": "close", "type": "normal"}], "where": [], "order": [], "limit": "200", "offset": "0"}, {"name": "test1", "parent": "test", "from": ["test"], "cols": [{"name": "close", "type": "normal"}, {"name": "close_lt_1000", "type": "case", "attributes": {"when": ["close", "lt", "1000", ""], "then": "1", "else": "0"}}], "where": [], "order": [], "limit": "200", "offset": "0"}]', ctesql = ', test1 as ( SELECT  close,CASE WHEN  close < 1000  THEN 1 ELSE 0END as close_lt_1000 FROM test) select * from test1 limit 200 offset 0' where name = test
+	        
+2022-11-14 23:28:23.202 IST [23532] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 23:30:58.233 IST [19744] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 23:31:48.506 IST [14056] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 23:32:23.331 IST [12900] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 23:34:08.977 IST [22328] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 23:35:46.275 IST [12496] ERROR:  syntax error at or near "(" at character 47
+2022-11-14 23:35:46.275 IST [12496] STATEMENT:  WITH test AS( SELECT  code FROM bse, test1 as ( SELECT  code FROM test) select * from test1 limit 200 offset 0
+2022-11-14 23:41:21.207 IST [12496] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-14 23:42:20.011 IST [1412] ERROR:  column "code" does not exist at character 62
+2022-11-14 23:42:20.011 IST [1412] HINT:  Perhaps you meant to reference the column "test.close".
+2022-11-14 23:42:20.011 IST [1412] STATEMENT:  WITH test AS ( SELECT  close FROM bse ) , test1 as ( SELECT  code FROM test WHERE  code > 600000) select * from test1 limit 200 offset 0
+2022-11-15 00:17:33.851 IST [1412] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-15 00:17:33.851 IST [1412] STATEMENT:  
+	        SELECT * FROM information_schema.tables WHERE table_schema = 'public'
+	    
+2022-11-15 00:19:08.501 IST [21104] ERROR:  canceling statement due to user request
+2022-11-15 00:19:08.502 IST [21164] LOG:  received fast shutdown request
+2022-11-15 00:19:08.514 IST [21164] LOG:  aborting any active transactions
+2022-11-15 00:19:08.514 IST [1412] FATAL:  terminating connection due to administrator command
+2022-11-15 00:19:08.515 IST [20540] FATAL:  terminating connection due to administrator command
+2022-11-15 00:19:08.516 IST [15900] FATAL:  terminating connection due to administrator command
+2022-11-15 00:19:08.523 IST [21164] LOG:  background worker "logical replication launcher" (PID 21104) exited with exit code 1
+2022-11-15 00:19:08.562 IST [16212] LOG:  shutting down
+2022-11-15 00:19:08.651 IST [21164] LOG:  database system is shut down
+2022-11-15 00:19:11.137 IST [22344] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-15 00:19:11.157 IST [22344] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-15 00:19:11.167 IST [22344] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-15 00:19:11.345 IST [17300] LOG:  database system was shut down at 2022-11-15 00:19:08 IST
+2022-11-15 00:19:11.523 IST [22344] LOG:  database system is ready to accept connections
+2022-11-15 00:19:23.817 IST [17208] ERROR:  syntax error at or near ")" at character 27
+2022-11-15 00:19:23.817 IST [17208] STATEMENT:  create table cte_temp as  ) , test1 as ( SELECT  code FROM test WHERE  code > 600000) select * from test1 limit 200 offset 0
+2022-11-15 00:19:29.180 IST [17208] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-15 00:19:29.180 IST [17208] STATEMENT:  
+	        SELECT * FROM information_schema.tables WHERE table_schema = 'public'
+	    
+2022-11-15 00:19:56.296 IST [17208] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-15 00:19:56.296 IST [17208] STATEMENT:  
+	        SELECT * FROM information_schema.tables WHERE table_schema = 'public'
+	    
+2022-11-15 00:20:02.167 IST [12208] ERROR:  canceling statement due to user request
+2022-11-15 00:20:02.168 IST [22344] LOG:  received fast shutdown request
+2022-11-15 00:20:02.172 IST [22344] LOG:  aborting any active transactions
+2022-11-15 00:20:02.173 IST [13912] FATAL:  terminating connection due to administrator command
+2022-11-15 00:20:02.173 IST [17208] FATAL:  terminating connection due to administrator command
+2022-11-15 00:20:02.173 IST [16372] FATAL:  terminating connection due to administrator command
+2022-11-15 00:20:02.194 IST [22344] LOG:  background worker "logical replication launcher" (PID 12208) exited with exit code 1
+2022-11-15 00:20:02.225 IST [9060] LOG:  shutting down
+2022-11-15 00:20:02.320 IST [22344] LOG:  database system is shut down
+2022-11-15 00:20:03.554 IST [4140] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-15 00:20:03.571 IST [4140] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-15 00:20:03.579 IST [4140] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-15 00:20:03.659 IST [1604] LOG:  database system was shut down at 2022-11-15 00:20:02 IST
+2022-11-15 00:20:03.832 IST [4140] LOG:  database system is ready to accept connections
+2022-11-15 00:23:47.686 IST [18124] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 00:23:47.686 IST [18124] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 00:25:55.065 IST [17100] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 00:26:01.961 IST [21784] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 00:28:41.789 IST [4716] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 00:28:41.789 IST [4716] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 00:42:03.359 IST [23212] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 00:42:03.359 IST [23212] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 00:49:30.215 IST [23280] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 00:49:30.215 IST [23280] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 00:49:35.963 IST [1420] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 00:49:50.930 IST [13484] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 00:49:58.708 IST [13464] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 01:05:40.636 IST [12736] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 01:05:40.636 IST [12736] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 01:10:07.046 IST [596] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 01:10:07.046 IST [596] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 01:10:37.328 IST [14500] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 01:11:37.410 IST [15436] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 01:11:37.410 IST [15436] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 01:13:58.593 IST [19752] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 01:15:38.031 IST [20488] ERROR:  syntax error at or near ")" at character 27
+2022-11-15 01:15:38.031 IST [20488] STATEMENT:  create table cte_temp as  ) , test1 as ( SELECT  CASE WHEN  test.close < 1000  THEN 1 ELSE 0END as close_lt_1000 FROM test) select * from test1 limit 200 offset 0
+2022-11-15 01:16:13.198 IST [20488] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-15 01:16:13.198 IST [20488] STATEMENT:  
+	        SELECT * FROM information_schema.tables WHERE table_schema = 'public'
+	    
+2022-11-15 01:16:17.406 IST [11508] ERROR:  canceling statement due to user request
+2022-11-15 01:16:17.407 IST [4140] LOG:  received fast shutdown request
+2022-11-15 01:16:17.411 IST [4140] LOG:  aborting any active transactions
+2022-11-15 01:16:17.412 IST [20488] FATAL:  terminating connection due to administrator command
+2022-11-15 01:16:17.412 IST [16188] FATAL:  terminating connection due to administrator command
+2022-11-15 01:16:17.413 IST [21296] FATAL:  terminating connection due to administrator command
+2022-11-15 01:16:17.414 IST [4140] LOG:  background worker "logical replication launcher" (PID 11508) exited with exit code 1
+2022-11-15 01:16:17.449 IST [15512] LOG:  shutting down
+2022-11-15 01:16:17.557 IST [4140] LOG:  database system is shut down
+2022-11-15 01:16:19.097 IST [19984] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-15 01:16:19.113 IST [19984] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-15 01:16:19.120 IST [19984] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-15 01:16:19.205 IST [21704] LOG:  database system was shut down at 2022-11-15 01:16:17 IST
+2022-11-15 01:16:19.290 IST [19984] LOG:  database system is ready to accept connections
+2022-11-15 01:16:21.611 IST [18604] ERROR:  syntax error at or near ")" at character 27
+2022-11-15 01:16:21.611 IST [18604] STATEMENT:  create table cte_temp as  ) , test1 as ( SELECT  CASE WHEN  test.close < 1000  THEN 1 ELSE 0END as close_lt_1000 FROM test) select * from test1 limit 200 offset 0
+2022-11-15 01:27:15.706 IST [21976] ERROR:  canceling statement due to user request
+2022-11-15 01:27:15.707 IST [19984] LOG:  received fast shutdown request
+2022-11-15 01:27:15.719 IST [19984] LOG:  aborting any active transactions
+2022-11-15 01:27:15.720 IST [18604] FATAL:  terminating connection due to administrator command
+2022-11-15 01:27:15.720 IST [4048] FATAL:  terminating connection due to administrator command
+2022-11-15 01:27:15.735 IST [19984] LOG:  background worker "logical replication launcher" (PID 21976) exited with exit code 1
+2022-11-15 01:27:15.755 IST [18116] LOG:  shutting down
+2022-11-15 01:27:15.831 IST [19984] LOG:  database system is shut down
+2022-11-15 01:27:18.427 IST [11768] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-15 01:27:18.438 IST [11768] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-15 01:27:18.445 IST [11768] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-15 01:27:18.580 IST [19868] LOG:  database system was shut down at 2022-11-15 01:27:15 IST
+2022-11-15 01:27:18.756 IST [11768] LOG:  database system is ready to accept connections
+2022-11-15 01:27:21.794 IST [1504] ERROR:  syntax error at or near ")" at character 27
+2022-11-15 01:27:21.794 IST [1504] STATEMENT:  create table cte_temp as  ) , test1 as ( SELECT  CASE WHEN  test.close < 1000  THEN 1 ELSE 0END as close_lt_1000 FROM test) select * from test1 limit 200 offset 0
+2022-11-15 01:29:21.257 IST [1504] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 01:29:25.993 IST [22708] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 01:35:39.578 IST [14380] ERROR:  canceling statement due to user request
+2022-11-15 01:35:39.579 IST [11768] LOG:  received fast shutdown request
+2022-11-15 01:35:39.591 IST [11768] LOG:  aborting any active transactions
+2022-11-15 01:35:39.591 IST [4144] FATAL:  terminating connection due to administrator command
+2022-11-15 01:35:39.591 IST [20888] FATAL:  terminating connection due to administrator command
+2022-11-15 01:35:39.592 IST [19428] FATAL:  terminating connection due to administrator command
+2022-11-15 01:35:39.616 IST [11768] LOG:  background worker "logical replication launcher" (PID 14380) exited with exit code 1
+2022-11-15 01:35:39.641 IST [20784] LOG:  shutting down
+2022-11-15 01:35:39.740 IST [11768] LOG:  database system is shut down

@@ -14,30 +14,51 @@ conn = psycopg2.connect(
 )
 
 
-cur = conn.cursor(cursor_factory=RealDictCursor)
+# cur = conn.cursor(cursor_factory=RealDictCursor)
 # Open a cursor to perform database operations
 
 # import sqlite3
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def hello(name=None):
-    return render_template('hello.html', name="dfdfdf")
+    tablemeta = fetch_all_tables_meta()
+    return render_template('hello.html', table_meta=tablemeta)
 
-@app.route('/jsontosql',methods=['POST'])
-def jsontosql():
-    print(request.get_json())    
+@app.route('/jsontosql/<action>',methods=['POST'])
+def jsontosql(action):
+    print(action)
+    print(request.form)
+    print("================================")
+
+    print("Request",request.get_json())
     jsonsql = request.get_json()
+
     with open('test.json','w') as f:
         f.write(json.dumps(jsonsql,  indent=4,default=str))
-    sql = jsontosql(jsonsql)
-    cur.execute(sql)
-    res = cur.fetchall()
-    # res = []
+
+    sql = get_jsontosql(jsonsql)
+    full_sql = saveCTE(jsonsql,sql,action)
+    print("SQL ",full_sql)
+    res = fetch_sql(full_sql)
+    
     jsonres = json.dumps(res,  indent=4, sort_keys=True, default=str)
     return json.dumps({'success':True,'sql':sql,'res':jsonres}), 200, {'ContentType':'application/json'} 
 
+    return json.dumps({'success':False,'sql':'','res':''}), 200, {'ContentType':'application/json'} 
+    
+@app.route('/fetchtablemeta/<tablename>',methods=['GET'])
+def fetchtablemeta(tablename):
+    tablemeta = fetch_all_tables_meta()
+    db_cols = ['',];
+    for t in tablemeta:
+        if t['name'] == tablename:
+            for c in t['cols']:
+                db_cols.append(f"{tablename}.{c['name']}")
+
+    return json.dumps({'success':True,'res':db_cols}), 200, {'ContentType':'application/json'} 
 
 @app.route('/viz',methods=['GET'])
 def visualization():
@@ -69,8 +90,9 @@ def visualization():
 
     '''
 
-    cur.execute(sql)
-    res = cur.fetchall()
+    
+
+    res = execute_sql(sql)
 
     name = res[0]['namearr'][0]
     closearr = res[0]['closearr']
@@ -100,34 +122,29 @@ def visualization():
     plt.savefig(buffer, format="png")
     return Response(buffer.getvalue(), mimetype='image/png')
 
-
-
-
-def jsontosql(jsonsql):  
+def get_jsontosql(jsonsql):  
     operators_dict= {'+':'+','-':'-','=':'=','lt':'<','gt':'>','lte':'<=', 'gte':'>='}
-    ctes = [jsonsql]
+    ctes = jsonsql
     sql = ''
-    i = 0
-    for cte in ctes:
 
-        if i == 0:
-            sql += f"WITH {cte['name']} AS( SELECT  "
+    for cte in ctes:        
+        print("=================================")
+        print(cte)
+        if cte['parent'] == "":
+            sql += f"WITH {cte['name']} AS ( SELECT  "
         else:
-            sql += f", {cte['name']} as ( SELECT  "
-
+            sql += f" ) , {cte['name']} as ( SELECT  "
         columns = []
-       
+
         for col in cte['cols']:
             print(col)
             print(col['type'])
             col_type = col['type']
             col_name = col['name']
-            
 
             # Normal Column
             if col_type == "normal":
                 columns.append(col_name)
-
             # Window function
             elif col_type == 'window_function':
                 attribs = col['attributes']
@@ -142,38 +159,28 @@ def jsontosql(jsonsql):
                 closing_braces += ")"
                 c += f"{attribs['col']}"
                 c += closing_braces
-
                 c += " OVER("
                 over = attribs['over']
                 # print(over)
 
-               
                 frame_spec = over['frame_spec']
                 if over['partition_by'] != '':
                     c += f"PARTITION BY {over['partition_by']}"
-
                 order_by = over['order_by']
                 order_type = over['order_type']
-
                 c += f" ORDER BY {order_by} {order_type} " if len(
                     order_by) > 0 else ''
-
-
                 if frame_spec['type'] == 'rows':
                     c += 'ROWS '
-
                 elif frame_spec['type'] == 'range':
                    c += 'RANGE '
                 elif frame_spec['type'] == 'group':
                    c += 'GROUP '
-             
+
                 if len(over['frame_boundaries']['preceding']) > 0 :
                     c += f" BETWEEN {over['frame_boundaries']['preceding']}  AND {over['frame_boundaries']['following']}"
-
                 c += f") as {col_name}"
-
                 columns.append(c)
-
             # Case columns
             elif col_type == 'case':
                 attribs = col['attributes']
@@ -185,12 +192,9 @@ def jsontosql(jsonsql):
                         c += " " + a
                 c += ' THEN ' + attribs['then'] + " ELSE " + attribs['else'] + "END as " + col_name
                 columns.append(c)
-
         sql += f"{','.join(columns)}"
         # print(cte)
         sql += f" FROM {','.join(cte['from'])}"
-
-
         # Where clause
         if len(cte['where']) > 0:
             sql += " WHERE "  
@@ -199,8 +203,6 @@ def jsontosql(jsonsql):
                     sql += " " + operators_dict[w] 
                 else:
                     sql += " " + w
-
-
         # Order by
         if len(cte['order']) > 0:
             sql += " ORDER BY "
@@ -213,10 +215,128 @@ def jsontosql(jsonsql):
         # order_type = cte['order'][1]
         # sql += f" order by {order_by} {order_type} " if len(
         #     order_by) > 0 else ''
-    
-
 
         # END OF CTE
-        sql += f") select * from {cte['name']} limit {cte['limit']} offset {cte['offset']}"
+    sql += f") select * from {cte['name']} limit {cte['limit']} offset {cte['offset']}"
     print(sql)
     return sql
+
+def saveCTE(jsontosql,generated_sql,action):
+    jsontosql = jsontosql[0]
+    generated_sql = generated_sql.replace("'","''")
+    sql = '''
+        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+    '''
+    execute_sql(sql)
+    # sql = f'''
+    #     insert into 
+    #     CTE(name,ctejson,ctesql,parent) 
+    #     values('{jsontosql["name"]}','{json.dumps(jsontosql)}','{generated_sql}','{jsontosql['parent']}')
+
+    #     on conflict(name)
+    #     DO 
+    #     update set ctejson = '{json.dumps(jsontosql)}', ctesql = '{generated_sql}', parent =  '{jsontosql['parent']}'
+    # '''
+    if jsontosql['parent'] == '':
+        sql = f'''
+            insert into 
+            CTE(name,ctejson,ctesql,parent) 
+            values('{jsontosql["name"]}','{json.dumps(jsontosql)}','{generated_sql}','{jsontosql['parent']}')
+        '''
+        if action == 'save':
+            execute_sql(sql)
+        return generated_sql
+    else:
+        sql = f'''
+            SELECT * FROM CTE WHERE name = '{jsontosql['parent']}'
+        '''
+        res = fetch_sql(sql)
+        jsql = res[0]['ctejson']
+        jsql_dict = jsql
+        cte_arr = []
+        cte_arr.append(jsql_dict)
+        cte_arr.append(jsontosql)
+        full_sql = get_jsontosql(cte_arr)
+        
+        sql = f'''
+            update cte set ctejson = '{json.dumps(cte_arr)}', ctesql = '{full_sql}' where name = '{jsontosql["parent"]}'
+        '''
+        if action == 'save':
+            execute_sql(sql)
+        return full_sql
+    
+    
+def execute_sql(sql):
+    print(" Executing SQL ", sql)    
+    with conn.cursor(cursor_factory=RealDictCursor) as cur:
+        cur.execute(sql)
+        conn.commit()
+    
+   
+def fetch_sql(sql):
+    print(" Fetching SQL ", sql)
+    res = None
+    with conn.cursor(cursor_factory=RealDictCursor) as cur:
+        cur.execute(sql)
+        res = cur.fetchall()
+    return res
+
+def fetch_all_tables_meta():
+    sql = '''
+        SELECT * FROM information_schema.tables WHERE table_schema = 'public'
+    '''
+    res = fetch_sql(sql)
+    table_struct = []
+    for t in res:
+        tname = t['table_name']
+        tstruct = {}
+        if tname == 'cte':    
+            # get cte sql
+            sql = '''
+                  select * from cte
+            '''
+            ctes = fetch_sql(sql)
+            for cte in ctes:
+                sql = '''
+                    drop table if exists cte_temp
+                '''
+                execute_sql(sql)
+
+                sql = f"create table cte_temp as {cte['ctesql']}"
+                execute_sql(sql)
+                cols = get_table_columns('cte_temp')
+                table_struct.append({
+                    "name":cte['name'],
+                    "type" : "cte",
+                    "cols":cols
+                })
+                sql = '''
+                    drop table if exists cte_temp
+                '''
+                execute_sql(sql)
+              
+
+        elif tname != 'cte_temp':
+            cols = get_table_columns(tname)
+            table_struct.append({
+                "name":tname,
+                "type" : 'table',
+                "cols":cols
+            })
+    return table_struct
+
+def get_table_columns(tname): 
+    sql = f'''
+        SELECT column_name, data_type 
+        FROM information_schema.columns
+        WHERE table_name = '{tname}' AND table_schema = 'public';
+    '''
+    table_cols = fetch_sql(sql)
+   
+    cols = []
+    for col in table_cols:
+        cols.append({"name":col['column_name'],'type':col['data_type']})
+    # print("GET TABLE COLUMN",tname,sql,table_cols,cols)
+
+    return cols
+

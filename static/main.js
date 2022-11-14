@@ -2,7 +2,8 @@ var cte = {}
 var fromList = [];
 var cols = [];
 
-var dbCols = ['','trade_date','code','close','name'];
+// var dbCols = ['','trade_date','code','close','name'];
+var dbCols = [];
 var wfCols = ['','AVG','MAX','MIN'];
 let operators= ['','+','-','=','lt','gt','lte', 'gte'];
 
@@ -16,12 +17,41 @@ $(document).ready(function () {
 
     $("button#from-add").click(function (e) {
         e.preventDefault();
-        var option = $("select[name=from]").val();
+        var selectedFrom = $("select[name=from]").find(":selected")
+        var option = selectedFrom.val();
+        var text = selectedFrom.text();
+
+        // If CTE then associate parent
+        if(text.includes('cte')){
+            cte['parent'] = option;
+        }else{
+            cte['parent'] = '';
+        }
+
         console.log(option);
 
         $("span#from-list").append("<em>" + option + "</em>");
         fromList.push(option);
         cte['from'] = fromList;
+
+        // Populate dbCols
+        $.ajax({
+                type: "GET", 
+                dataType:"json",
+                url: '/fetchtablemeta/'+option, //localhost Flask
+                data : {},
+                contentType: "application/json",
+            }).done(function(data){
+              
+                dbCols = data['res']
+                $("div#where-list").append(addWhereCondition());
+                $("div#order-list").append(addOrderCondition());
+            });
+
+
+
+          
+
     });
 
     $("button#col-add").click(function (e) {
@@ -44,8 +74,7 @@ $(document).ready(function () {
        
     });
 
-    $("div#where-list").append(addWhereCondition());
-    $("div#order-list").append(addOrderCondition());
+  
 
     $('div#col-list').on('change', 'select[name=select-normal-col]', function (event) {
         var name = $(this).val();
@@ -57,9 +86,9 @@ $(document).ready(function () {
 
 
     $("form#sqlform").submit(function (e) {
+        var action = $(e.originalEvent.submitter).val();
         cols = []
-        e.preventDefault();
-
+        e.preventDefault();      
         // parse all Normal Column
         let normalCols = [];
         $(this).find("div.normal-column").each((i,e)=>{
@@ -151,7 +180,7 @@ $(document).ready(function () {
             console.log("when then",when,then);
             cols.push({
                 "name":alias,
-                "type":"case",
+                "type":"case",              
                 "attributes":{
                     "when":when,
                     "then":then,
@@ -194,7 +223,7 @@ $(document).ready(function () {
         var limit = $("input[name=limit]").val();
         var offset = $("input[name=offset]").val();
 
-        
+       
         cte['cols'] = cols;
         cte['where'] = where;
         cte['order'] = order;
@@ -206,8 +235,8 @@ $(document).ready(function () {
         $.ajax({
             type: "POST", 
             dataType:"json",
-            url: "/jsontosql", //localhost Flask
-            data : JSON.stringify(cte),
+            url: "/jsontosql/" + action, //localhost Flask
+            data : JSON.stringify([cte]),
             contentType: "application/json",
         }).done(function(data){
             console.log(data);
@@ -505,3 +534,4 @@ function addOrderCondition() {
 function onChangeOrderBy(e){
     $(e).parent().append(addOrderCondition());
 }
+
