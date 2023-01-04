@@ -1,7 +1,8 @@
 var cte = {}
+cte['from'] = [];
 var fromList = [];
 var cols = [];
-
+cte['parent'] =''
 // var dbCols = ['','trade_date','code','close','name'];
 var dbCols = [];
 var wfCols = ['','AVG','MAX','MIN'];
@@ -24,28 +25,39 @@ $(document).ready(function () {
         // If CTE then associate parent
         if(text.includes('cte')){
             cte['parent'] = option;
-        }else{
-            cte['parent'] = '';
         }
-
         console.log(option);
 
-        $("span#from-list").append("<em>" + option + "</em>");
-        fromList.push(option);
-        cte['from'] = fromList;
+     
+        if(!fromList.includes(option)){
+           
+
+            // if more than one table added then add jon condition
+            if(fromList.length < 1){
+                $("span#from-list").append("<select><option value='" + option + "'>" + option + "</option></select>");
+                fromList.push(option);
+                // cte['from'] = fromList;
+            }else{
+                $("span#from-list").append("<select><option value='left join'>Left Join</option><option value='inner join'>Inner Join</option><option  value='right join'>Right Join</option></select><select><option value='" + option + "'>" + option + "<option></select><select><option value='on'>on</option></select><select class='joincols' onchange='onChangeCaseColumns(this)'></select> <select><option value='='>=</option></select> <select class='joincols' onchange='onChangeCaseColumns(this)'></select> ");
+                fromList.push(option);
+                // cte['from'] = fromList;
+            }
+        }   
+      
 
         // Populate dbCols
         $.ajax({
-                type: "GET", 
+                type: "POST", 
                 dataType:"json",
-                url: '/fetchtablemeta/'+option, //localhost Flask
-                data : {},
+                url: '/fetchtablemeta', //localhost Flask
+                data : JSON.stringify(fromList),
                 contentType: "application/json",
             }).done(function(data){
               
                 dbCols = data['res']
-                $("div#where-list").append(addWhereCondition());
-                $("div#order-list").append(addOrderCondition());
+                $("select.joincols").html(addJoinCols());
+                $("div#where-list").html(addWhereCondition());
+                $("div#order-list").html(addOrderCondition());
             });
 
 
@@ -89,6 +101,15 @@ $(document).ready(function () {
         var action = $(e.originalEvent.submitter).val();
         cols = []
         e.preventDefault();      
+
+        // Get from list
+        var fromjoinList = [];
+        $("span#from-list").children().each((i,e)=>{
+            console.log(i,$(e).val());
+            fromjoinList.push($(e).val());
+        });
+
+        cte['from'] = fromjoinList;
         // parse all Normal Column
         let normalCols = [];
         $(this).find("div.normal-column").each((i,e)=>{
@@ -466,6 +487,20 @@ function onChangeWhereAndOr(e){
     }
 }
 
+function addJoinCols() {
+    var cols = dbCols;
+    // var lcolumns = `<select name="select-case-lval-col" onchange="onChangeCaseColumns(this)">`;
+    var lcolumns = "";
+
+    for (var col in cols) {
+        lcolumns += `<option value ='${cols[col]}'>${cols[col]}</option>`;
+                   
+    }
+    lcolumns +=  `<option value="value">value</option>`;
+    // lcolumns += `</select>`;
+
+    return lcolumns;
+}
 // where condition
 function addWhereCondition() {
     var cols = dbCols;
@@ -534,4 +569,3 @@ function addOrderCondition() {
 function onChangeOrderBy(e){
     $(e).parent().append(addOrderCondition());
 }
-

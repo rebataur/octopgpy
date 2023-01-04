@@ -1,60 +1,29 @@
 [
     {
-        "name": "test1",
-        "parent": "test",
         "from": [
-            "test"
+            "sensex_index",
+            "left join",
+            "bse",
+            "on",
+            "sensex_index.code",
+            "=",
+            "bse.code"
         ],
+        "parent": "",
+        "name": "test0",
         "cols": [
             {
-                "name": "test.code",
+                "name": "sensex_index.code",
                 "type": "normal"
             },
             {
-                "name": "test.name",
+                "name": "bse.code",
                 "type": "normal"
-            },
-            {
-                "name": "test.trade_date",
-                "type": "normal"
-            },
-            {
-                "name": "test.close",
-                "type": "normal"
-            },
-            {
-                "name": "test.sma200",
-                "type": "normal"
-            },
-            {
-                "name": "close_lt_sma200",
-                "type": "case",
-                "attributes": {
-                    "when": [
-                        "test.close",
-                        "lt",
-                        "test.sma200",
-                        ""
-                    ],
-                    "then": "1",
-                    "else": "0"
-                }
             }
         ],
-        "where": [
-            "test.close",
-            "gt",
-            "1000",
-            "and",
-            "test.code",
-            "=",
-            "532540"
-        ],
-        "order": [
-            "test.trade_date",
-            "desc"
-        ],
-        "limit": "1",
+        "where": [],
+        "order": [],
+        "limit": "200",
         "offset": "0"
     }
 ]

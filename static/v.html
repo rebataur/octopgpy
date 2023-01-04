@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "/static/vue.esm-browser.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  
+  <script type="module">
+    import { createApp } from 'vue'
+    import ButtonCounter from './comp.vue'
+
+    createApp(MyComponent).mount('#app1')
+    createApp({
+      data() {
+        return {
+          count: 0
+        }
+      },
+      methods: {
+        increment() {
+          this.count++
+        }
+      }
+    }).mount('#app')
+    </script>
+    
+    <div id="app">
+      <button @click="increment">count is: {{ count }}</button>
+    </div>
+    
+    <div id="app1"></div>
+</body>
+</html>

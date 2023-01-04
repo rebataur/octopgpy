@@ -20,7 +20,10 @@ conn = psycopg2.connect(
 # import sqlite3
 
 app = Flask(__name__)
-
+@app.route('/v')
+def v(name=None):
+    # tablemeta = fetch_all_tables_meta()
+    return render_template('v.html')
 
 @app.route('/')
 def hello(name=None):
@@ -49,15 +52,18 @@ def jsontosql(action):
 
     return json.dumps({'success':False,'sql':'','res':''}), 200, {'ContentType':'application/json'} 
     
-@app.route('/fetchtablemeta/<tablename>',methods=['GET'])
-def fetchtablemeta(tablename):
+@app.route('/fetchtablemeta',methods=['POST'])
+def fetchtablemeta():
+    fromlist = request.get_json()
     tablemeta = fetch_all_tables_meta()
+    print(fromlist,tablemeta)
     db_cols = ['',];
     for t in tablemeta:
-        if t['name'] == tablename:
+        print(t['name'],fromlist,t['name'] in fromlist)
+        if t['name'] in fromlist:
             for c in t['cols']:
-                db_cols.append(f"{tablename}.{c['name']}")
-
+                db_cols.append(f"{t['name']}.{c['name']}")
+    print(db_cols)
     return json.dumps({'success':True,'res':db_cols}), 200, {'ContentType':'application/json'} 
 
 @app.route('/viz',methods=['GET'])
@@ -125,11 +131,13 @@ def visualization():
 def get_jsontosql(jsonsql):  
     operators_dict= {'+':'+','-':'-','=':'=','lt':'<','gt':'>','lte':'<=', 'gte':'>='}
     ctes = jsonsql
+    print(jsonsql)
+    print("------------------------------")
     sql = ''
-
+    print(ctes)
     for cte in ctes:        
         print("=================================")
-        print(cte)
+        print(len(cte))
         if cte['parent'] == "":
             sql += f"WITH {cte['name']} AS ( SELECT  "
         else:
@@ -144,7 +152,7 @@ def get_jsontosql(jsonsql):
 
             # Normal Column
             if col_type == "normal":
-                columns.append(col_name)
+                columns.append(f'{col_name} as {col_name.replace(".","_")}')
             # Window function
             elif col_type == 'window_function':
                 attribs = col['attributes']
@@ -194,15 +202,25 @@ def get_jsontosql(jsonsql):
                 columns.append(c)
         sql += f"{','.join(columns)}"
         # print(cte)
-        sql += f" FROM {','.join(cte['from'])}"
+        sql += f" FROM {' '.join(cte['from'])}"
         # Where clause
+        print((cte['where']))
+
         if len(cte['where']) > 0:
             sql += " WHERE "  
-            for w in cte['where']:
+            operand_found = False
+            for w in cte['where']:               
                 if w in operators_dict.keys():
                     sql += " " + operators_dict[w] 
+                    operand_found = True
                 else:
-                    sql += " " + w
+                    if operand_found and not w.isnumeric():
+                                              
+                        sql += f"'{w}'"
+                        print(sql)
+                        operand_found = False
+                    else:
+                        sql += f"{w}"
         # Order by
         if len(cte['order']) > 0:
             sql += " ORDER BY "
@@ -222,8 +240,9 @@ def get_jsontosql(jsonsql):
     return sql
 
 def saveCTE(jsontosql,generated_sql,action):
+
     jsontosql = jsontosql[0]
-    generated_sql = generated_sql.replace("'","''")
+    # generated_sql = generated_sql.replace("'","''")
     sql = '''
         create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
     '''
@@ -241,9 +260,10 @@ def saveCTE(jsontosql,generated_sql,action):
         sql = f'''
             insert into 
             CTE(name,ctejson,ctesql,parent) 
-            values('{jsontosql["name"]}','{json.dumps(jsontosql)}','{generated_sql}','{jsontosql['parent']}')
+            values('{jsontosql["name"]}','{json.dumps([jsontosql])}','{generated_sql.replace("'","''")}','{jsontosql['parent']}')
         '''
-        if action == 'save':
+       
+        if action == 'save':           
             execute_sql(sql)
         return generated_sql
     else:
@@ -253,13 +273,13 @@ def saveCTE(jsontosql,generated_sql,action):
         res = fetch_sql(sql)
         jsql = res[0]['ctejson']
         jsql_dict = jsql
-        cte_arr = []
-        cte_arr.append(jsql_dict)
-        cte_arr.append(jsontosql)
-        full_sql = get_jsontosql(cte_arr)
-        
+        # cte_arr = []
+        # cte_arr.append(jsql_dict)
+        jsql_dict.append(jsontosql)
+        full_sql = get_jsontosql(jsql_dict)
+     
         sql = f'''
-            update cte set ctejson = '{json.dumps(cte_arr)}', ctesql = '{full_sql}' where name = '{jsontosql["parent"]}'
+            update cte set name = '{jsontosql["name"]}', ctejson = '{json.dumps(jsql_dict)}', ctesql = '{full_sql.replace("'","''")}' where name = '{jsontosql["parent"]}'
         '''
         if action == 'save':
             execute_sql(sql)
@@ -269,17 +289,34 @@ def saveCTE(jsontosql,generated_sql,action):
 def execute_sql(sql):
     print(" Executing SQL ", sql)    
     with conn.cursor(cursor_factory=RealDictCursor) as cur:
-        cur.execute(sql)
-        conn.commit()
+        try:
+            cur.execute(sql)
+            conn.commit()
+        except psycopg2.errors.InFailedSqlTransaction as e:
+            print("THERE WAS ERROR IN EXECUTING SQL")
+            print(sql)
+            print(e)
+            cur.execute("ROLLBACK")
+            conn.commit()
+      
     
    
 def fetch_sql(sql):
     print(" Fetching SQL ", sql)
-    res = None
+    res = []
     with conn.cursor(cursor_factory=RealDictCursor) as cur:
-        cur.execute(sql)
-        res = cur.fetchall()
-    return res
+        try:
+            cur.execute(sql)
+            res = cur.fetchall()
+            return res
+        except psycopg2.errors.InFailedSqlTransaction as e:
+            print("THERE WAS ERROR IN EXECUTING SQL")
+            print(sql)
+            print(e)
+            cur.execute("ROLLBACK")
+            conn.commit()
+            return res
+
 
 def fetch_all_tables_meta():
     sql = '''
@@ -301,8 +338,8 @@ def fetch_all_tables_meta():
                     drop table if exists cte_temp
                 '''
                 execute_sql(sql)
-
-                sql = f"create table cte_temp as {cte['ctesql']}"
+                clean_sql = cte['ctesql'].replace("''","'")
+                sql = f"create table cte_temp as {clean_sql}"
                 execute_sql(sql)
                 cols = get_table_columns('cte_temp')
                 table_struct.append({

@@ -3381,3 +3381,2249 @@
 2022-11-15 01:35:39.616 IST [11768] LOG:  background worker "logical replication launcher" (PID 14380) exited with exit code 1
 2022-11-15 01:35:39.641 IST [20784] LOG:  shutting down
 2022-11-15 01:35:39.740 IST [11768] LOG:  database system is shut down
+2022-11-15 10:06:21.057 IST [12904] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-15 10:06:21.077 IST [12904] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-15 10:06:21.087 IST [12904] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-15 10:06:21.203 IST [22928] LOG:  database system was shut down at 2022-11-15 01:35:39 IST
+2022-11-15 10:06:21.322 IST [12904] LOG:  database system is ready to accept connections
+2022-11-15 10:15:39.351 IST [19520] ERROR:  syntax error at or near "{" at character 712
+2022-11-15 10:15:39.351 IST [19520] STATEMENT:  
+	
+	
+	
+	            WITH test AS(
+	            SELECT
+	                trade_date,
+	                code,
+	                CLOSE,
+	                name,
+	                AVG(round(CLOSE)) OVER(PARTITION BY code
+	            ORDER BY
+	                trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+	            FROM
+	                BSE
+	            ORDER BY
+	                trade_date DESC 
+	            
+	                
+	        ), lmt as(
+	                
+	        select close,sma200,trade_date,name
+	        FROM
+	            test
+	        WHERE
+	            code = 532540
+	            limit 10
+	        )select array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date),{'a'} from lmt 
+	        
+	        
+2022-11-15 10:16:19.526 IST [19520] ERROR:  syntax error at or near "{" at character 757
+2022-11-15 10:16:19.526 IST [19520] STATEMENT:  
+	
+	            WITH test AS(
+	            SELECT
+	                trade_date,
+	                code,
+	                CLOSE,
+	                name,
+	                AVG(round(CLOSE)) OVER(PARTITION BY code
+	            ORDER BY
+	                trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+	            FROM
+	                BSE
+	            ORDER BY
+	                trade_date DESC 
+	            
+	                
+	        ), lmt as(
+	                
+	        select close,sma200,trade_date,name
+	        FROM
+	            test
+	        WHERE
+	            code = 532540
+	            limit 10
+	        ), agg as (
+	        select array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date) from lmt
+	        ) select *,{'a'} from agg
+	        
+2022-11-15 10:17:18.032 IST [19520] ERROR:  syntax error at or near "{" at character 759
+2022-11-15 10:17:18.032 IST [19520] STATEMENT:  
+	
+	
+	            WITH test AS(
+	            SELECT
+	                trade_date,
+	                code,
+	                CLOSE,
+	                name,
+	                AVG(round(CLOSE)) OVER(PARTITION BY code
+	            ORDER BY
+	                trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+	            FROM
+	                BSE
+	            ORDER BY
+	                trade_date DESC 
+	            
+	                
+	        ), lmt as(
+	                
+	        select close,sma200,trade_date,name
+	        FROM
+	            test
+	        WHERE
+	            code = 532540
+	            limit 10
+	        ), agg as (
+	        select array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date) from lmt
+	        ) select *,{'a':'b'} as metadata from agg
+2022-11-15 10:18:42.005 IST [19520] ERROR:  syntax error at end of input at character 806
+2022-11-15 10:18:42.005 IST [19520] STATEMENT:  
+	            WITH test AS(
+	            SELECT
+	                trade_date,
+	                code,
+	                CLOSE,
+	                name,
+	                AVG(round(CLOSE)) OVER(PARTITION BY code
+	            ORDER BY
+	                trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+	            FROM
+	                BSE
+	            ORDER BY
+	                trade_date DESC 
+	            
+	                
+	        ), lmt as(
+	                
+	        select close,sma200,trade_date,name
+	        FROM
+	            test
+	        WHERE
+	            code = 532540
+	            limit 10
+	        ), agg as (
+	        select '{"foo": [true, "bar"], "tags": {"a": 1, "b": null}}'::json as metadata,array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date) from lmt
+2022-11-15 10:22:29.521 IST [19520] ERROR:  invalid input syntax for type json at character 649
+2022-11-15 10:22:29.521 IST [19520] DETAIL:  Token "xcols" is invalid.
+2022-11-15 10:22:29.521 IST [19520] CONTEXT:  JSON data, line 1: {xcols...
+2022-11-15 10:22:29.521 IST [19520] STATEMENT:  
+	
+	
+	
+	            WITH test AS(
+	            SELECT
+	                trade_date,
+	                code,
+	                CLOSE,
+	                name,
+	                AVG(round(CLOSE)) OVER(PARTITION BY code
+	            ORDER BY
+	                trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+	            FROM
+	                BSE
+	            ORDER BY
+	                trade_date DESC 
+	            
+	                
+	        ), lmt as(
+	                
+	        select close,sma200,trade_date,name
+	        FROM
+	            test
+	        WHERE
+	            code = 532540
+	            limit 10
+	        )
+	        select '{xcols:{"name":"trade_date","type":"date"}, ycols:{"name":"close","type":"numeric","name":"sma200","type":"numeric"}}'::json as metadata,array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date) from lmt
+	     
+2022-11-15 10:23:19.761 IST [19520] ERROR:  invalid input syntax for type json at character 647
+2022-11-15 10:23:19.761 IST [19520] DETAIL:  Token "ycols" is invalid.
+2022-11-15 10:23:19.761 IST [19520] CONTEXT:  JSON data, line 1: {"xcols":{"name":"trade_date","type":"date"}, ycols...
+2022-11-15 10:23:19.761 IST [19520] STATEMENT:  
+	
+	
+	            WITH test AS(
+	            SELECT
+	                trade_date,
+	                code,
+	                CLOSE,
+	                name,
+	                AVG(round(CLOSE)) OVER(PARTITION BY code
+	            ORDER BY
+	                trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+	            FROM
+	                BSE
+	            ORDER BY
+	                trade_date DESC 
+	            
+	                
+	        ), lmt as(
+	                
+	        select close,sma200,trade_date,name
+	        FROM
+	            test
+	        WHERE
+	            code = 532540
+	            limit 10
+	        )
+	        select '{"xcols":{"name":"trade_date","type":"date"}, ycols:[{"name":"close","type":"numeric","name":"sma200","type":"numeric"}}]'::json as metadata,array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date) from lmt
+	      
+	        
+2022-11-15 10:23:31.862 IST [19520] ERROR:  invalid input syntax for type json at character 647
+2022-11-15 10:23:31.862 IST [19520] DETAIL:  Token "ycols" is invalid.
+2022-11-15 10:23:31.862 IST [19520] CONTEXT:  JSON data, line 1: {"xcols":{"name":"trade_date","type":"date"}, ycols...
+2022-11-15 10:23:31.862 IST [19520] STATEMENT:  
+	
+	
+	            WITH test AS(
+	            SELECT
+	                trade_date,
+	                code,
+	                CLOSE,
+	                name,
+	                AVG(round(CLOSE)) OVER(PARTITION BY code
+	            ORDER BY
+	                trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+	            FROM
+	                BSE
+	            ORDER BY
+	                trade_date DESC 
+	            
+	                
+	        ), lmt as(
+	                
+	        select close,sma200,trade_date,name
+	        FROM
+	            test
+	        WHERE
+	            code = 532540
+	            limit 10
+	        )
+	        select '{"xcols":{"name":"trade_date","type":"date"}, ycols:[{"name":"close","type":"numeric","name":"sma200","type":"numeric"}}]'::json as metadata,array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date) from lmt
+	      
+2022-11-15 10:23:45.794 IST [19520] ERROR:  invalid input syntax for type json at character 647
+2022-11-15 10:23:45.794 IST [19520] DETAIL:  Expected "," or "]", but found "}".
+2022-11-15 10:23:45.794 IST [19520] CONTEXT:  JSON data, line 1: ...ype":"numeric","name":"sma200","type":"numeric"}}...
+2022-11-15 10:23:45.794 IST [19520] STATEMENT:  
+	
+	
+	            WITH test AS(
+	            SELECT
+	                trade_date,
+	                code,
+	                CLOSE,
+	                name,
+	                AVG(round(CLOSE)) OVER(PARTITION BY code
+	            ORDER BY
+	                trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+	            FROM
+	                BSE
+	            ORDER BY
+	                trade_date DESC 
+	            
+	                
+	        ), lmt as(
+	                
+	        select close,sma200,trade_date,name
+	        FROM
+	            test
+	        WHERE
+	            code = 532540
+	            limit 10
+	        )
+	        select '{"xcols":{"name":"trade_date","type":"date"}, "ycols":[{"name":"close","type":"numeric","name":"sma200","type":"numeric"}}]'::json as metadata,array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date) from lmt
+	      
+	        
+2022-11-15 10:24:28.928 IST [19520] ERROR:  invalid input syntax for type json at character 643
+2022-11-15 10:24:28.928 IST [19520] DETAIL:  The input string ended unexpectedly.
+2022-11-15 10:24:28.928 IST [19520] CONTEXT:  JSON data, line 1: ...e":"numeric"},{"name":"sma200","type":"numeric"}]
+2022-11-15 10:24:28.928 IST [19520] STATEMENT:  
+	            WITH test AS(
+	            SELECT
+	                trade_date,
+	                code,
+	                CLOSE,
+	                name,
+	                AVG(round(CLOSE)) OVER(PARTITION BY code
+	            ORDER BY
+	                trade_date ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200
+	            FROM
+	                BSE
+	            ORDER BY
+	                trade_date DESC 
+	            
+	                
+	        ), lmt as(
+	                
+	        select close,sma200,trade_date,name
+	        FROM
+	            test
+	        WHERE
+	            code = 532540
+	            limit 10
+	        )
+	        select '{"xcols":{"name":"trade_date","type":"date"}, "ycols":[{"name":"close","type":"numeric"},{"name":"sma200","type":"numeric"}]'::json as metadata,array_agg(name),array_agg(close),array_agg(sma200),array_agg(trade_date) from lmt
+2022-11-15 14:56:51.486 IST [18620] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 14:56:51.487 IST [18620] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 14:57:28.985 IST [21164] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 14:57:51.382 IST [3024] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 14:58:07.595 IST [1636] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 14:58:23.805 IST [24492] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 15:02:13.951 IST [18436] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 15:02:13.951 IST [18436] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 15:06:34.444 IST [3772] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 15:06:34.444 IST [3772] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 15:10:17.465 IST [18660] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 15:10:17.465 IST [18660] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 15:10:49.356 IST [19312] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 15:10:49.357 IST [19312] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 15:57:42.356 IST [11588] ERROR:  relation "test0" does not exist at character 312
+2022-11-15 15:57:42.356 IST [11588] STATEMENT:  WITH test1 AS ( SELECT  bse.code,bse.name,bse.close, AVG(bse.close) OVER(PARTITION BY bse.code ORDER BY bse.trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sma200, AVG(bse.close) OVER(PARTITION BY bse.code ORDER BY bse.trade_date asc ROWS  BETWEEN 299 preceding  AND current Row) as sma300 FROM test0,bse WHERE  test0.code = bse.code ORDER BY bse.trade_date desc ) select * from test1 limit 200 offset 0
+2022-11-15 16:00:14.669 IST [2976] ERROR:  canceling statement due to user request
+2022-11-15 16:00:14.669 IST [12904] LOG:  received fast shutdown request
+2022-11-15 16:00:14.673 IST [12904] LOG:  aborting any active transactions
+2022-11-15 16:00:14.674 IST [11588] FATAL:  terminating connection due to administrator command
+2022-11-15 16:00:14.674 IST [19520] FATAL:  terminating connection due to administrator command
+2022-11-15 16:00:14.675 IST [8008] FATAL:  terminating connection due to administrator command
+2022-11-15 16:00:14.682 IST [12904] LOG:  background worker "logical replication launcher" (PID 2976) exited with exit code 1
+2022-11-15 16:00:14.703 IST [17608] LOG:  shutting down
+2022-11-15 16:00:14.773 IST [12904] LOG:  database system is shut down
+2022-11-15 16:00:17.757 IST [18592] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-15 16:00:17.768 IST [18592] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-15 16:00:17.775 IST [18592] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-15 16:00:17.856 IST [14032] LOG:  database system was shut down at 2022-11-15 16:00:14 IST
+2022-11-15 16:00:17.965 IST [18592] LOG:  database system is ready to accept connections
+2022-11-15 16:06:23.637 IST [15464] ERROR:  relation "test0" does not exist at character 200
+2022-11-15 16:06:23.637 IST [15464] STATEMENT:  WITH test1 AS ( SELECT  bse.code,bse.name,bse.close,bse.trade_date, AVG(bse.close) OVER(PARTITION BY bse.code ORDER BY bse.trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sma200 FROM test0,bse WHERE  test0.code = bse.code ORDER BY bse.trade_date desc ) select * from test1 limit 200 offset 0
+2022-11-15 16:14:28.055 IST [15464] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-15 16:14:28.055 IST [15464] STATEMENT:  
+	        SELECT * FROM information_schema.tables WHERE table_schema = 'public'
+	    
+2022-11-15 16:14:32.451 IST [17672] ERROR:  canceling statement due to user request
+2022-11-15 16:14:32.452 IST [18592] LOG:  received fast shutdown request
+2022-11-15 16:14:32.456 IST [18592] LOG:  aborting any active transactions
+2022-11-15 16:14:32.456 IST [21460] FATAL:  terminating connection due to administrator command
+2022-11-15 16:14:32.457 IST [15464] FATAL:  terminating connection due to administrator command
+2022-11-15 16:14:32.457 IST [12280] FATAL:  terminating connection due to administrator command
+2022-11-15 16:14:32.484 IST [18592] LOG:  background worker "logical replication launcher" (PID 17672) exited with exit code 1
+2022-11-15 16:14:32.525 IST [16492] LOG:  shutting down
+2022-11-15 16:14:32.652 IST [18592] LOG:  database system is shut down
+2022-11-15 16:14:33.811 IST [18704] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-15 16:14:33.824 IST [18704] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-15 16:14:33.833 IST [18704] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-15 16:14:33.933 IST [14228] LOG:  database system was shut down at 2022-11-15 16:14:32 IST
+2022-11-15 16:14:34.089 IST [18704] LOG:  database system is ready to accept connections
+2022-11-15 16:35:01.440 IST [23788] ERROR:  canceling statement due to user request
+2022-11-15 16:35:01.441 IST [18704] LOG:  received fast shutdown request
+2022-11-15 16:35:01.452 IST [18704] LOG:  aborting any active transactions
+2022-11-15 16:35:01.453 IST [4328] FATAL:  terminating connection due to administrator command
+2022-11-15 16:35:01.453 IST [1764] FATAL:  terminating connection due to administrator command
+2022-11-15 16:35:01.454 IST [12284] FATAL:  terminating connection due to administrator command
+2022-11-15 16:35:01.461 IST [18704] LOG:  background worker "logical replication launcher" (PID 23788) exited with exit code 1
+2022-11-15 16:35:01.493 IST [15356] LOG:  shutting down
+2022-11-15 16:35:01.587 IST [18704] LOG:  database system is shut down
+2022-11-15 16:35:31.295 IST [6460] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-15 16:35:31.306 IST [6460] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-15 16:35:31.314 IST [6460] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-15 16:35:31.387 IST [6532] LOG:  database system was shut down at 2022-11-15 16:35:01 IST
+2022-11-15 16:35:31.607 IST [6460] LOG:  database system is ready to accept connections
+2022-11-15 16:39:18.498 IST [21536] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:39:18.498 IST [21536] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 16:45:45.387 IST [15156] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:45:45.387 IST [15156] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 16:46:35.555 IST [23712] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:46:35.555 IST [23712] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 16:46:47.437 IST [17792] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:47:15.757 IST [18160] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:47:29.807 IST [15884] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:47:29.807 IST [15884] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 16:47:41.031 IST [11320] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:47:45.794 IST [3920] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:47:58.896 IST [18956] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:47:58.896 IST [18956] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 16:48:11.082 IST [12076] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:48:11.083 IST [12076] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 16:48:30.289 IST [9696] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:48:41.252 IST [8352] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:49:19.994 IST [16236] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:49:19.994 IST [16236] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 16:49:30.890 IST [9772] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:51:35.937 IST [24124] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:51:35.937 IST [24124] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 16:52:16.747 IST [20940] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:52:40.000 IST [12388] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:52:40.000 IST [12388] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 16:58:59.174 IST [11912] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 16:58:59.174 IST [11912] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 17:18:12.520 IST [22928] ERROR:  syntax error at or near "2022" at character 1687
+2022-11-15 17:18:12.520 IST [22928] STATEMENT:  
+	            update cte set name = 'test3', ctejson = '[{"parent": "", "name": "test0", "from": ["sensex"], "cols": [{"name": "sensex.code", "type": "normal"}, {"name": "sensex.name", "type": "normal"}], "where": [], "order": [], "limit": "200", "offset": "0"}, {"parent": "test0", "name": "test1", "from": ["test0", "bse"], "cols": [{"name": "bse.code", "type": "normal"}, {"name": "bse.name", "type": "normal"}, {"name": "bse.close", "type": "normal"}, {"name": "bse.trade_date", "type": "normal"}], "where": ["test0.code", "=", "bse.code"], "order": [], "limit": "200", "offset": "0"}, {"parent": "test1", "name": "test2", "from": ["test1"], "cols": [{"name": "test1.code", "type": "normal"}, {"name": "test1.name", "type": "normal"}, {"name": "test1.close", "type": "normal"}, {"name": "test1.trade_date", "type": "normal"}, {"name": "sma200", "type": "window_function", "attributes": {"window_func": "AVG", "col": "test1.close", "over": {"partition_by": "test1.code", "order_by": "test1.trade_date", "order_type": "asc", "frame_spec": {"type": "rows"}, "frame_boundaries": {"preceding": "199 preceding", "following": "current Row"}}}}], "where": [], "order": ["test1.trade_date", "desc"], "limit": "200", "offset": "0"}, {"parent": "test2", "name": "test3", "from": ["test2"], "cols": [{"name": "test2.code", "type": "normal"}, {"name": "test2.name", "type": "normal"}, {"name": "test2.close", "type": "normal"}, {"name": "test2.trade_date", "type": "normal"}, {"name": "test2.sma200", "type": "normal"}, {"name": "close_lt_sma200", "type": "case", "attributes": {"when": ["test2.close", "lt", "test2.sma200", ""], "then": "1", "else": "0"}}], "where": ["test2.trade_date", "=", "'2022-11-11'"], "order": ["test2.trade_date", "desc"], "limit": "200", "offset": "0"}]', ctesql = 'WITH test0 AS ( SELECT  sensex.code,sensex.name FROM sensex ) , test1 as ( SELECT  bse.code,bse.name,bse.close,bse.trade_date FROM test0,bse WHERE  test0.code = bse.code ) , test2 as ( SELECT  test1.code,test1.name,test1.close,test1.trade_date, AVG(test1.close) OVER(PARTITION BY test1.code ORDER BY test1.trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sma200 FROM test1 ORDER BY test1.trade_date desc  ) , test3 as ( SELECT  test2.code,test2.name,test2.close,test2.trade_date,test2.sma200,CASE WHEN  test2.close < test2.sma200  THEN 1 ELSE 0END as close_lt_sma200 FROM test2 WHERE  test2.trade_date = '2022-11-11' ORDER BY test2.trade_date desc ) select * from test3 limit 200 offset 0' where name = 'test2'
+	        
+2022-11-15 17:19:28.285 IST [22928] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 17:20:10.576 IST [8524] ERROR:  syntax error at or near "2022" at character 1687
+2022-11-15 17:20:10.576 IST [8524] STATEMENT:  
+	            update cte set name = 'test3', ctejson = '[{"parent": "", "name": "test0", "from": ["sensex"], "cols": [{"name": "sensex.code", "type": "normal"}, {"name": "sensex.name", "type": "normal"}], "where": [], "order": [], "limit": "200", "offset": "0"}, {"parent": "test0", "name": "test1", "from": ["test0", "bse"], "cols": [{"name": "bse.code", "type": "normal"}, {"name": "bse.name", "type": "normal"}, {"name": "bse.close", "type": "normal"}, {"name": "bse.trade_date", "type": "normal"}], "where": ["test0.code", "=", "bse.code"], "order": [], "limit": "200", "offset": "0"}, {"parent": "test1", "name": "test2", "from": ["test1"], "cols": [{"name": "test1.code", "type": "normal"}, {"name": "test1.name", "type": "normal"}, {"name": "test1.close", "type": "normal"}, {"name": "test1.trade_date", "type": "normal"}, {"name": "sma200", "type": "window_function", "attributes": {"window_func": "AVG", "col": "test1.close", "over": {"partition_by": "test1.code", "order_by": "test1.trade_date", "order_type": "asc", "frame_spec": {"type": "rows"}, "frame_boundaries": {"preceding": "199 preceding", "following": "current Row"}}}}], "where": [], "order": ["test1.trade_date", "desc"], "limit": "200", "offset": "0"}, {"parent": "test2", "name": "test3", "from": ["test2"], "cols": [{"name": "test2.code", "type": "normal"}, {"name": "test2.name", "type": "normal"}, {"name": "test2.close", "type": "normal"}, {"name": "test2.trade_date", "type": "normal"}, {"name": "test2.sma200", "type": "normal"}, {"name": "close_lt_sma200", "type": "case", "attributes": {"when": ["test2.close", "lt", "test2.sma200", ""], "then": "1", "else": "0"}}], "where": ["test2.trade_date", "=", "'2022-11-11'"], "order": ["test2.trade_date", "desc"], "limit": "200", "offset": "0"}]', ctesql = 'WITH test0 AS ( SELECT  sensex.code,sensex.name FROM sensex ) , test1 as ( SELECT  bse.code,bse.name,bse.close,bse.trade_date FROM test0,bse WHERE  test0.code = bse.code ) , test2 as ( SELECT  test1.code,test1.name,test1.close,test1.trade_date, AVG(test1.close) OVER(PARTITION BY test1.code ORDER BY test1.trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sma200 FROM test1 ORDER BY test1.trade_date desc  ) , test3 as ( SELECT  test2.code,test2.name,test2.close,test2.trade_date,test2.sma200,CASE WHEN  test2.close < test2.sma200  THEN 1 ELSE 0END as close_lt_sma200 FROM test2 WHERE  test2.trade_date = '2022-11-11' ORDER BY test2.trade_date desc ) select * from test3 limit 200 offset 0' where name = 'test2'
+	        
+2022-11-15 17:21:06.558 IST [8524] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 17:21:35.052 IST [10716] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 17:21:38.306 IST [12816] ERROR:  syntax error at or near "2022" at character 622
+2022-11-15 17:21:38.306 IST [12816] STATEMENT:  WITH test0 AS ( SELECT  sensex.code,sensex.name FROM sensex ) , test1 as ( SELECT  bse.code,bse.name,bse.close,bse.trade_date FROM test0,bse WHERE  test0.code = bse.code ) , test2 as ( SELECT  test1.code,test1.name,test1.close,test1.trade_date, AVG(test1.close) OVER(PARTITION BY test1.code ORDER BY test1.trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sma200 FROM test1 ORDER BY test1.trade_date desc  ) , test3 as ( SELECT  test2.code,test2.name,test2.close,test2.trade_date,test2.sma200,CASE WHEN  test2.close < test2.sma200  THEN 1 ELSE 0END as close_lt_sma200 FROM test2 WHERE  test2.trade_date = ''2022-11-11'' ORDER BY test2.trade_date desc ) select * from test3 limit 200 offset 0
+2022-11-15 17:22:14.871 IST [12816] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 17:23:04.286 IST [17236] ERROR:  canceling statement due to user request
+2022-11-15 17:23:04.287 IST [6460] LOG:  received fast shutdown request
+2022-11-15 17:23:04.291 IST [6460] LOG:  aborting any active transactions
+2022-11-15 17:23:04.291 IST [24020] FATAL:  terminating connection due to administrator command
+2022-11-15 17:23:04.291 IST [23772] FATAL:  terminating connection due to administrator command
+2022-11-15 17:23:04.292 IST [20228] FATAL:  terminating connection due to administrator command
+2022-11-15 17:23:04.314 IST [6460] LOG:  background worker "logical replication launcher" (PID 17236) exited with exit code 1
+2022-11-15 17:23:04.344 IST [18876] LOG:  shutting down
+2022-11-15 17:23:04.441 IST [6460] LOG:  database system is shut down
+2022-11-15 17:23:06.100 IST [24284] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-15 17:23:06.111 IST [24284] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-15 17:23:06.119 IST [24284] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-15 17:23:06.191 IST [15780] LOG:  database system was shut down at 2022-11-15 17:23:04 IST
+2022-11-15 17:23:06.289 IST [24284] LOG:  database system is ready to accept connections
+2022-11-15 17:24:11.378 IST [7796] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-15 17:24:11.379 IST [7796] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-15 17:25:40.183 IST [20212] ERROR:  canceling statement due to user request
+2022-11-15 17:25:40.184 IST [24284] LOG:  received fast shutdown request
+2022-11-15 17:25:40.195 IST [24284] LOG:  aborting any active transactions
+2022-11-15 17:25:40.196 IST [21004] FATAL:  terminating connection due to administrator command
+2022-11-15 17:25:40.196 IST [17028] FATAL:  terminating connection due to administrator command
+2022-11-15 17:25:40.197 IST [11312] FATAL:  terminating connection due to administrator command
+2022-11-15 17:25:40.212 IST [24284] LOG:  background worker "logical replication launcher" (PID 20212) exited with exit code 1
+2022-11-15 17:25:40.233 IST [8008] LOG:  shutting down
+2022-11-15 17:25:40.323 IST [24284] LOG:  database system is shut down
+2022-11-15 17:26:22.509 IST [8048] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-15 17:26:22.520 IST [8048] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-15 17:26:22.528 IST [8048] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-15 17:26:22.599 IST [5232] LOG:  database system was shut down at 2022-11-15 17:25:40 IST
+2022-11-15 17:26:22.710 IST [8048] LOG:  database system is ready to accept connections
+2022-11-15 17:36:28.922 IST [20008] ERROR:  operator does not exist: date = integer at character 717
+2022-11-15 17:36:28.922 IST [20008] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2022-11-15 17:36:28.922 IST [20008] STATEMENT:  WITH test0 AS ( SELECT  sensex.code,sensex.name FROM sensex ) , test1 as ( SELECT  bse.code,bse.name,bse.close,bse.trade_date, AVG(bse.close) OVER(PARTITION BY bse.code ORDER BY bse.trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sma200 FROM test0,bse WHERE  bse.code = test0.code ) , test2 as ( SELECT  test1.code,test1.name,test1.close,test1.trade_date,test1.sma200,CASE WHEN  test1.close < test1.sma200  THEN 1 ELSE 0END as close_lt_sma200 FROM test1 ORDER BY test1.trade_date desc  ) , test3 as ( SELECT  test2.code,test2.name,test2.close,test2.trade_date,test2.sma200,test2.close_lt_sma200 FROM test2,bse,sensex WHERE  test2.close_lt_sma200 = 1 and test2.code = sensex.code and test2.trade_date = 2022-11-11 ORDER BY test2.trade_date desc ) select * from test3 limit 200 offset 0
+2022-11-15 17:36:36.998 IST [20008] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-15 17:36:36.998 IST [20008] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2022-11-15 17:37:10.359 IST [20008] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-15 17:37:10.359 IST [20008] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2022-11-15 18:33:00.585 IST [16536] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-15 18:33:00.607 IST [16536] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-15 18:33:00.624 IST [16536] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-15 18:33:00.722 IST [24148] LOG:  database system was interrupted; last known up at 2022-11-15 17:36:28 IST
+2022-11-15 18:33:01.089 IST [10772] FATAL:  the database system is starting up
+2022-11-15 18:33:03.342 IST [24148] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-15 18:33:03.354 IST [24148] LOG:  redo starts at 0/194145B8
+2022-11-15 18:33:03.354 IST [24148] LOG:  invalid record length at 0/194146A0: wanted 24, got 0
+2022-11-15 18:33:03.354 IST [24148] LOG:  redo done at 0/19414668 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-15 18:33:03.710 IST [16536] LOG:  database system is ready to accept connections
+2022-11-15 18:33:08.153 IST [14756] ERROR:  syntax error at or near "distinct" at character 525
+2022-11-15 18:33:08.153 IST [14756] STATEMENT:  with test0 as (
+	select
+		sensex.code,
+		sensex.name
+	from
+		sensex ) ,
+	test1 as (
+	select
+		bse.code,
+		bse.name,
+		bse.close,
+		bse.trade_date,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200
+	from
+		test0,
+		bse 
+		where test0.code = bse.code
+		) ,
+	test2 as (
+	select
+		test1.code,
+		test1.name,
+		test1.close,
+		test1.trade_date,
+		test1.sma200
+	from
+		test1
+	where
+		test1.close < test1.sma200
+	order by
+		test1.close asc )
+	select
+		*,distinct(test2.code)
+	from
+		test2
+	limit 200 offset 0
+2022-11-15 18:33:16.759 IST [14756] ERROR:  syntax error at or near "distinct" at character 525
+2022-11-15 18:33:16.759 IST [14756] STATEMENT:  with test0 as (
+	select
+		sensex.code,
+		sensex.name
+	from
+		sensex ) ,
+	test1 as (
+	select
+		bse.code,
+		bse.name,
+		bse.close,
+		bse.trade_date,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200
+	from
+		test0,
+		bse 
+		where test0.code = bse.code
+		) ,
+	test2 as (
+	select
+		test1.code,
+		test1.name,
+		test1.close,
+		test1.trade_date,
+		test1.sma200
+	from
+		test1
+	where
+		test1.close < test1.sma200
+	order by
+		test1.close asc )
+	select
+		*,distinct(test2.code)
+	from
+		test2
+	limit 200 offset 0
+2022-11-15 18:33:21.923 IST [16536] LOG:  received fast shutdown request
+2022-11-15 18:33:21.928 IST [16536] LOG:  aborting any active transactions
+2022-11-15 18:33:21.928 IST [14756] FATAL:  terminating connection due to administrator command
+2022-11-15 18:33:21.956 IST [16536] LOG:  background worker "logical replication launcher" (PID 11796) exited with exit code 1
+2022-11-15 18:33:21.957 IST [23172] LOG:  shutting down
+2022-11-15 18:33:22.018 IST [16536] LOG:  database system is shut down
+2022-11-15 18:33:22.528 IST [13232] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-15 18:33:22.539 IST [13232] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-15 18:33:22.547 IST [13232] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-15 18:33:22.620 IST [6340] LOG:  database system was shut down at 2022-11-15 18:33:21 IST
+2022-11-15 18:33:22.782 IST [13232] LOG:  database system is ready to accept connections
+2022-11-15 18:33:27.212 IST [23368] ERROR:  syntax error at or near "distinct" at character 525
+2022-11-15 18:33:27.212 IST [23368] STATEMENT:  with test0 as (
+	select
+		sensex.code,
+		sensex.name
+	from
+		sensex ) ,
+	test1 as (
+	select
+		bse.code,
+		bse.name,
+		bse.close,
+		bse.trade_date,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200
+	from
+		test0,
+		bse 
+		where test0.code = bse.code
+		) ,
+	test2 as (
+	select
+		test1.code,
+		test1.name,
+		test1.close,
+		test1.trade_date,
+		test1.sma200
+	from
+		test1
+	where
+		test1.close < test1.sma200
+	order by
+		test1.close asc )
+	select
+		*,distinct(test2.code)
+	from
+		test2
+	limit 200 offset 0
+2022-11-15 18:33:36.524 IST [21496] ERROR:  syntax error at or near "distinct" at character 525
+2022-11-15 18:33:36.524 IST [21496] STATEMENT:  with test0 as (
+	select
+		sensex.code,
+		sensex.name
+	from
+		sensex ) ,
+	test1 as (
+	select
+		bse.code,
+		bse.name,
+		bse.close,
+		bse.trade_date,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200
+	from
+		test0,
+		bse 
+		where test0.code = bse.code
+		) ,
+	test2 as (
+	select
+		test1.code,
+		test1.name,
+		test1.close,
+		test1.trade_date,
+		test1.sma200
+	from
+		test1
+	where
+		test1.close < test1.sma200
+	order by
+		test1.close asc )
+	select
+		*,distinct(test2.code)
+	from
+		test2
+	limit 200 offset 0
+2022-11-15 22:16:00.062 IST [21496] ERROR:  syntax error at or near "with" at character 475
+2022-11-15 22:16:00.062 IST [21496] STATEMENT:  
+	 WITH test0 AS ( SELECT  sensex.code,sensex.name FROM sensex ) , test1 as ( SELECT  bse.code,bse.name,bse.close,bse.trade_date, AVG(bse.close) OVER(PARTITION BY bse.code ORDER BY bse.trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sma200 FROM test0,bse ) , test2 as ( SELECT  test1.code,test1.name,test1.close,test1.trade_date,test1.sma200 FROM test1 WHERE  test1.close < test1.sma200 ORDER BY test1.close 
+	asc ) select * from test2 limit 200 offset 0
+	
+	with test0 as (
+	select
+		sensex.code,
+		sensex.name
+	from
+		sensex ) ,
+	test1 as (
+	select
+		bse.code,
+		bse.name,
+		bse.close,
+		bse.trade_date,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200
+	from
+		test0 left join
+		bse 
+		on test0.code = bse.code
+		
+		) ,
+	test2 as (
+	select
+		test1.code,
+		test1.name,
+		test1.close,
+		test1.trade_date,
+		test1.sma200
+	from
+		test1
+	where
+		test1.close < test1.sma200
+	order by
+		test1.close asc )
+	select
+		distinct(code),*
+	from
+		test2
+	limit 200 offset 0
+2022-11-15 22:19:04.401 IST [21496] ERROR:  syntax error at or near "with" at character 472
+2022-11-15 22:19:04.401 IST [21496] STATEMENT:  WITH test0 AS ( SELECT  sensex.code,sensex.name FROM sensex ) , test1 as ( SELECT  bse.code,bse.name,bse.close,bse.trade_date, AVG(bse.close) OVER(PARTITION BY bse.code ORDER BY bse.trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sma200 FROM test0,bse ) , test2 as ( SELECT  test1.code,test1.name,test1.close,test1.trade_date,test1.sma200 FROM test1 WHERE  test1.close < test1.sma200 ORDER BY test1.close 
+	asc ) select * from test2 limit 200 offset 0
+	
+	with test0 as (
+	select
+		sensex.code,
+		sensex.name
+	from
+		sensex ) ,
+	test1 as (
+	select
+		bse.code,
+		bse.name,
+		bse.close,
+		bse.trade_date,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200
+	from
+		test0,
+		bse 
+		where test0.code = bse.code
+		) ,
+	test2 as (
+	select
+		test1.code,
+		test1.name,
+		test1.close,
+		test1.trade_date,
+		test1.sma200
+	from
+		test1
+	where
+		test1.close < test1.sma200
+	order by
+		test1.close asc )
+	select
+		distinct(code),*
+	from
+		test2
+	limit 200 offset 0
+2022-11-15 22:22:38.150 IST [21496] ERROR:  column reference "code" is ambiguous at character 207
+2022-11-15 22:22:38.150 IST [21496] STATEMENT:  
+	select *,
+	avg(bse.close) over(partition by bse.code
+	order by
+	bse.trade_date asc rows between 199 preceding and current row) as sma200
+	from 
+	sensex left join bse 
+	on sensex.code = bse.code
+	group by code
+2022-11-15 22:27:54.395 IST [21496] ERROR:  syntax error at or near ")" at character 301
+2022-11-15 22:27:54.395 IST [21496] STATEMENT:  select *,
+	avg(bse.close) over(partition by bse.code
+	order by
+	bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	RANK() over(partition by bse.code
+	order by bse.trade_date desc) as rank
+	from 
+	sensex left join bse 
+	on sensex.code = bse.code
+	order by bse.trade_date desc
+	) select * from ranked_cte where rank = 1
+2022-11-15 23:52:58.920 IST [21496] ERROR:  syntax error at or near ")" at character 301
+2022-11-15 23:52:58.920 IST [21496] STATEMENT:  select *,
+	avg(bse.close) over(partition by bse.code
+	order by
+	bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	RANK() over(partition by bse.code
+	order by bse.trade_date desc) as rank
+	from 
+	sensex left join bse 
+	on sensex.code = bse.code
+	order by bse.trade_date desc
+	) select * from ranked_cte where rank = 1
+2022-11-15 23:54:17.262 IST [21496] ERROR:  syntax error at or near "as" at character 331
+2022-11-15 23:54:17.262 IST [21496] STATEMENT:  
+	
+	
+	with ranked_cte as(
+	select *,
+	avg(bse.close) over(partition by bse.code
+	order by
+	bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	RANK() over(partition by bse.code
+	order by bse.trade_date desc) as rank
+	from 
+	sensex left join bse 
+	on sensex.code = bse.code
+	order by bse.trade_date desc
+	), as belowsma200 as (
+	select * from ranked_cte where rank = 1 where ranked_cte.close < ranked_cte.sma200
+2022-11-15 23:54:32.834 IST [21496] ERROR:  syntax error at or near "as" at character 327
+2022-11-15 23:54:32.834 IST [21496] STATEMENT:  
+	with ranked_cte as(
+	select *,
+	avg(bse.close) over(partition by bse.code
+	order by
+	bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	RANK() over(partition by bse.code
+	order by bse.trade_date desc) as rank
+	from 
+	sensex left join bse 
+	on sensex.code = bse.code
+	order by bse.trade_date desc
+	), as belowsma200 as (
+	select * from ranked_cte where rank = 1 where ranked_cte.close < ranked_cte.sma200
+	)select * from belowsma200
+2022-11-15 23:54:41.651 IST [21496] ERROR:  syntax error at or near "where" at character 385
+2022-11-15 23:54:41.651 IST [21496] STATEMENT:  
+	with ranked_cte as(
+	select *,
+	avg(bse.close) over(partition by bse.code
+	order by
+	bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	RANK() over(partition by bse.code
+	order by bse.trade_date desc) as rank
+	from 
+	sensex left join bse 
+	on sensex.code = bse.code
+	order by bse.trade_date desc
+	), belowsma200 as (
+	select * from ranked_cte where rank = 1 where ranked_cte.close < ranked_cte.sma200
+	)select * from belowsma200
+2022-11-16 00:00:31.495 IST [21496] ERROR:  syntax error at or near "then" at character 732
+2022-11-16 00:00:31.495 IST [21496] STATEMENT:  
+	with ranked_cte as(
+	select
+		*,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 299 preceding and current row) as sma300,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 499 preceding and current row) as sma500,
+		rank() over(partition by bse.code
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc ),
+	belowsma200 as (
+	select
+		*,
+		case when ranked_cte.close < ranked_cte.sma200 then 2 
+		     else  ranked_cte.close < ranked_cte.sma300 then 3 
+		     else  ranked_cte.close < ranked_cte.sma500 then 5
+		end dep
+	from
+		ranked_cte
+	where
+		rank = 1	
+	)select
+		*
+	from
+		belowsma200
+2022-11-16 00:02:30.704 IST [21496] ERROR:  syntax error at or near "case" at character 704
+2022-11-16 00:02:30.704 IST [21496] STATEMENT:  
+	with ranked_cte as(
+	select
+		*,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 299 preceding and current row) as sma300,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 499 preceding and current row) as sma500,
+		rank() over(partition by bse.code
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc ),
+	belowsma200 as (
+	select
+		*,
+		case when ranked_cte.close < ranked_cte.sma200 then 2 else 0 end sma200dep
+		case when ranked_cte.close < ranked_cte.sma300 then 3 else 0 end sma300dep
+		case when ranked_cte.close < ranked_cte.sma500 then 5 else 0 end sma500dep
+	
+	from
+		ranked_cte
+	where
+		rank = 1	
+	)select
+		*
+	from
+		belowsma200
+2022-11-16 00:02:49.435 IST [21496] ERROR:  syntax error at or near "from" at character 862
+2022-11-16 00:02:49.435 IST [21496] STATEMENT:  
+	with ranked_cte as(
+	select
+		*,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 299 preceding and current row) as sma300,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 499 preceding and current row) as sma500,
+		rank() over(partition by bse.code
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc ),
+	belowsma200 as (
+	select
+		*,
+		case when ranked_cte.close < ranked_cte.sma200 then 2 else 0 end sma200dep,
+		case when ranked_cte.close < ranked_cte.sma300 then 3 else 0 end sma300dep,
+		case when ranked_cte.close < ranked_cte.sma500 then 5 else 0 end sma500dep,
+	
+	from
+		ranked_cte
+	where
+		rank = 1	
+	)select
+		*
+	from
+		belowsma200
+2022-11-17 00:00:44.978 IST [14164] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-17 00:00:45.002 IST [14164] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-17 00:00:45.011 IST [14164] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-17 00:00:45.204 IST [8460] LOG:  database system was interrupted; last known up at 2022-11-16 00:16:24 IST
+2022-11-17 00:00:47.784 IST [21964] FATAL:  the database system is starting up
+2022-11-17 00:00:51.047 IST [19544] FATAL:  the database system is starting up
+2022-11-17 00:00:52.438 IST [8460] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-17 00:00:52.445 IST [8460] LOG:  redo starts at 0/194290D8
+2022-11-17 00:00:52.445 IST [8460] LOG:  invalid record length at 0/194291C0: wanted 24, got 0
+2022-11-17 00:00:52.445 IST [8460] LOG:  redo done at 0/19429188 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-17 00:00:52.576 IST [14164] LOG:  database system is ready to accept connections
+2022-11-17 00:02:21.324 IST [13944] ERROR:  syntax error at or near "tablea" at character 8
+2022-11-17 00:02:21.324 IST [13944] STATEMENT:  insert tablea values((1,a),(2,b))
+2022-11-17 00:02:28.593 IST [13944] ERROR:  column "a" does not exist at character 30
+2022-11-17 00:02:28.593 IST [13944] STATEMENT:  insert into tablea values((1,a),(2,b))
+2022-11-17 00:02:39.424 IST [13944] ERROR:  column "id" is of type integer but expression is of type record at character 27
+2022-11-17 00:02:39.424 IST [13944] HINT:  You will need to rewrite or cast the expression.
+2022-11-17 00:02:39.424 IST [13944] STATEMENT:  insert into tablea values((1,'a'),(2,'b'))
+2022-11-17 00:03:57.775 IST [13944] ERROR:  INSERT has more target columns than expressions at character 23
+2022-11-17 00:03:57.775 IST [13944] HINT:  The insertion source is a row expression containing the same number of columns expected by the INSERT. Did you accidentally use extra parentheses?
+2022-11-17 00:03:57.775 IST [13944] STATEMENT:  insert into tablea(id,col) values((1,'a'))
+2022-11-17 00:05:22.396 IST [13944] ERROR:  syntax error at or near "insert" at character 63
+2022-11-17 00:05:22.396 IST [13944] STATEMENT:  
+	
+	insert into tablea(id,col) values(1,'a'),(2,'b'),(3,'c')
+	insert into tableb(id,col) values(1,'d'),(2,'e'),(3,'f')
+2022-11-17 00:09:17.479 IST [13944] ERROR:  syntax error at or near "on" at character 29
+2022-11-17 00:09:17.479 IST [13944] STATEMENT:  select * from tablea,tableb on tablea.id = tableb.id
+2022-11-18 01:57:42.282 IST [5232] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-18 01:57:42.295 IST [5232] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-18 01:57:42.302 IST [5232] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-18 01:57:42.501 IST [1672] LOG:  database system was interrupted; last known up at 2022-11-17 00:15:55 IST
+2022-11-18 01:57:52.582 IST [1672] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-18 01:57:52.587 IST [1672] LOG:  redo starts at 0/19499EC8
+2022-11-18 01:57:52.587 IST [1672] LOG:  invalid record length at 0/19499FB0: wanted 24, got 0
+2022-11-18 01:57:52.587 IST [1672] LOG:  redo done at 0/19499F78 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-18 01:57:52.735 IST [5232] LOG:  database system is ready to accept connections
+2022-11-18 02:04:50.139 IST [17620] ERROR:  missing FROM-clause entry for table "ranked_cte" at character 989
+2022-11-18 02:04:50.139 IST [17620] STATEMENT:  
+	
+	with ranked_cte as(
+	select
+		*,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 299 preceding and current row) as sma300,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 499 preceding and current row) as sma500,
+		rank() over(partition by bse.code
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc ),
+	belowsma200 as (
+	select
+		*,
+		case when ranked_cte.close < ranked_cte.sma200 then 2 else 0 end sma200dep,
+		case when ranked_cte.close < ranked_cte.sma300 then 3 else 0 end sma300dep,
+		case when ranked_cte.close < ranked_cte.sma500 then 5 else 0 end sma500dep
+	
+	from
+		ranked_cte
+	where
+		rank = 1	
+	)select
+		*
+	from
+		belowsma200
+		order by sma500dep desc,sma300dep desc,sma200dep desc,ranked_cte.close
+2022-11-18 11:35:59.627 IST [11776] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-18 11:35:59.643 IST [11776] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-18 11:35:59.652 IST [11776] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-18 11:36:00.046 IST [11980] LOG:  database system was interrupted; last known up at 2022-11-18 02:03:22 IST
+2022-11-18 11:36:08.340 IST [11980] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-18 11:36:08.349 IST [11980] LOG:  redo starts at 0/197242A8
+2022-11-18 11:36:08.355 IST [11980] LOG:  invalid record length at 0/1972A5D8: wanted 24, got 0
+2022-11-18 11:36:08.355 IST [11980] LOG:  redo done at 0/1972A5A0 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-18 11:36:08.556 IST [11776] LOG:  database system is ready to accept connections
+2022-11-18 11:37:47.519 IST [17948] ERROR:  syntax error at or near "varchar" at character 146
+2022-11-18 11:37:47.519 IST [17948] STATEMENT:  
+	-- SQLINES DEMO *** mbol, @start_date, and @end_date to 
+	-- SQLINES DEMO *** ulled from a database of time series values
+	declare 
+	 v_symbol varchar(5) = 'GOOGL'
+	
+2022-11-18 11:39:02.527 IST [17948] ERROR:  syntax error at or near "varchar" at character 18
+2022-11-18 11:39:02.527 IST [17948] STATEMENT:  declare v_symbol varchar(5) = 'GOOGL'
+2022-11-18 11:39:14.091 IST [17948] ERROR:  syntax error at or near "varchar" at character 20
+2022-11-18 11:39:14.091 IST [17948] STATEMENT:  declare 
+	v_symbol varchar(5) = 'GOOGL'
+2022-11-18 11:39:25.560 IST [17948] ERROR:  syntax error at or near "text" at character 20
+2022-11-18 11:39:25.560 IST [17948] STATEMENT:  declare 
+	v_symbol text = 'GOOGL'
+2022-11-18 13:58:04.215 IST [17948] ERROR:  syntax error at or near "where" at character 989
+2022-11-18 13:58:04.215 IST [17948] STATEMENT:  
+	
+	with ranked_cte as(
+	select
+		*,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 299 preceding and current row) as sma300,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 499 preceding and current row) as sma500,
+		rank() over(partition by bse.code
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc ),
+	belowsma200 as (
+	select
+		*,
+		case when ranked_cte.close < ranked_cte.sma200 then 2 else 0 end sma200dep,
+		case when ranked_cte.close < ranked_cte.sma300 then 3 else 0 end sma300dep,
+		case when ranked_cte.close < ranked_cte.sma500 then 5 else 0 end sma500dep
+	
+	from
+		ranked_cte
+	where
+		rank = 1	
+	)select
+		*
+	from
+		belowsma200
+		order by sma500dep desc,sma300dep desc,sma200dep desc where belowsma200.code = 506285
+2022-11-18 13:58:18.677 IST [17948] ERROR:  column reference "code" is ambiguous at character 942
+2022-11-18 13:58:18.677 IST [17948] STATEMENT:  
+	
+	with ranked_cte as(
+	select
+		*,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 299 preceding and current row) as sma300,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 499 preceding and current row) as sma500,
+		rank() over(partition by bse.code
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc ),
+	belowsma200 as (
+	select
+		*,
+		case when ranked_cte.close < ranked_cte.sma200 then 2 else 0 end sma200dep,
+		case when ranked_cte.close < ranked_cte.sma300 then 3 else 0 end sma300dep,
+		case when ranked_cte.close < ranked_cte.sma500 then 5 else 0 end sma500dep
+	
+	from
+		ranked_cte
+	where
+		rank = 1	
+	)select
+		*
+	from
+		belowsma200
+		 where belowsma200.code = 506285
+		order by sma500dep desc,sma300dep desc,sma200dep desc
+2022-11-18 13:58:44.760 IST [17948] ERROR:  column reference "code" is ambiguous at character 940
+2022-11-18 13:58:44.760 IST [17948] STATEMENT:  
+	with ranked_cte as(
+	select
+		*,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 299 preceding and current row) as sma300,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 499 preceding and current row) as sma500,
+		rank() over(partition by bse.code
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc ),
+	belowsma200 as (
+	select
+		*,
+		case when ranked_cte.close < ranked_cte.sma200 then 2 else 0 end sma200dep,
+		case when ranked_cte.close < ranked_cte.sma300 then 3 else 0 end sma300dep,
+		case when ranked_cte.close < ranked_cte.sma500 then 5 else 0 end sma500dep
+	
+	from
+		ranked_cte
+	where
+		rank = 1	
+	)select
+		*
+	from
+		belowsma200
+		 where code = 506285
+		order by sma500dep desc,sma300dep desc,sma200dep desc
+2022-11-18 13:58:58.903 IST [17948] ERROR:  column reference "code" is ambiguous at character 940
+2022-11-18 13:58:58.903 IST [17948] STATEMENT:  
+	with ranked_cte as(
+	select
+		*,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 299 preceding and current row) as sma300,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 499 preceding and current row) as sma500,
+		rank() over(partition by bse.code
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc ),
+	belowsma200 as (
+	select
+		*,
+		case when ranked_cte.close < ranked_cte.sma200 then 2 else 0 end sma200dep,
+		case when ranked_cte.close < ranked_cte.sma300 then 3 else 0 end sma300dep,
+		case when ranked_cte.close < ranked_cte.sma500 then 5 else 0 end sma500dep
+	
+	from
+		ranked_cte
+	where
+		rank = 1	
+	)select
+		*
+	from
+		belowsma200
+		 where belowsma200.code = 506285
+		order by sma500dep desc,sma300dep desc,sma200dep desc
+2022-11-18 14:00:18.059 IST [17948] ERROR:  column reference "code" is ambiguous at character 913
+2022-11-18 14:00:18.059 IST [17948] STATEMENT:  
+	
+	with ranked_cte as(
+	select
+		*,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 299 preceding and current row) as sma300,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 499 preceding and current row) as sma500,
+		rank() over(partition by bse.code
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc ),
+	belowsma200 as (
+	select
+		*,
+		case when ranked_cte.close < ranked_cte.sma200 then 2 else 0 end sma200dep,
+		case when ranked_cte.close < ranked_cte.sma300 then 3 else 0 end sma300dep,
+		case when ranked_cte.close < ranked_cte.sma500 then 5 else 0 end sma500dep
+	
+	from
+		ranked_cte
+	where
+		rank = 1	
+	)select
+		*,code as belowsma200_code
+	from
+		belowsma200
+		 
+		order by sma500dep desc,sma300dep desc,sma200dep desc
+2022-11-18 14:00:56.839 IST [17948] ERROR:  column reference "code" is ambiguous at character 909
+2022-11-18 14:00:56.839 IST [17948] STATEMENT:  
+	with ranked_cte as(
+	select
+		*,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 299 preceding and current row) as sma300,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 499 preceding and current row) as sma500,
+		rank() over(partition by bse.code
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc ),
+	belowsma200 as (
+	select
+		*,
+		case when ranked_cte.close < ranked_cte.sma200 then 2 else 0 end sma200dep,
+		case when ranked_cte.close < ranked_cte.sma300 then 3 else 0 end sma300dep,
+		case when ranked_cte.close < ranked_cte.sma500 then 5 else 0 end sma500dep
+	
+	from
+		ranked_cte
+	where
+		rank = 1	
+	)select
+		code, sma500dep ,sma300dep ,sma200dep
+	from
+		belowsma200
+		 
+		order by sma500dep desc,sma300dep desc,sma200dep desc
+2022-11-18 14:01:15.384 IST [17948] ERROR:  missing FROM-clause entry for table "ranked_cte" at character 909
+2022-11-18 14:01:15.384 IST [17948] STATEMENT:  
+	with ranked_cte as(
+	select
+		*,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 299 preceding and current row) as sma300,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 499 preceding and current row) as sma500,
+		rank() over(partition by bse.code
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc ),
+	belowsma200 as (
+	select
+		*,
+		case when ranked_cte.close < ranked_cte.sma200 then 2 else 0 end sma200dep,
+		case when ranked_cte.close < ranked_cte.sma300 then 3 else 0 end sma300dep,
+		case when ranked_cte.close < ranked_cte.sma500 then 5 else 0 end sma500dep
+	
+	from
+		ranked_cte
+	where
+		rank = 1	
+	)select
+		belowsma200.ranked_cte.code, sma500dep ,sma300dep ,sma200dep
+	from
+		belowsma200
+		 
+		order by sma500dep desc,sma300dep desc,sma200dep desc
+2022-11-18 14:01:30.441 IST [17948] ERROR:  invalid reference to FROM-clause entry for table "ranked_cte" at character 909
+2022-11-18 14:01:30.441 IST [17948] HINT:  There is an entry for table "ranked_cte", but it cannot be referenced from this part of the query.
+2022-11-18 14:01:30.441 IST [17948] STATEMENT:  
+	with ranked_cte as(
+	select
+		*,
+		avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 199 preceding and current row) as sma200,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 299 preceding and current row) as sma300,
+	avg(bse.close) over(partition by bse.code
+	order by
+		bse.trade_date asc rows between 499 preceding and current row) as sma500,
+		rank() over(partition by bse.code
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc ),
+	belowsma200 as (
+	select
+		*,
+		case when ranked_cte.close < ranked_cte.sma200 then 2 else 0 end sma200dep,
+		case when ranked_cte.close < ranked_cte.sma300 then 3 else 0 end sma300dep,
+		case when ranked_cte.close < ranked_cte.sma500 then 5 else 0 end sma500dep
+	
+	from
+		ranked_cte
+	where
+		rank = 1	
+	)select
+		belowsma200.ranked_cte.code, sma500dep ,sma300dep ,sma200dep
+	from
+		belowsma200,ranked_cte
+		 
+		order by sma500dep desc,sma300dep desc,sma200dep desc
+2022-11-18 14:01:56.218 IST [17948] ERROR:  column reference "name" is ambiguous at character 882
+2022-11-18 14:01:56.218 IST [17948] STATEMENT:  WITH ranked_cte AS (SELECT *, avg(bse.close) OVER (PARTITION BY bse.code ORDER BY bse.trade_date ASC ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200, avg(bse.close) OVER (PARTITION BY bse.code ORDER BY bse.trade_date ASC ROWS BETWEEN 299 PRECEDING AND CURRENT ROW) AS sma300, avg(bse.close) OVER (PARTITION BY bse.code ORDER BY bse.trade_date ASC ROWS BETWEEN 499 PRECEDING AND CURRENT ROW) AS sma500, rank() OVER (PARTITION BY bse.code ORDER BY bse.trade_date DESC) AS rank FROM sensex LEFT JOIN bse ON sensex.code = bse.code ORDER BY bse.trade_date DESC), belowsma200 AS (SELECT *, CASE WHEN ranked_cte.close < ranked_cte.sma200 THEN 2 ELSE 0 END sma200dep, CASE WHEN ranked_cte.close < ranked_cte.sma300 THEN 3 ELSE 0 END sma300dep, CASE WHEN ranked_cte.close < ranked_cte.sma500 THEN 5 ELSE 0 END sma500dep FROM ranked_cte WHERE rank = 1) SELECT * FROM belowsma200 WHERE "name" = 'Bayer CropScience Ltd/India' ORDER BY sma500dep DESC, sma300dep DESC, sma200dep DESC
+2022-11-18 14:02:09.591 IST [17948] ERROR:  column reference "name" is ambiguous at character 882
+2022-11-18 14:02:09.591 IST [17948] STATEMENT:  WITH ranked_cte AS (SELECT *, avg(bse.close) OVER (PARTITION BY bse.code ORDER BY bse.trade_date ASC ROWS BETWEEN 199 PRECEDING AND CURRENT ROW) AS sma200, avg(bse.close) OVER (PARTITION BY bse.code ORDER BY bse.trade_date ASC ROWS BETWEEN 299 PRECEDING AND CURRENT ROW) AS sma300, avg(bse.close) OVER (PARTITION BY bse.code ORDER BY bse.trade_date ASC ROWS BETWEEN 499 PRECEDING AND CURRENT ROW) AS sma500, rank() OVER (PARTITION BY bse.code ORDER BY bse.trade_date DESC) AS rank FROM sensex LEFT JOIN bse ON sensex.code = bse.code ORDER BY bse.trade_date DESC), belowsma200 AS (SELECT *, CASE WHEN ranked_cte.close < ranked_cte.sma200 THEN 2 ELSE 0 END sma200dep, CASE WHEN ranked_cte.close < ranked_cte.sma300 THEN 3 ELSE 0 END sma300dep, CASE WHEN ranked_cte.close < ranked_cte.sma500 THEN 5 ELSE 0 END sma500dep FROM ranked_cte WHERE rank = 1) SELECT * FROM belowsma200 WHERE "name" = 'Bayer CropScience Ltd/India' ORDER BY sma500dep DESC, sma300dep DESC, sma200dep DESC
+2022-11-18 16:01:43.609 IST [11776] LOG:  server process (PID 15800) was terminated by exception 0x40010004
+2022-11-18 16:01:43.609 IST [11776] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-11-18 16:01:43.610 IST [11776] LOG:  terminating any other active server processes
+2022-11-18 16:01:43.796 IST [11776] LOG:  all server processes terminated; reinitializing
+2022-11-18 16:01:43.963 IST [11776] LOG:  startup process (PID 25144) was terminated by exception 0xC000026B
+2022-11-18 16:01:43.963 IST [11776] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-11-18 16:01:43.964 IST [11776] LOG:  aborting startup due to startup process failure
+2022-11-18 16:01:43.969 IST [11776] LOG:  database system is shut down
+2022-11-22 22:17:04.083 IST [19884] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-22 22:17:04.095 IST [19884] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-22 22:17:04.102 IST [19884] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-22 22:17:04.204 IST [17816] LOG:  database system was interrupted; last known up at 2022-11-18 11:36:08 IST
+2022-11-22 22:17:13.021 IST [17816] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-22 22:17:13.027 IST [17816] LOG:  redo starts at 0/1972A650
+2022-11-22 22:17:13.027 IST [17816] LOG:  invalid record length at 0/1972A688: wanted 24, got 0
+2022-11-22 22:17:13.027 IST [17816] LOG:  redo done at 0/1972A650 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-22 22:17:13.132 IST [19884] LOG:  database system is ready to accept connections
+2022-11-22 22:17:29.914 IST [3300] ERROR:  syntax error at or near "AS" at character 7
+2022-11-22 22:17:29.914 IST [3300] STATEMENT:  WITH  AS ( SELECT  bse.filename FROM bse) select * from  limit 200 offset 0
+2022-11-22 22:17:38.272 IST [3300] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-11-22 22:17:38.272 IST [3300] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2022-11-22 22:19:49.976 IST [3300] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-22 22:20:23.601 IST [1420] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-22 22:21:01.196 IST [8456] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-22 22:21:28.451 IST [11416] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-22 22:21:35.241 IST [19760] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-22 22:21:56.530 IST [18560] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-23 12:53:00.259 IST [19884] LOG:  autovacuum launcher process (PID 15928) was terminated by exception 0x40010004
+2022-11-23 12:53:00.259 IST [19884] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-11-23 12:53:00.259 IST [19884] LOG:  terminating any other active server processes
+2022-11-23 12:53:00.269 IST [19884] LOG:  statistics collector process (PID 14260) was terminated by exception 0x40010004
+2022-11-23 12:53:00.269 IST [19884] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-11-23 12:53:00.269 IST [19884] LOG:  all server processes terminated; reinitializing
+^C2022-11-25 16:07:41.268 IST [20124] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-25 16:07:41.304 IST [20124] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-25 16:07:41.326 IST [20124] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-25 16:07:41.630 IST [7808] LOG:  database system was interrupted; last known up at 2022-11-22 22:57:16 IST
+2022-11-25 16:08:03.393 IST [7808] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-25 16:08:03.404 IST [7808] LOG:  redo starts at 0/1977F830
+2022-11-25 16:08:03.404 IST [7808] LOG:  invalid record length at 0/1977FA38: wanted 24, got 0
+2022-11-25 16:08:03.404 IST [7808] LOG:  redo done at 0/1977FA00 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-25 16:08:03.683 IST [20124] LOG:  database system is ready to accept connections
+2022-11-25 17:01:09.472 IST [15820] ERROR:  aggregate functions are not allowed in GROUP BY at character 51
+2022-11-25 17:01:09.472 IST [15820] STATEMENT:  
+		SELECT date_trunc('week', trade_date),
+	       count(*)
+	FROM bse
+	GROUP BY 2
+	ORDER BY 2
+2022-11-26 13:18:08.424 IST [12736] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-26 13:18:08.447 IST [12736] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-26 13:18:08.469 IST [12736] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-26 13:18:08.589 IST [13152] LOG:  database system was interrupted; last known up at 2022-11-25 16:38:04 IST
+2022-11-26 13:18:11.433 IST [13152] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-26 13:18:11.441 IST [13152] LOG:  redo starts at 0/197811D8
+2022-11-26 13:18:11.441 IST [13152] LOG:  invalid record length at 0/197812C0: wanted 24, got 0
+2022-11-26 13:18:11.441 IST [13152] LOG:  redo done at 0/19781288 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-26 13:18:11.551 IST [12736] LOG:  database system is ready to accept connections
+2022-11-26 13:18:13.832 IST [12736] LOG:  received fast shutdown request
+2022-11-26 13:18:13.835 IST [12736] LOG:  aborting any active transactions
+2022-11-26 13:18:13.865 IST [12736] LOG:  background worker "logical replication launcher" (PID 22728) exited with exit code 1
+2022-11-26 13:18:13.866 IST [11640] LOG:  shutting down
+2022-11-26 13:18:13.901 IST [12736] LOG:  database system is shut down
+2022-11-26 13:18:14.438 IST [21408] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-26 13:18:14.455 IST [21408] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-26 13:18:14.461 IST [21408] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-26 13:18:14.534 IST [9764] LOG:  database system was shut down at 2022-11-26 13:18:13 IST
+2022-11-26 13:18:14.663 IST [21408] LOG:  database system is ready to accept connections
+2022-11-26 13:18:21.680 IST [21408] LOG:  received fast shutdown request
+2022-11-26 13:18:21.684 IST [21408] LOG:  aborting any active transactions
+2022-11-26 13:18:21.691 IST [21408] LOG:  background worker "logical replication launcher" (PID 20256) exited with exit code 1
+2022-11-26 13:18:21.705 IST [17040] LOG:  shutting down
+2022-11-26 13:18:21.785 IST [21408] LOG:  database system is shut down
+2022-11-26 13:18:22.338 IST [12472] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-26 13:18:22.350 IST [12472] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-26 13:18:22.356 IST [12472] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-26 13:18:22.428 IST [16744] LOG:  database system was shut down at 2022-11-26 13:18:21 IST
+2022-11-26 13:18:22.509 IST [12472] LOG:  database system is ready to accept connections
+2022-11-26 13:18:35.589 IST [5944] ERROR:  canceling statement due to user request
+2022-11-26 13:18:35.589 IST [10784] ERROR:  canceling statement due to user request
+2022-11-26 13:18:35.590 IST [12472] LOG:  received fast shutdown request
+2022-11-26 13:18:35.594 IST [12472] LOG:  aborting any active transactions
+2022-11-26 13:18:35.595 IST [2656] FATAL:  terminating connection due to administrator command
+2022-11-26 13:18:35.595 IST [4428] FATAL:  terminating connection due to administrator command
+2022-11-26 13:18:35.618 IST [12472] LOG:  background worker "logical replication launcher" (PID 5944) exited with exit code 1
+2022-11-26 13:18:35.665 IST [20848] LOG:  shutting down
+2022-11-26 13:18:35.728 IST [12472] LOG:  database system is shut down
+2022-11-26 13:18:42.596 IST [11276] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-26 13:18:42.608 IST [11276] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-26 13:18:42.615 IST [11276] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-26 13:18:42.693 IST [11236] LOG:  database system was shut down at 2022-11-26 13:18:35 IST
+2022-11-26 13:18:42.867 IST [11276] LOG:  database system is ready to accept connections
+2022-11-26 14:13:21.246 IST [19116] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-26 14:13:21.246 IST [19116] LOG:  unexpected EOF on client connection with an open transaction
+2022-11-26 14:13:33.862 IST [19944] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-11-27 00:14:49.122 IST [16492] ERROR:  syntax error at or near "as" at character 71
+2022-11-27 00:14:49.122 IST [16492] STATEMENT:  
+		
+	with ranked_cte as(
+	select
+		*
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc )
+	select top(30) from ranked_cte
+2022-11-27 00:15:04.001 IST [16492] ERROR:  syntax error at or near "as" at character 74
+2022-11-27 00:15:04.001 IST [16492] STATEMENT:  
+		
+		
+	with ranked_cte as(
+	select
+		*
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc )
+	select * from ranked_cte limit 30
+2022-11-27 00:15:16.849 IST [16492] ERROR:  syntax error at or near ")" at character 43
+2022-11-27 00:15:16.849 IST [16492] STATEMENT:  select
+		*
+	order by
+		bse.trade_date desc) as rank
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc
+2022-11-27 00:16:23.247 IST [16492] ERROR:  syntax error at or near "from" at character 17
+2022-11-27 00:16:23.247 IST [16492] STATEMENT:  select
+		*,
+		
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc
+2022-11-27 00:17:53.277 IST [16492] ERROR:  syntax error at or near "lag" at character 14
+2022-11-27 00:17:53.277 IST [16492] STATEMENT:  select
+		*
+		lag(close,250) over(partition by code order by trade_date asc) last_year_val
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc 
+2022-11-27 00:18:05.410 IST [16492] ERROR:  column reference "code" is ambiguous at character 48
+2022-11-27 00:18:05.410 IST [16492] STATEMENT:  select
+		*,
+		lag(close,250) over(partition by code order by trade_date asc) last_year_val
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc 
+2022-11-27 00:22:05.427 IST [16492] ERROR:  syntax error at or near "as" at character 224
+2022-11-27 00:22:05.427 IST [16492] STATEMENT:  with ranked_cte as(
+	select
+		*,
+		close - lag(close,250) over(partition by sensex.code order by trade_date asc) last_year_diff
+	from
+		sensex
+	left join bse on
+		sensex.code = bse.code
+	order by
+		bse.trade_date desc 
+	), as top_30(
+	
+		select * from ranked_cte limit 30
+	) select * from top_30 order by last_year_diff
+2022-11-27 03:02:15.790 IST [2400] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-27 03:02:15.806 IST [2400] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-27 03:02:15.816 IST [2400] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-27 03:02:16.067 IST [23148] LOG:  database system was interrupted; last known up at 2022-11-26 14:55:13 IST
+2022-11-27 03:02:19.966 IST [9740] FATAL:  the database system is starting up
+2022-11-27 03:02:20.056 IST [11032] FATAL:  the database system is starting up
+2022-11-27 03:02:20.248 IST [4960] FATAL:  the database system is starting up
+2022-11-27 03:02:20.423 IST [16084] FATAL:  the database system is starting up
+2022-11-27 03:02:20.531 IST [20380] FATAL:  the database system is starting up
+2022-11-27 03:02:25.126 IST [21580] FATAL:  the database system is starting up
+2022-11-27 03:02:25.185 IST [12828] FATAL:  the database system is starting up
+2022-11-27 03:02:25.246 IST [8380] FATAL:  the database system is starting up
+2022-11-27 03:02:25.382 IST [18208] FATAL:  the database system is starting up
+2022-11-27 03:02:25.450 IST [8372] FATAL:  the database system is starting up
+2022-11-27 03:02:31.994 IST [23148] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-27 03:02:32.001 IST [23148] LOG:  redo starts at 0/19845B80
+2022-11-27 03:02:32.001 IST [23148] LOG:  invalid record length at 0/19846190: wanted 24, got 0
+2022-11-27 03:02:32.001 IST [23148] LOG:  redo done at 0/19846158 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-27 03:02:32.167 IST [2400] LOG:  database system is ready to accept connections
+2022-11-27 03:15:00.895 IST [2400] LOG:  server process (PID 11320) exited with exit code 1
+2022-11-27 03:15:00.895 IST [2400] LOG:  terminating any other active server processes
+2022-11-27 03:43:40.892 IST [15288] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-11-27 03:43:40.910 IST [15288] LOG:  listening on IPv6 address "::1", port 5432
+2022-11-27 03:43:40.935 IST [15288] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-11-27 03:43:41.083 IST [23048] LOG:  database system was interrupted; last known up at 2022-11-27 03:13:15 IST
+2022-11-27 03:43:41.394 IST [16696] FATAL:  the database system is starting up
+2022-11-27 03:43:41.577 IST [18820] FATAL:  the database system is starting up
+2022-11-27 03:43:41.757 IST [10320] FATAL:  the database system is starting up
+2022-11-27 03:43:46.234 IST [23048] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-11-27 03:43:46.243 IST [23048] LOG:  redo starts at 0/19BEF3A0
+2022-11-27 03:43:46.244 IST [23048] LOG:  invalid record length at 0/19BEF488: wanted 24, got 0
+2022-11-27 03:43:46.244 IST [23048] LOG:  redo done at 0/19BEF450 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-11-27 03:43:46.507 IST [15288] LOG:  database system is ready to accept connections
+2022-11-27 03:43:55.157 IST [1876] ERROR:  relation "sensex_index" does not exist at character 143
+2022-11-27 03:43:55.157 IST [1876] STATEMENT:  with ranked_cte as(
+	select
+		*,
+		close - lag(close,252) over(partition by sensex_index.code order by trade_date asc) last_year_diff
+	from
+		sensex_index
+	left join bse on
+		sensex_index.code = bse.code
+	order by
+		bse.trade_date desc 
+	), top_30 as(
+	
+		select * from ranked_cte 
+	) select * from top_30 where close < 1000 and last_year_diff > 0 order by last_year_diff desc 
+2022-11-27 05:32:21.872 IST [15288] LOG:  server process (PID 4756) was terminated by exception 0x40010004
+2022-11-27 05:32:21.872 IST [15288] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-11-27 05:32:21.872 IST [15288] LOG:  terminating any other active server processes
+2022-12-05 17:22:49.602 IST [1284] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-12-05 17:22:49.612 IST [1284] LOG:  listening on IPv6 address "::1", port 5432
+2022-12-05 17:22:49.619 IST [1284] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-12-05 17:22:49.720 IST [8960] LOG:  database system was interrupted; last known up at 2022-11-27 03:48:47 IST
+2022-12-05 17:22:58.524 IST [8960] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-12-05 17:22:58.530 IST [8960] LOG:  redo starts at 0/19BFBA48
+2022-12-05 17:22:58.530 IST [8960] LOG:  invalid record length at 0/19BFBB30: wanted 24, got 0
+2022-12-05 17:22:58.530 IST [8960] LOG:  redo done at 0/19BFBAF8 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-12-05 17:22:58.692 IST [1284] LOG:  database system is ready to accept connections
+2022-12-05 17:23:12.358 IST [21072] ERROR:  relation "sensex" does not exist at character 79
+2022-12-05 17:23:12.358 IST [21072] STATEMENT:  create table cte_temp as WITH test0 AS ( SELECT  sensex.code,sensex.name FROM sensex ) , test1 as ( SELECT  bse.code,bse.name,bse.close,bse.trade_date, AVG(bse.close) OVER(PARTITION BY bse.code ORDER BY bse.trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sma200 FROM test0,bse WHERE  bse.code = test0.code ) , test2 as ( SELECT  test1.code,test1.name,test1.close,test1.trade_date,test1.sma200,CASE WHEN  test1.close < test1.sma200  THEN 1 ELSE 0END as close_lt_sma200 FROM test1 ORDER BY test1.trade_date desc ) select * from test2 limit 30 offset 0
+2022-12-05 17:23:39.374 IST [21072] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2022-12-05 17:47:08.661 IST [1284] LOG:  server process (PID 15676) was terminated by exception 0xC000013A
+2022-12-05 17:47:08.661 IST [1284] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-12-05 17:47:08.661 IST [1284] LOG:  terminating any other active server processes
+2022-12-05 17:47:08.705 IST [1284] LOG:  all server processes terminated; reinitializing
+2022-12-05 17:47:08.733 IST [1284] LOG:  startup process (PID 12092) was terminated by exception 0xC0000142
+2022-12-05 17:47:08.733 IST [1284] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-12-05 17:47:08.733 IST [1284] LOG:  aborting startup due to startup process failure
+2022-12-05 17:47:08.735 IST [1284] LOG:  database system is shut down
+2022-12-06 01:14:55.431 IST [9168] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-12-06 01:14:55.443 IST [9168] LOG:  listening on IPv6 address "::1", port 5432
+2022-12-06 01:14:55.449 IST [9168] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-12-06 01:14:55.522 IST [11112] LOG:  database system was interrupted; last known up at 2022-12-05 17:22:58 IST
+2022-12-06 01:14:55.944 IST [11112] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-12-06 01:14:55.954 IST [11112] LOG:  redo starts at 0/19BFBBA8
+2022-12-06 01:14:55.954 IST [11112] LOG:  invalid record length at 0/19BFBBE0: wanted 24, got 0
+2022-12-06 01:14:55.955 IST [11112] LOG:  redo done at 0/19BFBBA8 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-12-06 01:14:56.131 IST [9168] LOG:  database system is ready to accept connections
+2022-12-06 11:25:58.894 IST [9156] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-12-06 11:25:58.907 IST [9156] LOG:  listening on IPv6 address "::1", port 5432
+2022-12-06 11:25:58.914 IST [9156] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-12-06 11:25:59.031 IST [19868] LOG:  database system was interrupted; last known up at 2022-12-06 01:14:55 IST
+2022-12-06 11:25:59.972 IST [19868] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-12-06 11:25:59.980 IST [19868] LOG:  redo starts at 0/19BFBC58
+2022-12-06 11:25:59.980 IST [19868] LOG:  invalid record length at 0/19BFBC90: wanted 24, got 0
+2022-12-06 11:25:59.980 IST [19868] LOG:  redo done at 0/19BFBC58 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-12-06 11:26:00.094 IST [9156] LOG:  database system is ready to accept connections
+2022-12-06 11:26:04.466 IST [15796] ERROR:  relation "sensex" does not exist at character 79
+2022-12-06 11:26:04.466 IST [15796] STATEMENT:  create table cte_temp as WITH test0 AS ( SELECT  sensex.code,sensex.name FROM sensex ) , test1 as ( SELECT  bse.code,bse.name,bse.close,bse.trade_date, AVG(bse.close) OVER(PARTITION BY bse.code ORDER BY bse.trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sma200 FROM test0,bse WHERE  bse.code = test0.code ) , test2 as ( SELECT  test1.code,test1.name,test1.close,test1.trade_date,test1.sma200,CASE WHEN  test1.close < test1.sma200  THEN 1 ELSE 0END as close_lt_sma200 FROM test1 ORDER BY test1.trade_date desc ) select * from test2 limit 30 offset 0
+2022-12-06 13:57:52.127 IST [12340] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-12-06 13:57:52.138 IST [12340] LOG:  listening on IPv6 address "::1", port 5432
+2022-12-06 13:57:52.145 IST [12340] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-12-06 13:57:52.220 IST [1196] LOG:  database system was interrupted; last known up at 2022-12-06 11:26:00 IST
+2022-12-06 13:57:53.259 IST [1196] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-12-06 13:57:53.265 IST [1196] LOG:  redo starts at 0/19BFBD08
+2022-12-06 13:57:53.265 IST [1196] LOG:  invalid record length at 0/19BFBD40: wanted 24, got 0
+2022-12-06 13:57:53.265 IST [1196] LOG:  redo done at 0/19BFBD08 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-12-06 13:57:53.374 IST [12340] LOG:  database system is ready to accept connections
+2022-12-06 21:51:11.635 IST [12340] LOG:  server process (PID 3160) was terminated by exception 0xC000013A
+2022-12-06 21:51:11.635 IST [12340] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-12-06 21:51:11.635 IST [12340] LOG:  terminating any other active server processes
+2022-12-06 21:51:11.668 IST [12340] LOG:  all server processes terminated; reinitializing
+2022-12-06 21:51:11.693 IST [12340] LOG:  startup process (PID 23520) was terminated by exception 0xC0000142
+2022-12-06 21:51:11.693 IST [12340] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-12-06 21:51:11.693 IST [12340] LOG:  aborting startup due to startup process failure
+2022-12-06 21:51:11.695 IST [12340] LOG:  database system is shut down
+2022-12-16 20:05:14.701 IST [6172] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-12-16 20:05:14.711 IST [6172] LOG:  listening on IPv6 address "::1", port 5432
+2022-12-16 20:05:14.716 IST [6172] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-12-16 20:05:14.763 IST [14920] LOG:  database system was interrupted; last known up at 2022-12-06 14:33:36 IST
+2022-12-16 20:05:15.095 IST [14920] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-12-16 20:05:15.102 IST [14920] LOG:  redo starts at 0/19FA5AC0
+2022-12-16 20:05:15.102 IST [14920] LOG:  invalid record length at 0/19FA5BA8: wanted 24, got 0
+2022-12-16 20:05:15.102 IST [14920] LOG:  redo done at 0/19FA5B70 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2022-12-16 20:05:15.179 IST [6172] LOG:  database system is ready to accept connections
+2022-12-16 20:05:29.588 IST [9376] ERROR:  relation "sensex" does not exist at character 79
+2022-12-16 20:05:29.588 IST [9376] STATEMENT:  create table cte_temp as WITH test0 AS ( SELECT  sensex.code,sensex.name FROM sensex ) , test1 as ( SELECT  bse.code,bse.name,bse.close,bse.trade_date, AVG(bse.close) OVER(PARTITION BY bse.code ORDER BY bse.trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sma200 FROM test0,bse WHERE  bse.code = test0.code ) , test2 as ( SELECT  test1.code,test1.name,test1.close,test1.trade_date,test1.sma200,CASE WHEN  test1.close < test1.sma200  THEN 1 ELSE 0END as close_lt_sma200 FROM test1 ORDER BY test1.trade_date desc ) select * from test2 limit 30 offset 0
+2022-12-16 20:08:59.194 IST [9376] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-12-16 20:08:59.194 IST [9376] STATEMENT:  
+	        SELECT * FROM information_schema.tables WHERE table_schema = 'public'
+	    
+2022-12-16 20:08:59.196 IST [9376] WARNING:  there is no transaction in progress
+2022-12-16 20:13:36.979 IST [9376] ERROR:  relation "sensex" does not exist at character 79
+2022-12-16 20:13:36.979 IST [9376] STATEMENT:  create table cte_temp as WITH test0 AS ( SELECT  sensex.code,sensex.name FROM sensex ) , test1 as ( SELECT  bse.code,bse.name,bse.close,bse.trade_date, AVG(bse.close) OVER(PARTITION BY bse.code ORDER BY bse.trade_date asc ROWS  BETWEEN 199 preceding  AND current Row) as sma200 FROM test0,bse WHERE  bse.code = test0.code ) , test2 as ( SELECT  test1.code,test1.name,test1.close,test1.trade_date,test1.sma200,CASE WHEN  test1.close < test1.sma200  THEN 1 ELSE 0END as close_lt_sma200 FROM test1 ORDER BY test1.trade_date desc ) select * from test2 limit 30 offset 0
+2022-12-16 20:20:45.859 IST [9376] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2022-12-16 20:20:45.859 IST [9376] STATEMENT:  
+	        SELECT * FROM information_schema.tables WHERE table_schema = 'public'
+	    
+2022-12-16 20:20:45.864 IST [9376] WARNING:  there is no transaction in progress
+2022-12-16 20:41:21.391 IST [10492] ERROR:  canceling statement due to user request
+2022-12-16 20:41:21.391 IST [6172] LOG:  received fast shutdown request
+2022-12-16 20:41:21.396 IST [6172] LOG:  aborting any active transactions
+2022-12-16 20:41:21.396 IST [13276] FATAL:  terminating connection due to administrator command
+2022-12-16 20:41:21.396 IST [9376] FATAL:  terminating connection due to administrator command
+2022-12-16 20:41:21.397 IST [13984] FATAL:  terminating connection due to administrator command
+2022-12-16 20:41:21.413 IST [6172] LOG:  background worker "logical replication launcher" (PID 10492) exited with exit code 1
+2022-12-16 20:41:21.432 IST [15036] LOG:  shutting down
+2022-12-16 20:41:21.523 IST [6172] LOG:  database system is shut down
+2022-12-16 20:41:22.557 IST [6624] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-12-16 20:41:22.565 IST [6624] LOG:  listening on IPv6 address "::1", port 5432
+2022-12-16 20:41:22.571 IST [6624] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-12-16 20:41:22.613 IST [6612] LOG:  database system was shut down at 2022-12-16 20:41:21 IST
+2022-12-16 20:41:22.672 IST [6624] LOG:  database system is ready to accept connections
+2022-12-16 21:22:02.922 IST [5764] ERROR:  canceling statement due to user request
+2022-12-16 21:22:02.922 IST [6624] LOG:  received fast shutdown request
+2022-12-16 21:22:02.925 IST [6624] LOG:  aborting any active transactions
+2022-12-16 21:22:02.926 IST [7676] FATAL:  terminating connection due to administrator command
+2022-12-16 21:22:02.926 IST [10820] FATAL:  terminating connection due to administrator command
+2022-12-16 21:22:02.926 IST [6624] LOG:  background worker "logical replication launcher" (PID 5764) exited with exit code 1
+2022-12-16 21:22:02.941 IST [6572] LOG:  shutting down
+2022-12-16 21:22:03.006 IST [6624] LOG:  database system is shut down
+2022-12-19 00:47:03.807 IST [1588] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2022-12-19 00:47:03.816 IST [1588] LOG:  listening on IPv6 address "::1", port 5432
+2022-12-19 00:47:03.822 IST [1588] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-12-19 00:47:03.868 IST [10776] LOG:  database system was shut down at 2022-12-16 21:22:02 IST
+2022-12-19 00:47:03.948 IST [1588] LOG:  database system is ready to accept connections
+2022-12-19 02:25:52.553 IST [1588] LOG:  server process (PID 18044) was terminated by exception 0xC000013A
+2022-12-19 02:25:52.553 IST [1588] DETAIL:  Failed process was running: 
+	        SELECT column_name, data_type 
+	        FROM information_schema.columns
+	        WHERE table_name = 'sensex' AND table_schema = 'public';
+	    
+2022-12-19 02:25:52.553 IST [1588] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-12-19 02:25:52.553 IST [1588] LOG:  terminating any other active server processes
+^C2023-01-04 23:09:55.958 IST [18188] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2023-01-04 23:09:55.969 IST [18188] LOG:  listening on IPv6 address "::1", port 5432
+2023-01-04 23:09:55.976 IST [18188] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-01-04 23:09:56.061 IST [13892] LOG:  database system was interrupted; last known up at 2022-12-19 02:22:08 IST
+2023-01-04 23:09:57.013 IST [13892] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-01-04 23:09:57.018 IST [13892] LOG:  redo starts at 0/1A262D18
+2023-01-04 23:09:57.018 IST [13892] LOG:  invalid record length at 0/1A264138: wanted 24, got 0
+2023-01-04 23:09:57.018 IST [13892] LOG:  redo done at 0/1A264100 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-01-04 23:09:57.121 IST [18188] LOG:  database system is ready to accept connections
+2023-01-04 23:11:57.934 IST [10252] ERROR:  syntax error at or near ")" at character 100
+2023-01-04 23:11:57.934 IST [10252] STATEMENT:  WITH test AS ( SELECT   AVG(bse.close) OVER(PARTITION BY bse.code ORDER BY bse.trade_date asc ROWS ) as  FROM sensex,bse) select * from test limit 200 offset 0
+2023-01-04 23:12:22.554 IST [10252] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-04 23:12:22.554 IST [10252] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2023-01-04 23:12:22.558 IST [10252] WARNING:  there is no transaction in progress
+2023-01-04 23:19:19.813 IST [10252] ERROR:  duplicate key value violates unique constraint "cte_name_key"
+2023-01-04 23:19:19.813 IST [10252] DETAIL:  Key (name)=(test) already exists.
+2023-01-04 23:19:19.813 IST [10252] STATEMENT:  
+	            insert into 
+	            CTE(name,ctejson,ctesql,parent) 
+	            values('test','[{"parent": "", "name": "test", "from": ["sensex_index", "bse"], "cols": [{"name": "bse.code", "type": "normal"}, {"name": "bse.close", "type": "normal"}, {"name": "bse.name", "type": "normal"}, {"name": "sma200", "type": "window_function", "attributes": {"window_func": "AVG", "col": "bse.close", "over": {"partition_by": "bse.code", "order_by": "bse.trade_date", "order_type": "asc", "frame_spec": {"type": "rows"}, "frame_boundaries": {"preceding": "200 preceding", "following": "current Row"}}}}], "where": ["bse.code", "=", "500002"], "order": [], "limit": "2000", "offset": "0"}]','WITH test AS ( SELECT  bse.code,bse.close,bse.name, AVG(bse.close) OVER(PARTITION BY bse.code ORDER BY bse.trade_date asc ROWS  BETWEEN 200 preceding  AND current Row) as sma200 FROM sensex_index,bse WHERE  bse.code = 500002) select * from test limit 2000 offset 0','')
+	        
+2023-01-04 23:19:37.306 IST [10252] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-04 23:19:37.306 IST [10252] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2023-01-04 23:19:37.308 IST [10252] WARNING:  there is no transaction in progress
+2023-01-05 00:36:13.390 IST [11316] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2023-01-05 00:36:13.398 IST [11316] LOG:  listening on IPv6 address "::1", port 5432
+2023-01-05 00:36:13.404 IST [11316] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-01-05 00:36:13.457 IST [13936] LOG:  database system was interrupted; last known up at 2023-01-05 00:32:01 IST
+2023-01-05 00:36:13.732 IST [13936] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-01-05 00:36:13.740 IST [13936] LOG:  redo starts at 0/1AE4E210
+2023-01-05 00:36:13.778 IST [13936] LOG:  invalid record length at 0/1B71D788: wanted 24, got 0
+2023-01-05 00:36:13.778 IST [13936] LOG:  redo done at 0/1B71D750 system usage: CPU: user: 0.03 s, system: 0.00 s, elapsed: 0.03 s
+2023-01-05 00:36:13.921 IST [11316] LOG:  database system is ready to accept connections
+2023-01-05 01:24:10.109 IST [17840] ERROR:  canceling statement due to user request
+2023-01-05 01:24:10.110 IST [11316] LOG:  received fast shutdown request
+2023-01-05 01:24:10.121 IST [11316] LOG:  aborting any active transactions
+2023-01-05 01:24:10.122 IST [4000] FATAL:  terminating connection due to administrator command
+2023-01-05 01:24:10.122 IST [8608] FATAL:  terminating connection due to administrator command
+2023-01-05 01:24:10.126 IST [11316] LOG:  background worker "logical replication launcher" (PID 17840) exited with exit code 1
+2023-01-05 01:24:10.143 IST [7404] LOG:  shutting down
+2023-01-05 01:24:10.205 IST [11316] LOG:  database system is shut down
+2023-01-05 01:24:18.610 IST [13936] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2023-01-05 01:24:18.617 IST [13936] LOG:  listening on IPv6 address "::1", port 5432
+2023-01-05 01:24:18.623 IST [13936] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-01-05 01:24:18.676 IST [14884] LOG:  database system was shut down at 2023-01-05 01:24:10 IST
+2023-01-05 01:24:18.712 IST [13936] LOG:  database system is ready to accept connections
+2023-01-05 01:26:10.456 IST [17116] ERROR:  syntax error at or near "join" at character 65
+2023-01-05 01:26:10.456 IST [17116] STATEMENT:  WITH test AS ( SELECT   FROM sensex_index,bse,sensex_index,left join,bse,on,sensex_index.code,=,bse.code) select * from test limit 200 offset 0
+2023-01-05 01:27:23.105 IST [17116] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 01:27:28.276 IST [16636] ERROR:  syntax error at or near "sensex_index" at character 47
+2023-01-05 01:27:28.276 IST [16636] STATEMENT:  WITH test AS ( SELECT   FROM sensex_index bse sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code) select * from test limit 200 offset 0
+2023-01-05 01:28:15.101 IST [16636] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 01:28:15.101 IST [16636] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2023-01-05 01:28:15.103 IST [16636] WARNING:  there is no transaction in progress
+2023-01-05 01:28:15.104 IST [16636] ERROR:  syntax error at or near "sensex_index" at character 55
+2023-01-05 01:28:15.104 IST [16636] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index bse sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code) select * from test limit 200 offset 0
+2023-01-05 01:28:57.956 IST [16636] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 01:28:57.956 IST [16636] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2023-01-05 01:28:57.958 IST [16636] WARNING:  there is no transaction in progress
+2023-01-05 01:28:57.960 IST [16636] ERROR:  syntax error at or near "sensex_index" at character 55
+2023-01-05 01:28:57.960 IST [16636] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index bse sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code) select * from test limit 200 offset 0
+2023-01-05 01:29:09.128 IST [16636] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 01:29:09.128 IST [16636] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2023-01-05 01:29:09.130 IST [16636] WARNING:  there is no transaction in progress
+2023-01-05 01:29:09.131 IST [16636] ERROR:  syntax error at or near "sensex_index" at character 55
+2023-01-05 01:29:09.131 IST [16636] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index bse sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code) select * from test limit 200 offset 0
+2023-01-05 01:29:47.877 IST [16636] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 01:29:47.877 IST [16636] STATEMENT:  
+	        SELECT * FROM information_schema.tables WHERE table_schema = 'public'
+	    
+2023-01-05 01:29:47.882 IST [16636] WARNING:  there is no transaction in progress
+2023-01-05 01:38:54.907 IST [16636] ERROR:  syntax error at or near "sensex_index" at character 97
+2023-01-05 01:38:54.907 IST [16636] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code WHERE  sensex_index.code = 500180) select * from test limit 200 offset 0
+2023-01-05 01:39:01.158 IST [16636] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 01:39:01.158 IST [16636] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2023-01-05 01:39:01.160 IST [16636] WARNING:  there is no transaction in progress
+2023-01-05 01:39:01.162 IST [16636] ERROR:  syntax error at or near "sensex_index" at character 97
+2023-01-05 01:39:01.162 IST [16636] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code WHERE  sensex_index.code = 500180) select * from test limit 200 offset 0
+2023-01-05 01:40:10.729 IST [16636] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 01:40:10.729 IST [16636] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2023-01-05 01:40:10.730 IST [16636] WARNING:  there is no transaction in progress
+2023-01-05 01:40:10.732 IST [16636] ERROR:  syntax error at or near "sensex_index" at character 97
+2023-01-05 01:40:10.732 IST [16636] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code WHERE  sensex_index.code = 500180) select * from test limit 200 offset 0
+2023-01-05 01:40:27.104 IST [16636] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 01:40:27.104 IST [16636] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2023-01-05 01:40:27.105 IST [16636] WARNING:  there is no transaction in progress
+2023-01-05 01:40:27.107 IST [16636] ERROR:  syntax error at or near "sensex_index" at character 97
+2023-01-05 01:40:27.107 IST [16636] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code WHERE  sensex_index.code = 500180) select * from test limit 200 offset 0
+2023-01-05 01:40:32.498 IST [13484] ERROR:  canceling statement due to user request
+2023-01-05 01:40:32.499 IST [13936] LOG:  received fast shutdown request
+2023-01-05 01:40:32.502 IST [13936] LOG:  aborting any active transactions
+2023-01-05 01:40:32.502 IST [16636] FATAL:  terminating connection due to administrator command
+2023-01-05 01:40:32.502 IST [6172] FATAL:  terminating connection due to administrator command
+2023-01-05 01:40:32.513 IST [13936] LOG:  background worker "logical replication launcher" (PID 13484) exited with exit code 1
+2023-01-05 01:40:32.531 IST [9976] LOG:  shutting down
+2023-01-05 01:40:32.593 IST [13936] LOG:  database system is shut down
+2023-01-05 01:40:34.000 IST [1896] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2023-01-05 01:40:34.010 IST [1896] LOG:  listening on IPv6 address "::1", port 5432
+2023-01-05 01:40:34.016 IST [1896] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-01-05 01:40:34.058 IST [11680] LOG:  database system was shut down at 2023-01-05 01:40:32 IST
+2023-01-05 01:40:34.104 IST [1896] LOG:  database system is ready to accept connections
+2023-01-05 01:40:37.009 IST [8784] ERROR:  syntax error at or near "sensex_index" at character 97
+2023-01-05 01:40:37.009 IST [8784] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code WHERE  sensex_index.code = 500180) select * from test limit 200 offset 0
+2023-01-05 01:42:35.167 IST [8784] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 01:43:39.439 IST [16640] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 01:43:44.102 IST [7628] ERROR:  syntax error at or near "sensex_index" at character 97
+2023-01-05 01:43:44.102 IST [7628] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code WHERE  sensex_index.code = 500180) select * from test limit 200 offset 0
+2023-01-05 01:44:26.959 IST [7628] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 01:44:28.457 IST [4456] ERROR:  syntax error at or near "sensex_index" at character 97
+2023-01-05 01:44:28.457 IST [4456] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code WHERE  sensex_index.code = 500180) select * from test limit 200 offset 0
+2023-01-05 01:44:54.762 IST [4784] ERROR:  canceling statement due to user request
+2023-01-05 01:44:54.762 IST [1896] LOG:  received fast shutdown request
+2023-01-05 01:44:54.774 IST [1896] LOG:  aborting any active transactions
+2023-01-05 01:44:54.774 IST [4456] FATAL:  terminating connection due to administrator command
+2023-01-05 01:44:54.775 IST [10648] FATAL:  terminating connection due to administrator command
+2023-01-05 01:44:54.775 IST [1896] LOG:  background worker "logical replication launcher" (PID 4784) exited with exit code 1
+2023-01-05 01:44:54.775 IST [18276] FATAL:  terminating connection due to administrator command
+2023-01-05 01:44:54.805 IST [5096] LOG:  shutting down
+2023-01-05 01:44:54.854 IST [1896] LOG:  database system is shut down
+2023-01-05 01:44:56.481 IST [8412] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2023-01-05 01:44:56.489 IST [8412] LOG:  listening on IPv6 address "::1", port 5432
+2023-01-05 01:44:56.495 IST [8412] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-01-05 01:44:56.536 IST [15216] LOG:  database system was shut down at 2023-01-05 01:44:54 IST
+2023-01-05 01:44:56.612 IST [8412] LOG:  database system is ready to accept connections
+2023-01-05 01:45:47.891 IST [11604] ERROR:  syntax error at or near "sensex_index" at character 97
+2023-01-05 01:45:47.891 IST [11604] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code WHERE  bse.code = 500410) select * from test limit 200 offset 0
+2023-01-05 01:46:35.490 IST [11604] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 01:46:35.490 IST [11604] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2023-01-05 01:46:35.492 IST [11604] WARNING:  there is no transaction in progress
+2023-01-05 01:46:35.493 IST [11604] ERROR:  syntax error at or near "sensex_index" at character 233
+2023-01-05 01:46:35.493 IST [11604] STATEMENT:  WITH test AS ( SELECT  bse.code, AVG(bse.close) OVER(PARTITION BY sensex_index.code ORDER BY bse.trade_date asc ROWS  BETWEEN 200 preceding  AND current Row) as sma200 FROM sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code WHERE  bse.code = 500411) select * from test limit 200 offset 0
+2023-01-05 01:46:47.120 IST [11164] ERROR:  canceling statement due to user request
+2023-01-05 01:46:47.121 IST [8412] LOG:  received fast shutdown request
+2023-01-05 01:46:47.135 IST [8412] LOG:  aborting any active transactions
+2023-01-05 01:46:47.135 IST [11604] FATAL:  terminating connection due to administrator command
+2023-01-05 01:46:47.136 IST [18260] FATAL:  terminating connection due to administrator command
+2023-01-05 01:46:47.138 IST [8412] LOG:  background worker "logical replication launcher" (PID 11164) exited with exit code 1
+2023-01-05 01:46:47.155 IST [9972] LOG:  shutting down
+2023-01-05 01:46:47.219 IST [8412] LOG:  database system is shut down
+2023-01-05 01:46:48.221 IST [13572] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2023-01-05 01:46:48.228 IST [13572] LOG:  listening on IPv6 address "::1", port 5432
+2023-01-05 01:46:48.234 IST [13572] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-01-05 01:46:48.276 IST [2140] LOG:  database system was shut down at 2023-01-05 01:46:47 IST
+2023-01-05 01:46:48.345 IST [13572] LOG:  database system is ready to accept connections
+2023-01-05 01:46:50.878 IST [1960] ERROR:  syntax error at or near "sensex_index" at character 233
+2023-01-05 01:46:50.878 IST [1960] STATEMENT:  WITH test AS ( SELECT  bse.code, AVG(bse.close) OVER(PARTITION BY sensex_index.code ORDER BY bse.trade_date asc ROWS  BETWEEN 200 preceding  AND current Row) as sma200 FROM sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code WHERE  bse.code = 500411) select * from test limit 200 offset 0
+2023-01-05 01:47:18.125 IST [1960] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 01:47:18.125 IST [1960] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2023-01-05 01:47:18.126 IST [1960] WARNING:  there is no transaction in progress
+2023-01-05 01:47:18.129 IST [1960] ERROR:  syntax error at or near "sensex_index" at character 233
+2023-01-05 01:47:18.129 IST [1960] STATEMENT:  WITH test AS ( SELECT  bse.code, AVG(bse.close) OVER(PARTITION BY sensex_index.code ORDER BY bse.trade_date asc ROWS  BETWEEN 200 preceding  AND current Row) as sma200 FROM sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code WHERE  bse.code = 500411) select * from test limit 200 offset 0
+2023-01-05 01:47:26.652 IST [1960] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 01:47:26.652 IST [1960] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2023-01-05 01:47:26.654 IST [1960] WARNING:  there is no transaction in progress
+2023-01-05 01:47:26.656 IST [1960] ERROR:  syntax error at or near "sensex_index" at character 233
+2023-01-05 01:47:26.656 IST [1960] STATEMENT:  WITH test AS ( SELECT  bse.code, AVG(bse.close) OVER(PARTITION BY sensex_index.code ORDER BY bse.trade_date asc ROWS  BETWEEN 200 preceding  AND current Row) as sma200 FROM sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code sensex_index left join bse on bse.code = sensex_index.code WHERE  bse.code = 500411) select * from test limit 200 offset 0
+2023-01-05 01:48:10.435 IST [1960] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 01:48:10.435 IST [1960] STATEMENT:  
+	        SELECT * FROM information_schema.tables WHERE table_schema = 'public'
+	    
+2023-01-05 01:48:10.438 IST [1960] WARNING:  there is no transaction in progress
+2023-01-05 01:49:58.093 IST [1960] ERROR:  syntax error at or near "2017" at character 150
+2023-01-05 01:49:58.093 IST [1960] STATEMENT:  WITH myindex AS ( SELECT  bse.code,bse.name,bse.trade_date FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date > ''2017-12-11'') select * from myindex limit 200 offset 0
+2023-01-05 01:50:20.030 IST [1960] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 01:50:20.030 IST [1960] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2023-01-05 01:50:20.032 IST [1960] WARNING:  there is no transaction in progress
+2023-01-05 01:50:20.034 IST [1960] ERROR:  syntax error at or near "sensex_index" at character 124
+2023-01-05 01:50:20.034 IST [1960] STATEMENT:  WITH myindex AS ( SELECT  bse.code,bse.name,bse.trade_date FROM sensex_index left join bse on sensex_index.code = bse.code sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date > 2017-12-11) select * from myindex limit 200 offset 0
+2023-01-05 01:52:52.408 IST [1960] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 01:52:52.408 IST [1960] STATEMENT:  
+	        SELECT * FROM information_schema.tables WHERE table_schema = 'public'
+	    
+2023-01-05 01:52:52.410 IST [1960] WARNING:  there is no transaction in progress
+2023-01-05 01:53:50.013 IST [1960] ERROR:  syntax error at or near "2017" at character 150
+2023-01-05 01:53:50.013 IST [1960] STATEMENT:  WITH myindex AS ( SELECT  bse.code,bse.name,bse.trade_date FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date > ''2017-12-11'') select * from myindex limit 200 offset 0
+2023-01-05 01:54:13.503 IST [1960] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 01:54:13.503 IST [1960] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2023-01-05 01:54:13.505 IST [1960] WARNING:  there is no transaction in progress
+2023-01-05 01:54:13.506 IST [1960] ERROR:  operator does not exist: date > integer at character 146
+2023-01-05 01:54:13.506 IST [1960] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2023-01-05 01:54:13.506 IST [1960] STATEMENT:  WITH myindex AS ( SELECT  bse.code,bse.name,bse.trade_date FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date > 2017-12-11) select * from myindex limit 200 offset 0
+2023-01-05 01:57:50.021 IST [1960] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 01:58:01.759 IST [17424] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 01:58:48.701 IST [1160] ERROR:  syntax error at or near "bse" at character 106
+2023-01-05 01:58:48.701 IST [1160] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  ''bse.trade_date''  > ''2017-12-11'' ) select * from test limit 200 offset 0
+2023-01-05 02:01:10.669 IST [1160] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:02:06.438 IST [17324] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:02:23.881 IST [14048] ERROR:  syntax error at or near "2017" at character 123
+2023-01-05 02:02:23.881 IST [14048] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date > ''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:03:28.911 IST [14048] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:03:43.610 IST [10672] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:03:47.615 IST [19400] ERROR:  syntax error at or near "2017" at character 123
+2023-01-05 02:03:47.615 IST [19400] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date > ''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:05:00.797 IST [19400] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:05:04.433 IST [19336] ERROR:  operator does not exist: date > integer at character 119
+2023-01-05 02:05:04.433 IST [19336] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2023-01-05 02:05:04.433 IST [19336] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date > 2017-12-11) select * from test limit 200 offset 0
+2023-01-05 02:06:49.952 IST [19336] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:06:58.887 IST [4272] ERROR:  syntax error at or near "bse" at character 106
+2023-01-05 02:06:58.887 IST [4272] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  ''bse.trade_date'' > ''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:08:32.701 IST [4272] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:08:36.923 IST [15476] ERROR:  syntax error at or near "bse" at character 106
+2023-01-05 02:08:36.923 IST [15476] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  ''bse.trade_date'' > ''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:08:49.512 IST [15476] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:08:50.888 IST [11104] ERROR:  syntax error at or near "bse" at character 106
+2023-01-05 02:08:50.888 IST [11104] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  ''bse.trade_date'' > ''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:09:02.248 IST [11104] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:09:05.789 IST [12280] ERROR:  syntax error at or near "bse" at character 106
+2023-01-05 02:09:05.789 IST [12280] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  ''bse.trade_date'' > ''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:11:27.424 IST [12280] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:12:01.679 IST [1836] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:12:05.205 IST [18636] ERROR:  operator does not exist: date > integer at character 119
+2023-01-05 02:12:05.205 IST [18636] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2023-01-05 02:12:05.205 IST [18636] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date > 2017-12-11) select * from test limit 200 offset 0
+2023-01-05 02:12:14.383 IST [18636] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:12:19.913 IST [17720] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:12:23.925 IST [6824] ERROR:  operator does not exist: date > integer at character 119
+2023-01-05 02:12:23.925 IST [6824] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2023-01-05 02:12:23.925 IST [6824] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date > 2017-12-11) select * from test limit 200 offset 0
+2023-01-05 02:12:51.027 IST [6824] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:12:56.583 IST [4852] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:12:58.982 IST [7628] ERROR:  operator does not exist: date > integer at character 119
+2023-01-05 02:12:58.982 IST [7628] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2023-01-05 02:12:58.982 IST [7628] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date > 2017-12-11) select * from test limit 200 offset 0
+2023-01-05 02:13:21.647 IST [7628] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:13:24.132 IST [12824] ERROR:  operator does not exist: date > integer at character 119
+2023-01-05 02:13:24.132 IST [12824] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2023-01-05 02:13:24.132 IST [12824] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date > 2017-12-11) select * from test limit 200 offset 0
+2023-01-05 02:13:59.313 IST [12824] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:14:01.445 IST [2420] ERROR:  operator does not exist: date > integer at character 119
+2023-01-05 02:14:01.445 IST [2420] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2023-01-05 02:14:01.445 IST [2420] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date > 2017-12-11) select * from test limit 200 offset 0
+2023-01-05 02:14:27.364 IST [2420] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:14:45.193 IST [19256] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:14:48.677 IST [8972] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:14:52.283 IST [18564] ERROR:  syntax error at or near "2017" at character 123
+2023-01-05 02:14:52.283 IST [18564] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date > ''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:16:14.302 IST [18564] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:16:17.066 IST [14588] ERROR:  operator does not exist: date > integer at character 119
+2023-01-05 02:16:17.066 IST [14588] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2023-01-05 02:16:17.066 IST [14588] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date > 2017-12-11) select * from test limit 200 offset 0
+2023-01-05 02:16:22.904 IST [14588] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:17:05.414 IST [15492] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:17:07.615 IST [7160] ERROR:  syntax error at or near "2017" at character 122
+2023-01-05 02:17:07.615 IST [7160] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date >''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:17:31.461 IST [7160] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:17:32.504 IST [16028] ERROR:  syntax error at end of input at character 173
+2023-01-05 02:17:32.504 IST [16028] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date >--2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:18:31.486 IST [16028] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:18:35.996 IST [4320] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:18:38.474 IST [12216] ERROR:  syntax error at or near "2017" at character 122
+2023-01-05 02:18:38.474 IST [12216] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date >''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:18:58.911 IST [12216] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:19:00.326 IST [1932] ERROR:  operator does not exist: date > integer at character 119
+2023-01-05 02:19:00.326 IST [1932] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2023-01-05 02:19:00.326 IST [1932] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE  bse.trade_date >2017-12-11) select * from test limit 200 offset 0
+2023-01-05 02:21:16.725 IST [1932] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:21:26.390 IST [14976] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:21:33.341 IST [15408] ERROR:  syntax error at or near "2017" at character 121
+2023-01-05 02:21:33.341 IST [15408] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:21:38.152 IST [12548] ERROR:  canceling statement due to user request
+2023-01-05 02:21:38.153 IST [13572] LOG:  received fast shutdown request
+2023-01-05 02:21:38.156 IST [13572] LOG:  aborting any active transactions
+2023-01-05 02:21:38.156 IST [15408] FATAL:  terminating connection due to administrator command
+2023-01-05 02:21:38.157 IST [13608] FATAL:  terminating connection due to administrator command
+2023-01-05 02:21:38.180 IST [13572] LOG:  background worker "logical replication launcher" (PID 12548) exited with exit code 1
+2023-01-05 02:21:38.195 IST [15176] LOG:  shutting down
+2023-01-05 02:21:38.262 IST [13572] LOG:  database system is shut down
+2023-01-05 02:21:39.197 IST [11212] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2023-01-05 02:21:39.205 IST [11212] LOG:  listening on IPv6 address "::1", port 5432
+2023-01-05 02:21:39.211 IST [11212] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-01-05 02:21:39.252 IST [3288] LOG:  database system was shut down at 2023-01-05 02:21:38 IST
+2023-01-05 02:21:39.323 IST [11212] LOG:  database system is ready to accept connections
+2023-01-05 02:21:41.394 IST [1132] ERROR:  syntax error at or near "2017" at character 121
+2023-01-05 02:21:41.394 IST [1132] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:22:20.194 IST [1132] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:22:22.707 IST [2668] ERROR:  syntax error at or near "2017" at character 121
+2023-01-05 02:22:22.707 IST [2668] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:22:31.886 IST [2668] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:22:34.241 IST [18016] ERROR:  operator does not exist: date > integer at character 118
+2023-01-05 02:22:34.241 IST [18016] HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+2023-01-05 02:22:34.241 IST [18016] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >2017-12-11) select * from test limit 200 offset 0
+2023-01-05 02:22:42.548 IST [18016] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:24:08.998 IST [6052] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:24:13.454 IST [12696] ERROR:  syntax error at or near "2017" at character 121
+2023-01-05 02:24:13.454 IST [12696] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:25:18.150 IST [12696] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:25:22.430 IST [19196] ERROR:  syntax error at or near "2017" at character 121
+2023-01-05 02:25:22.430 IST [19196] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:25:44.175 IST [19196] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:25:47.945 IST [16996] ERROR:  column "2017-12-11" does not exist at character 119
+2023-01-05 02:25:47.945 IST [16996] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >"2017-12-11") select * from test limit 200 offset 0
+2023-01-05 02:26:18.327 IST [16996] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:26:21.919 IST [1836] ERROR:  column "2017-12-11" does not exist at character 119
+2023-01-05 02:26:21.919 IST [1836] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >"2017-12-11") select * from test limit 200 offset 0
+2023-01-05 02:26:31.016 IST [1836] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:26:32.417 IST [14212] ERROR:  syntax error at or near "2017" at character 121
+2023-01-05 02:26:32.417 IST [14212] STATEMENT:  WITH test AS ( SELECT  bse.code FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >''2017-12-11'') select * from test limit 200 offset 0
+2023-01-05 02:27:33.091 IST [14212] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:27:50.892 IST [8736] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:30:39.950 IST [16416] ERROR:  syntax error at or near "2017" at character 1014
+2023-01-05 02:30:39.950 IST [16416] STATEMENT:  
+	            insert into 
+	            CTE(name,ctejson,ctesql,parent) 
+	            values('myindex','[{"from": ["sensex_index", "left join", "bse", "on", "sensex_index.code", "=", "bse.code"], "parent": "", "name": "myindex", "cols": [{"name": "bse.code", "type": "normal"}, {"name": "sensex_index.name", "type": "normal"}, {"name": "sma200", "type": "window_function", "attributes": {"window_func": "AVG", "col": "bse.close", "over": {"partition_by": "sensex_index.code", "order_by": "bse.trade_date", "order_type": "asc", "frame_spec": {"type": "rows"}, "frame_boundaries": {"preceding": "200 preceding", "following": "current Row"}}}}], "where": ["bse.trade_date", "gt", "2017-12-11"], "order": [], "limit": "2000", "offset": "0"}]','WITH myindex AS ( SELECT  bse.code,sensex_index.name, AVG(bse.close) OVER(PARTITION BY sensex_index.code ORDER BY bse.trade_date asc ROWS  BETWEEN 200 preceding  AND current Row) as sma200 FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >'2017-12-11') select * from myindex limit 2000 offset 0','')
+	        
+2023-01-05 02:33:29.463 IST [16416] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:33:37.138 IST [13092] ERROR:  syntax error at or near "2017" at character 278
+2023-01-05 02:33:37.138 IST [13092] STATEMENT:  WITH myindex AS ( SELECT  bse.code,sensex_index.name, AVG(bse.close) OVER(PARTITION BY sensex_index.code ORDER BY bse.trade_date asc ROWS  BETWEEN 200 preceding  AND current Row) as sma200 FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >''2017-12-11'') select * from myindex limit 2000 offset 0
+2023-01-05 02:34:40.530 IST [13092] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:37:25.493 IST [8084] ERROR:  syntax error at or near "2017" at character 1014
+2023-01-05 02:37:25.493 IST [8084] STATEMENT:  
+	            insert into 
+	            CTE(name,ctejson,ctesql,parent) 
+	            values('myindex','[{"from": ["sensex_index", "left join", "bse", "on", "sensex_index.code", "=", "bse.code"], "parent": "", "name": "myindex", "cols": [{"name": "bse.code", "type": "normal"}, {"name": "sensex_index.name", "type": "normal"}, {"name": "sma200", "type": "window_function", "attributes": {"window_func": "AVG", "col": "bse.close", "over": {"partition_by": "sensex_index.code", "order_by": "bse.trade_date", "order_type": "asc", "frame_spec": {"type": "rows"}, "frame_boundaries": {"preceding": "200 preceding", "following": "current Row"}}}}], "where": ["bse.trade_date", "gt", "2017-12-11"], "order": [], "limit": "2000", "offset": "0"}]','WITH myindex AS ( SELECT  bse.code,sensex_index.name, AVG(bse.close) OVER(PARTITION BY sensex_index.code ORDER BY bse.trade_date asc ROWS  BETWEEN 200 preceding  AND current Row) as sma200 FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >'2017-12-11') select * from myindex limit 2000 offset 0','')
+	        
+2023-01-05 02:38:24.144 IST [8084] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:38:27.498 IST [11476] ERROR:  syntax error at or near "2017" at character 1014
+2023-01-05 02:38:27.498 IST [11476] STATEMENT:  
+	            insert into 
+	            CTE(name,ctejson,ctesql,parent) 
+	            values('myindex','[{"from": ["sensex_index", "left join", "bse", "on", "sensex_index.code", "=", "bse.code"], "parent": "", "name": "myindex", "cols": [{"name": "bse.code", "type": "normal"}, {"name": "sensex_index.name", "type": "normal"}, {"name": "sma200", "type": "window_function", "attributes": {"window_func": "AVG", "col": "bse.close", "over": {"partition_by": "sensex_index.code", "order_by": "bse.trade_date", "order_type": "asc", "frame_spec": {"type": "rows"}, "frame_boundaries": {"preceding": "200 preceding", "following": "current Row"}}}}], "where": ["bse.trade_date", "gt", "2017-12-11"], "order": [], "limit": "2000", "offset": "0"}]','WITH myindex AS ( SELECT  bse.code,sensex_index.name, AVG(bse.close) OVER(PARTITION BY sensex_index.code ORDER BY bse.trade_date asc ROWS  BETWEEN 200 preceding  AND current Row) as sma200 FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >'2017-12-11') select * from myindex limit 2000 offset 0','')
+	        
+2023-01-05 02:39:37.247 IST [11476] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:39:39.718 IST [7616] ERROR:  syntax error at or near "2017" at character 1014
+2023-01-05 02:39:39.718 IST [7616] STATEMENT:  
+	            insert into 
+	            CTE(name,ctejson,ctesql,parent) 
+	            values('myindex','[{"from": ["sensex_index", "left join", "bse", "on", "sensex_index.code", "=", "bse.code"], "parent": "", "name": "myindex", "cols": [{"name": "bse.code", "type": "normal"}, {"name": "sensex_index.name", "type": "normal"}, {"name": "sma200", "type": "window_function", "attributes": {"window_func": "AVG", "col": "bse.close", "over": {"partition_by": "sensex_index.code", "order_by": "bse.trade_date", "order_type": "asc", "frame_spec": {"type": "rows"}, "frame_boundaries": {"preceding": "200 preceding", "following": "current Row"}}}}], "where": ["bse.trade_date", "gt", "2017-12-11"], "order": [], "limit": "2000", "offset": "0"}]','WITH myindex AS ( SELECT  bse.code,sensex_index.name, AVG(bse.close) OVER(PARTITION BY sensex_index.code ORDER BY bse.trade_date asc ROWS  BETWEEN 200 preceding  AND current Row) as sma200 FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >'2017-12-11') select * from myindex limit 2000 offset 0','')
+	        
+2023-01-05 02:40:10.417 IST [7616] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:40:12.680 IST [5180] ERROR:  syntax error at or near "2017" at character 1014
+2023-01-05 02:40:12.680 IST [5180] STATEMENT:  
+	            insert into 
+	            CTE(name,ctejson,ctesql,parent) 
+	            values('myindex','[{"from": ["sensex_index", "left join", "bse", "on", "sensex_index.code", "=", "bse.code"], "parent": "", "name": "myindex", "cols": [{"name": "bse.code", "type": "normal"}, {"name": "sensex_index.name", "type": "normal"}, {"name": "sma200", "type": "window_function", "attributes": {"window_func": "AVG", "col": "bse.close", "over": {"partition_by": "sensex_index.code", "order_by": "bse.trade_date", "order_type": "asc", "frame_spec": {"type": "rows"}, "frame_boundaries": {"preceding": "200 preceding", "following": "current Row"}}}}], "where": ["bse.trade_date", "gt", "2017-12-11"], "order": [], "limit": "2000", "offset": "0"}]','WITH myindex AS ( SELECT  bse.code,sensex_index.name, AVG(bse.close) OVER(PARTITION BY sensex_index.code ORDER BY bse.trade_date asc ROWS  BETWEEN 200 preceding  AND current Row) as sma200 FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >'2017-12-11') select * from myindex limit 2000 offset 0','')
+	        
+2023-01-05 02:40:47.666 IST [5180] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:40:49.998 IST [18792] ERROR:  syntax error at or near "2017" at character 1014
+2023-01-05 02:40:49.998 IST [18792] STATEMENT:  
+	            insert into 
+	            CTE(name,ctejson,ctesql,parent) 
+	            values('myindex','[{"from": ["sensex_index", "left join", "bse", "on", "sensex_index.code", "=", "bse.code"], "parent": "", "name": "myindex", "cols": [{"name": "bse.code", "type": "normal"}, {"name": "sensex_index.name", "type": "normal"}, {"name": "sma200", "type": "window_function", "attributes": {"window_func": "AVG", "col": "bse.close", "over": {"partition_by": "sensex_index.code", "order_by": "bse.trade_date", "order_type": "asc", "frame_spec": {"type": "rows"}, "frame_boundaries": {"preceding": "200 preceding", "following": "current Row"}}}}], "where": ["bse.trade_date", "gt", "2017-12-11"], "order": [], "limit": "2000", "offset": "0"}]','WITH myindex AS ( SELECT  bse.code,sensex_index.name, AVG(bse.close) OVER(PARTITION BY sensex_index.code ORDER BY bse.trade_date asc ROWS  BETWEEN 200 preceding  AND current Row) as sma200 FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >'2017-12-11') select * from myindex limit 2000 offset 0','')
+	        
+2023-01-05 02:41:30.071 IST [18792] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:43:37.531 IST [13724] ERROR:  canceling statement due to user request
+2023-01-05 02:43:37.531 IST [11212] LOG:  received fast shutdown request
+2023-01-05 02:43:37.535 IST [11212] LOG:  aborting any active transactions
+2023-01-05 02:43:37.535 IST [6960] FATAL:  terminating connection due to administrator command
+2023-01-05 02:43:37.536 IST [3408] FATAL:  terminating connection due to administrator command
+2023-01-05 02:43:37.536 IST [10156] FATAL:  terminating connection due to administrator command
+2023-01-05 02:43:37.548 IST [11212] LOG:  background worker "logical replication launcher" (PID 13724) exited with exit code 1
+2023-01-05 02:43:37.566 IST [17876] LOG:  shutting down
+2023-01-05 02:43:37.616 IST [11212] LOG:  database system is shut down
+2023-01-05 02:43:39.999 IST [19204] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2023-01-05 02:43:40.007 IST [19204] LOG:  listening on IPv6 address "::1", port 5432
+2023-01-05 02:43:40.013 IST [19204] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-01-05 02:43:40.054 IST [16092] LOG:  database system was shut down at 2023-01-05 02:43:37 IST
+2023-01-05 02:43:40.115 IST [19204] LOG:  database system is ready to accept connections
+2023-01-05 02:44:51.124 IST [13848] ERROR:  canceling statement due to user request
+2023-01-05 02:44:51.124 IST [13848] CONTEXT:  while inserting index tuple (0,17) in relation "cte_name_key"
+2023-01-05 02:44:51.124 IST [13848] STATEMENT:  insert into
+	            CTE(name,ctejson,ctesql,parent)
+	            values('test123','[{"from": ["sensex_index", "left join", "bse", "on", "sensex_index.code", "=", "bse.code"], "parent": "", "name": "test123", "cols": [{"name": "bse.code", "type": "normal"}, {"name": "sensex_index.name", "type": "normal"}, {"name": "sma200", "type": "window_function", "attributes": {"window_func": "AVG", "col": "bse.close", "over": {"partition_by": "sensex_index.code", "order_by": "bse.trade_date", "order_type": "asc", "frame_spec": {"type": 
+	"rows"}, "frame_boundaries": {"preceding": "200 preceding", "following": "current Row"}}}}], "where": ["bse.trade_date", "gt", "2017-12-11"], "order": [], "limit": "2000", "offset": "0"}]','WITH test123 AS ( SELECT  bse.code,sensex_index.name, AVG(bse.close) OVER(PARTITION BY sensex_index.code ORDER BY bse.trade_date asc ROWS  BETWEEN 200 preceding  AND current Row) as sma200 FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >''2017-12-11'') select * from test123 limit 2000 offset 0','')
+	
+2023-01-05 02:53:22.670 IST [16792] ERROR:  canceling statement due to user request
+2023-01-05 02:53:22.670 IST [16792] CONTEXT:  while inserting index tuple (0,18) in relation "cte_name_key"
+2023-01-05 02:53:22.670 IST [16792] STATEMENT:  insert into
+	            CTE(name,ctejson,ctesql,parent)
+	            values('test123','[{"from": ["sensex_index", "left join", "bse", "on", "sensex_index.code", "=", "bse.code"], "parent": "", "name": "test123", "cols": [{"name": "bse.code", "type": "normal"}, {"name": "sensex_index.name", "type": "normal"}, {"name": "sma200", "type": "window_function", "attributes": {"window_func": "AVG", "col": "bse.close", "over": {"partition_by": "sensex_index.code", "order_by": "bse.trade_date", "order_type": "asc", "frame_spec": {"type": 
+	"rows"}, "frame_boundaries": {"preceding": "200 preceding", "following": "current Row"}}}}], "where": ["bse.trade_date", "gt", "2017-12-11"], "order": [], "limit": "2000", "offset": "0"}]','WITH test123 AS ( SELECT  bse.code,sensex_index.name, AVG(bse.close) OVER(PARTITION BY sensex_index.code ORDER BY bse.trade_date asc ROWS  BETWEEN 200 preceding  AND current Row) as sma200 FROM sensex_index left join bse on sensex_index.code = bse.code WHERE bse.trade_date >''2017-12-11'') select * from test123 limit 2000 offset 0','')
+	
+2023-01-05 02:53:57.272 IST [5180] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:53:57.273 IST [5180] LOG:  unexpected EOF on client connection with an open transaction
+2023-01-05 02:53:57.282 IST [8080] LOG:  could not receive data from client: An established connection was aborted by the software in your host machine.
+	
+2023-01-05 02:54:02.967 IST [16112] ERROR:  duplicate key value violates unique constraint "cte_name_key"
+2023-01-05 02:54:02.967 IST [16112] DETAIL:  Key (name)=(test123) already exists.
+2023-01-05 02:54:02.967 IST [16112] STATEMENT:  
+	            insert into 
+	            CTE(name,ctejson,ctesql,parent) 
+	            values('test123','[{"from": ["sensex_index", "left join", "bse", "on", "sensex_index.code", "=", "bse.code"], "parent": "", "name": "test123", "cols": [{"name": "bse.code", "type": "normal"}, {"name": "sensex_index.name", "type": "normal"}, {"name": "sma200", "type": "window_function", "attributes": {"window_func": "AVG", "col": "bse.close", "over": {"partition_by": "sensex_index.code", "order_by": "bse.trade_date", "order_type": "asc", "frame_spec": {"type": "rows"}, "frame_boundaries": {"preceding": "200 preceding", "following": "current Row"}}}}], "where": ["bse.trade_date", "gt", "2017-12-11"], "order": [], "limit": "2000", "offset": "0"}]','','')
+	        
+2023-01-05 02:54:25.889 IST [16112] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 02:54:25.889 IST [16112] STATEMENT:  
+	        create table if not exists CTE(name text unique,ctejson json, ctesql text,parent text)
+	    
+2023-01-05 02:54:25.890 IST [16112] WARNING:  there is no transaction in progress
+2023-01-05 02:54:56.197 IST [16112] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:54:56.197 IST [16112] LOG:  unexpected EOF on client connection with an open transaction
+2023-01-05 02:55:15.109 IST [10600] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:55:15.109 IST [10600] LOG:  unexpected EOF on client connection with an open transaction
+2023-01-05 02:55:48.403 IST [13972] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:56:44.990 IST [15836] ERROR:  duplicate key value violates unique constraint "cte_name_key"
+2023-01-05 02:56:44.990 IST [15836] DETAIL:  Key (name)=(test123) already exists.
+2023-01-05 02:56:44.990 IST [15836] STATEMENT:  
+	            insert into 
+	            CTE(name,ctejson,ctesql,parent) 
+	            values('test123','[{"from": ["sensex_index", "left join", "bse", "on", "sensex_index.code", "=", "bse.code"], "parent": "", "name": "test123", "cols": [{"name": "bse.code", "type": "normal"}, {"name": "sensex_index.name", "type": "normal"}, {"name": "sma200", "type": "window_function", "attributes": {"window_func": "AVG", "col": "bse.close", "over": {"partition_by": "sensex_index.code", "order_by": "bse.trade_date", "order_type": "asc", "frame_spec": {"type": "rows"}, "frame_boundaries": {"preceding": "200 preceding", "following": "current Row"}}}}], "where": ["bse.trade_date", "gt", "2017-12-11"], "order": [], "limit": "2000", "offset": "0"}]','','')
+	        
+2023-01-05 02:57:29.302 IST [15836] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 02:57:49.399 IST [9480] ERROR:  syntax error at end of input at character 26
+2023-01-05 02:57:49.399 IST [9480] STATEMENT:  create table cte_temp as 
+2023-01-05 02:59:06.868 IST [9480] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 03:02:37.107 IST [4012] ERROR:  canceling statement due to user request
+2023-01-05 03:02:37.107 IST [19204] LOG:  received fast shutdown request
+2023-01-05 03:02:37.119 IST [19204] LOG:  aborting any active transactions
+2023-01-05 03:02:37.119 IST [10616] FATAL:  terminating connection due to administrator command
+2023-01-05 03:02:37.119 IST [2288] FATAL:  terminating connection due to administrator command
+2023-01-05 03:02:37.127 IST [19204] LOG:  background worker "logical replication launcher" (PID 4012) exited with exit code 1
+2023-01-05 03:02:37.143 IST [11660] LOG:  shutting down
+2023-01-05 03:02:37.171 IST [19204] LOG:  database system is shut down
+2023-01-05 03:02:38.859 IST [15068] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2023-01-05 03:02:38.867 IST [15068] LOG:  listening on IPv6 address "::1", port 5432
+2023-01-05 03:02:38.872 IST [15068] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-01-05 03:02:38.927 IST [3036] LOG:  database system was shut down at 2023-01-05 03:02:37 IST
+2023-01-05 03:02:38.997 IST [15068] LOG:  database system is ready to accept connections
+2023-01-05 03:02:51.105 IST [15068] LOG:  received fast shutdown request
+2023-01-05 03:02:51.108 IST [15068] LOG:  aborting any active transactions
+2023-01-05 03:02:51.127 IST [15068] LOG:  background worker "logical replication launcher" (PID 13324) exited with exit code 1
+2023-01-05 03:02:51.127 IST [18328] LOG:  shutting down
+2023-01-05 03:02:51.158 IST [15068] LOG:  database system is shut down
+2023-01-05 03:02:51.393 IST [16088] LOG:  starting PostgreSQL 14.6, compiled by Visual C++ build 1914, 64-bit
+2023-01-05 03:02:51.401 IST [16088] LOG:  listening on IPv6 address "::1", port 5432
+2023-01-05 03:02:51.406 IST [16088] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-01-05 03:02:51.459 IST [13160] LOG:  database system was shut down at 2023-01-05 03:02:51 IST
+2023-01-05 03:02:51.538 IST [16088] LOG:  database system is ready to accept connections
+2023-01-05 03:04:35.676 IST [16264] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 03:04:49.120 IST [7580] ERROR:  column "code" specified more than once
+2023-01-05 03:04:49.120 IST [7580] STATEMENT:  create table cte_temp as WITH test0 AS ( SELECT  bse.code,bse.name,sensex_index.code FROM sensex_index left join bse on sensex_index.code = bse.code) select * from test0 limit 200 offset 0
+2023-01-05 03:05:00.972 IST [7580] ERROR:  current transaction is aborted, commands ignored until end of transaction block
+2023-01-05 03:05:00.972 IST [7580] STATEMENT:  
+	        SELECT * FROM information_schema.tables WHERE table_schema = 'public'
+	    
+2023-01-05 03:05:00.974 IST [7580] WARNING:  there is no transaction in progress
+2023-01-05 03:08:53.072 IST [7580] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 03:08:53.072 IST [7580] LOG:  unexpected EOF on client connection with an open transaction
+2023-01-05 03:09:04.688 IST [14804] ERROR:  syntax error at or near "." at character 58
+2023-01-05 03:09:04.688 IST [14804] STATEMENT:  WITH test0 AS ( SELECT  sensex_index.code as sensex_index.code,bse.code as bse.code FROM sensex_index left join bse on sensex_index.code = bse.code) select * from test0 limit 200 offset 0
+2023-01-05 03:09:36.556 IST [14804] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2023-01-05 03:10:40.050 IST [19232] ERROR:  canceling statement due to user request
+2023-01-05 03:10:40.050 IST [16088] LOG:  received fast shutdown request
+2023-01-05 03:10:40.053 IST [16088] LOG:  aborting any active transactions
+2023-01-05 03:10:40.054 IST [12420] FATAL:  terminating connection due to administrator command
+2023-01-05 03:10:40.054 IST [11896] FATAL:  terminating connection due to administrator command
+2023-01-05 03:10:40.054 IST [8400] FATAL:  terminating connection due to administrator command
+2023-01-05 03:10:40.078 IST [16088] LOG:  background worker "logical replication launcher" (PID 19232) exited with exit code 1
+2023-01-05 03:10:40.094 IST [9100] LOG:  shutting down
+2023-01-05 03:10:40.206 IST [16088] LOG:  database system is shut down
